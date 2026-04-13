@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="FinLit">
+<meta name="theme-color" content="#FAFAF7">
+<title>Financial Literacy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body { background: #FAFAF7; font-family: 'Instrument Serif', Georgia, serif; color: #1A1A1A; min-height: 100vh; min-height: 100dvh; }
+  #app { max-width: 430px; margin: 0 auto; min-height: 100vh; min-height: 100dvh; }
+  button { font-family: 'DM Sans', sans-serif; cursor: pointer; -webkit-appearance: none; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+const { useState, useEffect, useCallback } = React;
+
+// ─── CURRICULUM DATA ───
+const MODULES = [
+  { name: "Financial Foundations", range: "1–5" },
+  { name: "Index Fund Investing", range: "6–14" },
+  { name: "Real Estate Fundamentals", range: "15–22" },
+  { name: "Mortgages Deep Dive", range: "23–31" },
+  { name: "Loans & Debt Strategy", range: "32–37" },
+  { name: "Real Estate Strategy", range: "38–45" },
+  { name: "Putting It Together", range: "46–51" },
+];
+
+const getModuleForDay = (day) => {
+  if (day <= 5) return 0;
+  if (day <= 14) return 1;
+  if (day <= 22) return 2;
+  if (day <= 31) return 3;
+  if (day <= 37) return 4;
+  if (day <= 45) return 5;
+  return 6;
+};
+
+const LESSONS = [
+  {
+    day: 1,
+    title: "Net Worth Tracking & Cash Flow Management",
+    concept: [
+      "Net worth is the single number that captures your entire financial position: everything you own (assets) minus everything you owe (liabilities). Your bank accounts, investments, property, and valuables go on one side. Credit card debt, student loans, mortgages, and car loans go on the other.",
+      "Most people focus on income, but income alone tells you nothing about financial health. Someone earning $200K a year but spending $195K is in a worse position than someone earning $80K and keeping $30K. What matters is the gap between what comes in and what goes out — your cash flow.",
+      "Tracking net worth monthly does something powerful: it turns abstract financial progress into a concrete number that moves. You start seeing which decisions actually move the needle (paying down high-interest debt, increasing savings rate) versus which ones feel productive but aren't (obsessing over small expenses while ignoring big structural issues).",
+      "A simple spreadsheet updated on the 1st of each month is all you need. List assets, list liabilities, subtract. Watch the trend line, not any single month."
+    ],
+    scenario: {
+      prompt: "Alex earns $85,000/year and has: $12K in savings, $8K in a retirement account, a car worth $15K, $28K in student loans, and $4K in credit card debt. What's Alex's net worth, and what's the single biggest lever to improve it?",
+      options: [
+        { id: "a", label: "Net worth is $3K — pay off the car loan first" },
+        { id: "b", label: "Net worth is $3K — eliminate the credit card debt first" },
+        { id: "c", label: "Net worth is $3K — focus on maximising retirement contributions" },
+        { id: "d", label: "Net worth is $35K — Alex is doing fine" },
+      ],
+      correct: "b",
+      feedback: "Net worth = ($12K + $8K + $15K) − ($28K + $4K) = $3K. The credit card debt is the biggest lever because it likely carries 18-25% interest, meaning it's actively destroying wealth faster than almost any investment can build it. Paying off $4K of credit card debt at 22% interest is equivalent to earning a guaranteed 22% return. Always attack the highest-interest debt first."
+    },
+    quiz: [
+      { q: "Net worth can be negative.", answer: true, explanation: "If your liabilities exceed your assets, your net worth is negative. This is common for people early in their career with student loans." },
+      { q: "A high income guarantees a high net worth.", answer: false, explanation: "Income is a flow, net worth is a stock. High earners who spend everything they make can have a net worth of zero — or negative." },
+      { q: "You should track net worth daily for the best results.", answer: false, explanation: "Monthly is ideal. Daily tracking creates noise and anxiety without adding useful information. The trend over months and years is what matters." }
+    ]
+  },
+  {
+    day: 2,
+    title: "Emergency Fund Sizing",
+    concept: [
+      "An emergency fund is cash set aside for genuine emergencies — job loss, medical bills, urgent home or car repairs. It's not an investment. Its job is to keep you from going into debt or selling investments at the worst possible time.",
+      "The common advice is '3-6 months of expenses,' but that's a starting point, not a rule. The right size depends on your income stability. A tenured government employee with a dual-income household might be fine with 3 months. A freelancer with variable income and one income stream might need 9-12 months.",
+      "Key factors to consider: How stable is your income? How quickly could you find a new job in your field? Do you have dependents? Do you own property (which can generate unexpected large expenses)? Is your partner's income correlated with yours (e.g., you both work in tech)?",
+      "Keep your emergency fund in a high-yield savings account — not invested, not locked up. You need it accessible within 1-2 business days. The opportunity cost of not investing this money is the price you pay for sleeping well at night."
+    ],
+    scenario: {
+      prompt: "Two people need your advice on emergency fund sizing. Jamie is a salaried software engineer at a large company, single, renting an apartment, with monthly expenses of $4,000. Sam is a freelance graphic designer, married with one child, owns a home, with monthly expenses of $6,500. How much should each hold?",
+      options: [
+        { id: "a", label: "Jamie: $12K (3 months), Sam: $39K (6 months)" },
+        { id: "b", label: "Jamie: $16K (4 months), Sam: $58.5K (9 months)" },
+        { id: "c", label: "Both should hold exactly 6 months regardless" },
+        { id: "d", label: "Jamie: $24K (6 months), Sam: $19.5K (3 months)" },
+      ],
+      correct: "b",
+      feedback: "Jamie has stable employment in a high-demand field, no dependents, and no property — 3-4 months is reasonable. Sam has variable freelance income, a child, and a home that could need repairs — 9 months provides a real safety net. The 'd' answer gets it backwards: the person with more risk needs more buffer, not less."
+    },
+    quiz: [
+      { q: "An emergency fund should be invested in index funds for better returns.", answer: false, explanation: "Emergency funds need to be liquid and stable. If the market drops 30% the same week you lose your job, your emergency fund just shrank by 30% when you need it most." },
+      { q: "Freelancers generally need a larger emergency fund than salaried employees.", answer: true, explanation: "Variable income means you might have months with no revenue. A larger buffer protects against the natural volatility of self-employment." }
+    ]
+  },
+  {
+    day: 3,
+    title: "Insurance Worth Having",
+    concept: [
+      "Insurance exists to protect against financial catastrophe — events that would wipe out your savings or put you into serious debt. The right framework is: insure against what you can't afford to lose, self-insure against what you can.",
+      "Health insurance is non-negotiable. A single hospital stay can cost $50K-$100K+. Disability insurance is underrated — your ability to earn income is your most valuable asset, especially early in your career. A 30-year-old has millions of dollars of future earnings ahead of them.",
+      "Liability insurance (umbrella policy) becomes important as your net worth grows. If you own property, homeowner's or landlord insurance is essential — not just for the building, but for liability if someone is injured on your property.",
+      "What's usually a waste: extended warranties on electronics, credit card insurance, mortgage payment protection insurance, and most add-on insurance products sold at the point of purchase. These are high-margin products for the seller, which means they're bad deals for you."
+    ],
+    scenario: {
+      prompt: "Review this insurance portfolio for a 32-year-old homeowner earning $95K with $50K in savings: Health insurance (employer-provided), $500K life insurance policy, renter's insurance, extended warranties on laptop and phone, no disability insurance. What should change?",
+      options: [
+        { id: "a", label: "Drop life insurance (no dependents mentioned), add disability insurance, drop extended warranties, switch renter's to homeowner's" },
+        { id: "b", label: "Keep everything as is but add disability insurance" },
+        { id: "c", label: "Drop everything except health insurance to save money" },
+        { id: "d", label: "Add more life insurance and keep the extended warranties" },
+      ],
+      correct: "a",
+      feedback: "They own a home but have renter's insurance — that needs to switch to homeowner's insurance. Extended warranties on electronics are almost always negative expected value. Life insurance with no dependents mentioned is likely unnecessary (unless they have a co-signed mortgage). The critical gap is disability insurance — at 32, their future earnings are their biggest asset, and a disability could eliminate them entirely."
+    },
+    quiz: [
+      { q: "Disability insurance is less important than life insurance for a young single person.", answer: false, explanation: "For a young single person with no dependents, disability insurance is actually MORE important. No one depends on their life, but they depend entirely on their ability to earn income." },
+      { q: "An umbrella liability policy is only for wealthy people.", answer: false, explanation: "Anyone who could be sued for more than their existing coverage should consider it. This includes homeowners, dog owners, or anyone who drives. Umbrella policies are surprisingly cheap for the coverage they provide." }
+    ]
+  },
+  {
+    day: 4,
+    title: "Psychology of Spending & Lifestyle Inflation",
+    concept: [
+      "Lifestyle inflation is the tendency to increase spending as income rises. Get a 20% raise, and somehow expenses grow by 18%. It's the single biggest reason high earners end up with low net worth. It's not about deprivation — it's about the gap between earning and spending staying wide as income grows.",
+      "The hedonic treadmill explains why: we adapt quickly to improvements. The new car feels amazing for 3 months, then it's just your car. The bigger apartment feels luxurious until it's just where you live. Research consistently shows that beyond a moderate comfort level, more spending produces diminishing returns on happiness.",
+      "Practical guardrails that work: When you get a raise, automatically direct 50%+ of the after-tax increase to savings or investments before you adjust your lifestyle. This way your life still improves — you just don't absorb the entire raise into spending.",
+      "The most powerful version of this: maintain your current standard of living for one full year after any income increase. Let the full raise flow into building wealth. After a year, reassess what spending increases would genuinely improve your life versus which ones you'd adapt to and forget."
+    ],
+    scenario: {
+      prompt: "Morgan just got promoted: salary jumping from $70K to $98K. Here are two plans for the extra $28K gross (~$20K net). Plan A: New apartment ($600/mo more), car upgrade ($300/mo more), lifestyle bump ($250/mo more) = $13,800/year spent, $6,200/year saved. Plan B: Keep current apartment, keep current car, allow $200/mo lifestyle bump, invest the rest = $2,400/year spent, $17,600/year saved. What's the 10-year wealth difference?",
+      options: [
+        { id: "a", label: "About $50K difference — not that significant over 10 years" },
+        { id: "b", label: "About $114K difference — Plan B builds serious wealth" },
+        { id: "c", label: "About $150K+ difference — compound growth makes Plan B dramatically better" },
+        { id: "d", label: "It doesn't matter — both plans save something" },
+      ],
+      correct: "c",
+      feedback: "Plan A saves $6,200/year. Plan B saves $17,600/year. That's $11,400/year more. Over 10 years at a 7% average return, Plan B generates roughly $160K more in invested wealth. But the real story is bigger: Plan A's spending is sticky — the bigger apartment and car payment become your new baseline. Plan B keeps optionality. Morgan can always upgrade later from a position of strength."
+    },
+    quiz: [
+      { q: "The hedonic treadmill means you'll eventually feel the same level of satisfaction regardless of spending increases.", answer: true, explanation: "Humans adapt to new normals remarkably quickly. Studies show happiness from material purchases fades within months, while financial security provides lasting peace of mind." },
+      { q: "Saving 50% of every raise is unrealistic for most people.", answer: false, explanation: "It's easier than it sounds because you're saving money you never had. You were living on your previous salary yesterday — directing half of new money to savings means you still get a lifestyle upgrade." }
+    ]
+  },
+  {
+    day: 5,
+    title: "Long-Horizon Financial Goals",
+    concept: [
+      "Compounding is the most powerful force in personal finance, but it only works with time. The math is simple but the implications are profound: money growing at 7% doubles roughly every 10 years. $10K becomes $20K in 10 years, $40K in 20, $80K in 30.",
+      "This creates a brutal asymmetry: the money you invest in your 20s is worth dramatically more than money invested in your 40s, because it has more doubling periods ahead of it. Every dollar invested at 25 has roughly 4x the time to compound compared to a dollar invested at 45.",
+      "The practical implication is that starting early matters more than optimising later. A 25-year-old investing $300/month until 65 at 7% returns will accumulate more than a 35-year-old investing $600/month until 65 at the same rate — despite the 35-year-old contributing significantly more total dollars.",
+      "This doesn't mean it's too late if you're starting later. It means: start now, whatever 'now' is for you. The second-best time to start investing is today. But if you're young and reading this, understand that time is your single greatest financial advantage, and it's one you can never get back."
+    ],
+    scenario: {
+      prompt: "Two friends start investing for retirement at different ages. Casey starts at 25, investing $400/month. Jordan starts at 35, investing $400/month. Both earn 7% average annual returns and plan to retire at 65. Who has more at retirement, and by how much?",
+      options: [
+        { id: "a", label: "Casey: ~$958K, Jordan: ~$454K — Casey has about 2x more" },
+        { id: "b", label: "About the same — Jordan can catch up by investing more later" },
+        { id: "c", label: "Casey: ~$958K, Jordan: ~$454K — but the gap isn't that meaningful" },
+        { id: "d", label: "Jordan has more because they invest during higher-earning years" },
+      ],
+      correct: "a",
+      feedback: "Casey invests $400/mo for 40 years (total contributions: $192K) and ends up with roughly $958K. Jordan invests $400/mo for 30 years (total contributions: $144K) and ends up with roughly $454K. Casey contributed only $48K more but ended up with over $500K more. Those first 10 years of compounding created most of the gap. This is why starting early, even with small amounts, is the most valuable financial decision a young person can make."
+    },
+    quiz: [
+      { q: "Money invested at 7% annual return doubles approximately every 10 years.", answer: true, explanation: "The Rule of 72: divide 72 by the annual return rate to estimate doubling time. 72 ÷ 7 ≈ 10.3 years." },
+      { q: "It's better to wait until you have a large sum to invest rather than starting small.", answer: false, explanation: "Time in the market beats timing the market. Starting with $100/month at 25 is far more powerful than waiting until 35 to invest $500/month, because early money has more compounding time." },
+      { q: "Compounding works the same way on debt as it does on investments.", answer: true, explanation: "Compound interest is a double-edged sword. High-interest debt compounds against you just as powerfully as investments compound for you. This is why paying off high-interest debt is effectively a guaranteed high return." }
+    ]
+  },
+  {
+    day: 6,
+    title: "How Index Funds Work",
+    concept: [
+      "An index fund is a type of investment fund that aims to replicate the performance of a specific market index — like the S&P 500 or the total stock market. Instead of a fund manager picking stocks they think will win, an index fund simply buys all (or a representative sample of) the stocks in the index, in proportion to their size.",
+      "This is called market-cap weighting: larger companies make up a bigger portion of the fund. In the S&P 500, Apple and Microsoft each account for about 6-7% of the fund, while smaller companies in the index might be 0.01%. When the index changes its composition (a company is added or removed), the fund automatically rebalances to match.",
+      "Why do index funds outperform most active managers? Because investing is close to a zero-sum game after costs. For every active manager who beats the market, another underperforms by the same amount. But all active managers charge fees — typically 0.5% to 1.5% per year. Those fees mean that as a group, active managers underperform the index by the amount of their fees. Over 20 years, roughly 90% of active funds fail to beat their benchmark index.",
+      "Index funds charge very low fees (as low as 0.03% per year) because they don't need expensive analysts and traders. This cost advantage, compounded over decades, is what makes them the single best investment vehicle for most people."
+    ],
+    scenario: {
+      prompt: "You have $10,000 to invest for 20 years. Option A: An index fund tracking the S&P 500 with a 0.03% expense ratio, averaging 10% annual returns. Option B: An actively managed fund with a 1.1% expense ratio, also averaging 10% annual returns before fees. How much does each end up with?",
+      options: [
+        { id: "a", label: "A: ~$66,800, B: ~$55,300 — about $11,500 difference" },
+        { id: "b", label: "A: ~$67,000, B: ~$66,000 — barely any difference" },
+        { id: "c", label: "A: ~$66,800, B: ~$48,000 — nearly $19,000 difference" },
+        { id: "d", label: "B wins because active managers add value over 20 years" },
+      ],
+      correct: "a",
+      feedback: "At 9.97% net return (10% - 0.03%), $10K becomes roughly $66,800. At 8.9% net return (10% - 1.1%), $10K becomes roughly $55,300. That 1.07% annual fee difference costs you about $11,500 — more than your entire original investment. And this assumes the active fund matches the market before fees, which 90% of them fail to do over 20 years. The real gap is likely much larger."
+    },
+    quiz: [
+      { q: "An index fund tries to beat the market by picking the best stocks.", answer: false, explanation: "An index fund aims to match the market, not beat it. It buys all stocks in the index in proportion to their size. The insight is that matching the market at low cost beats most attempts to outperform it." },
+      { q: "Over a 20-year period, most actively managed funds underperform their benchmark index.", answer: true, explanation: "Data consistently shows that roughly 85-90% of active funds underperform their benchmark over 20 years. The primary reason is fees — active management costs more, and those costs compound against returns." },
+      { q: "Market-cap weighting means all stocks in the index have equal weight.", answer: false, explanation: "Market-cap weighting means larger companies get a larger share. In the S&P 500, the top 10 companies might make up 30%+ of the fund, while the bottom 100 together account for less than 3%." }
+    ]
+  },
+  {
+    day: 7,
+    title: "Total Market vs S&P 500 vs International",
+    concept: [
+      "The S&P 500 tracks the 500 largest publicly traded US companies. It covers roughly 80% of the US stock market by value. A Total US Stock Market fund includes those same 500 companies plus mid-cap and small-cap stocks — roughly 3,500-4,000 additional companies. Historically, the performance difference between the two has been small, but the Total Market fund gives you broader exposure.",
+      "International funds capture companies outside the US — developed markets (Europe, Japan, Australia) and emerging markets (China, India, Brazil). International stocks make up roughly 40% of global stock market value, meaning a US-only investor is ignoring nearly half the world's investable companies.",
+      "The case for international diversification is about risk reduction, not return maximisation. Over the past 15 years, the US has dramatically outperformed international markets. But from 2000-2010, international stocks crushed US stocks. No one knows which will lead for the next decade. Diversifying means you won't have the best returns in any single period, but you'll avoid the worst outcomes.",
+      "A common allocation is 60-80% US and 20-40% international. The exact split matters less than being consistent and staying invested. Opinions vary among serious investors, and there's no objectively 'right' answer — just tradeoffs between home-country concentration and global diversification."
+    ],
+    scenario: {
+      prompt: "You're building a long-term portfolio with $50,000. You have three choices. Portfolio A: 100% S&P 500. Portfolio B: 80% Total US Market / 20% International. Portfolio C: 60% US / 40% International. Which allocation do you choose and why?",
+      options: [
+        { id: "a", label: "Portfolio A — US has outperformed, keep it simple" },
+        { id: "b", label: "Portfolio B — broad US exposure with some international diversification" },
+        { id: "c", label: "Portfolio C — match global market weights more closely" },
+        { id: "d", label: "It doesn't matter — all three will perform similarly" },
+      ],
+      correct: "b",
+      feedback: "Portfolio B is the most commonly recommended by evidence-based investors. Total US Market gives you broader exposure than S&P 500 alone (including small/mid-caps that have historically offered a return premium). The 20% international allocation provides meaningful diversification without betting heavily against US dominance. Portfolio A concentrates risk in large-cap US stocks. Portfolio C is defensible but historically would have dragged returns. The honest truth: any of the three is vastly better than not investing at all."
+    },
+    quiz: [
+      { q: "The S&P 500 includes mid-cap and small-cap stocks.", answer: false, explanation: "The S&P 500 only tracks 500 large-cap US companies. For mid and small-cap exposure, you need a Total US Stock Market fund." },
+      { q: "International diversification guarantees higher returns.", answer: false, explanation: "International diversification reduces concentration risk — it doesn't guarantee higher returns. In some decades US wins, in others international wins. Diversification is about avoiding catastrophic concentration, not maximising returns." },
+      { q: "International stocks represent roughly 40% of global market value.", answer: true, explanation: "Non-US stocks make up approximately 40% of total global stock market capitalisation. A US-only investor is ignoring a significant portion of the world's investable companies." }
+    ]
+  },
+  {
+    day: 32,
+    title: "Good Debt vs Bad Debt",
+    concept: [
+      "Not all debt is created equal. The distinction between good debt and bad debt comes down to one question: does this borrowing put money in your pocket over time, or take it out? Good debt finances assets that appreciate or increase your earning power. Bad debt finances consumption that depreciates.",
+      "Classic good debt: a mortgage on a property that builds equity and appreciates, student loans for a degree that substantially increases lifetime earnings, or a business loan that funds revenue-generating operations. The key is that the return on what you're buying exceeds the cost of borrowing.",
+      "Classic bad debt: credit card balances on meals and shopping, car loans on vehicles you can't really afford, personal loans for holidays. These finance things that lose value immediately while you pay interest on them. A $30K car financed at 7% costs you roughly $33,600 over 5 years — for an asset that's worth $15K by then.",
+      "The grey area is where it gets interesting. Student loans for a degree with poor earning prospects might be bad debt disguised as good debt. A car loan at 2% for a reliable vehicle you need for work might be acceptable leverage. Context matters more than rigid categories — the framework is a thinking tool, not a rulebook."
+    ],
+    scenario: {
+      prompt: "Three people are considering taking on debt. Alex wants a $25K personal loan for a dream holiday. Sam wants $40K in student loans for a part-time MBA while keeping their job. Jordan wants a $15K loan at 5% to start a side business projected to earn $8K/year. Rank these from best to worst use of debt.",
+      options: [
+        { id: "a", label: "Jordan → Sam → Alex (business, then education, then consumption)" },
+        { id: "b", label: "Sam → Jordan → Alex (education is always the best investment)" },
+        { id: "c", label: "All debt is bad — none of them should borrow" },
+        { id: "d", label: "Alex → Sam → Jordan (experiences matter most)" },
+      ],
+      correct: "a",
+      feedback: "Jordan's business loan has a clear, quantifiable return — $8K/year on $15K at 5% interest means the business pays for the loan and generates profit. Sam's MBA could increase earnings, but the return depends on the degree's impact on their specific career path. Alex's holiday loan is the clearest bad debt — borrowing $25K at personal loan rates (likely 8-15%) for something with zero financial return. You'll be paying for that holiday years after the memories fade."
+    },
+    quiz: [
+      { q: "A mortgage is always considered good debt.", answer: false, explanation: "A mortgage on an overpriced property that doesn't appreciate, or one that stretches you beyond your means, can absolutely be bad debt. The 'good' comes from the asset building equity and appreciating — not from the label 'mortgage.'" },
+      { q: "The key test for good debt is whether the borrowed money generates a return exceeding the interest cost.", answer: true, explanation: "If borrowing at 5% to fund something that returns 10%, the debt is working for you. If borrowing at 20% to buy something that returns 0%, the debt is destroying wealth." },
+      { q: "Car loans are always bad debt.", answer: false, explanation: "A car loan at a low interest rate for a reliable vehicle needed for work can be a reasonable use of debt. The key is whether the car is genuinely necessary and appropriately priced relative to income, not whether it's financed." }
+    ]
+  },
+  {
+    day: 33,
+    title: "The True Cost of Debt",
+    concept: [
+      "The sticker price of debt is the interest rate. The true cost is what that interest rate does to you over time. A credit card charging 22% APR on a $5,000 balance, paying only minimums ($100/month), takes over 9 years to pay off and costs roughly $6,300 in interest — more than the original balance. You effectively pay $11,300 for $5,000 worth of purchases.",
+      "This happens because of how minimum payments work. Early on, most of your payment goes to interest, not principal. On that $5K balance at 22%, your first $100 payment puts only about $8 toward the actual debt. The other $92 is pure interest. It's a treadmill designed to keep you paying as long as possible.",
+      "APR (Annual Percentage Rate) is the standard way to compare debt costs, but it can be misleading. A 0% introductory credit card rate that jumps to 24% after 12 months has a very different true cost than a flat 8% personal loan. Store financing with 'no interest for 24 months' often charges retroactive interest on the full original balance if you miss the payoff deadline.",
+      "The opportunity cost makes it worse. Every dollar going to interest is a dollar not invested. $200/month in interest payments over 10 years isn't just $24,000 lost — it's the $24,000 plus the roughly $10,000 that money would have earned if invested at 7%. High-interest debt doesn't just cost you money; it costs you future wealth."
+    ],
+    scenario: {
+      prompt: "You have a $8,000 credit card balance at 21% APR and are paying $200/month. Your friend says 'just pay the minimum, invest the difference — the stock market returns more than 21%.' Is your friend right?",
+      options: [
+        { id: "a", label: "Yes — the stock market averages 10%, which beats most interest rates" },
+        { id: "b", label: "No — 21% guaranteed cost beats 10% average expected return, and it's not close" },
+        { id: "c", label: "It depends on current market conditions" },
+        { id: "d", label: "Split the difference — pay half to debt, invest half" },
+      ],
+      correct: "b",
+      feedback: "Your friend is dangerously wrong. Paying off 21% debt is a guaranteed 21% return. The stock market averages roughly 10% historically — but that's an average with huge variance. In any given year you might lose 30%. Meanwhile, the credit card charges 21% with absolute certainty. Paying off high-interest debt is the single best risk-adjusted return available to any investor. There's no scenario where investing beats paying off 21% debt."
+    },
+    quiz: [
+      { q: "Paying only minimum payments on a credit card can result in paying more in interest than the original purchase price.", answer: true, explanation: "On high-interest cards, minimum payments are structured so most goes to interest. A $5K balance at 22% with minimum payments can cost over $6K in interest — more than doubling what you originally spent." },
+      { q: "A 0% introductory APR credit card has no true cost of debt.", answer: false, explanation: "0% intro rates expire, often jumping to 20%+. If you haven't paid the balance by then, the true cost can be very high. Some store cards even charge retroactive interest on the full original balance if the promotional period ends with a remaining balance." }
+    ]
+  },
+  {
+    day: 34,
+    title: "Avalanche vs Snowball Method",
+    concept: [
+      "When you have multiple debts, the order you pay them off matters. The two main strategies are the avalanche method (pay highest interest rate first) and the snowball method (pay smallest balance first). Both work — they optimise for different things.",
+      "The avalanche method is mathematically optimal. List all debts by interest rate, highest first. Pay minimums on everything, then throw every extra dollar at the highest-rate debt. Once it's gone, roll that payment into the next highest rate. This minimises total interest paid. If you have a $2K card at 22%, a $5K card at 18%, and a $10K loan at 6%, you attack the 22% card first regardless of balance.",
+      "The snowball method is psychologically optimal. List all debts by balance, smallest first. Pay minimums on everything, then throw every extra dollar at the smallest balance. The quick wins of eliminating entire debts create motivation and momentum. Research by behavioural economists shows people using the snowball method are more likely to stick with their payoff plan and become debt-free.",
+      "The best method is the one you'll actually follow through on. If you're disciplined and motivated by maths, use avalanche — it'll save you more money. If you need early wins to stay motivated, use snowball — the psychological momentum is real and valuable. Some people use a hybrid: snowball for debts under $1K (quick wins), then avalanche for the rest."
+    ],
+    scenario: {
+      prompt: "You have three debts: Credit Card A ($1,200 balance, 24% APR), Credit Card B ($4,500 balance, 18% APR), and a Personal Loan ($8,000 balance, 7% APR). You have $800/month total for debt payments. Minimums are $50, $100, and $150 respectively. That leaves $500 extra. Which debt do you attack first under each method?",
+      options: [
+        { id: "a", label: "Avalanche: Card A (24%). Snowball: Card A ($1,200). Both agree here." },
+        { id: "b", label: "Avalanche: Personal Loan (largest). Snowball: Card A (smallest)." },
+        { id: "c", label: "Avalanche: Card B (middle ground). Snowball: Card A (smallest)." },
+        { id: "d", label: "Split the $500 equally across all three debts." },
+      ],
+      correct: "a",
+      feedback: "This is a case where both methods agree — Card A has both the highest interest rate (24%) and the smallest balance ($1,200). You'd pay it off in about 2.5 months with $500 extra per month, then roll that payment into Card B. The interesting decision comes after Card A is gone: avalanche says Card B next (18% > 7%), snowball also says Card B ($4,500 < $8,000). In this example, both methods produce the same order. That won't always happen — the methods diverge when the smallest balance isn't also the highest rate."
+    },
+    quiz: [
+      { q: "The avalanche method always saves more money in interest than the snowball method.", answer: true, explanation: "By definition, attacking the highest interest rate first minimises total interest paid. The snowball method trades some mathematical efficiency for psychological momentum." },
+      { q: "Most financial experts recommend the snowball method over the avalanche method.", answer: false, explanation: "Opinions are split. Mathematically-focused advisors tend to prefer avalanche. Behaviourally-focused advisors (like Dave Ramsey) prefer snowball. The evidence shows snowball users are more likely to complete their payoff plan, but avalanche users save more if they stick with it." },
+      { q: "You should always pay only minimums on low-interest debt while aggressively paying high-interest debt.", answer: true, explanation: "This is the core principle of the avalanche method and is mathematically sound. Every extra dollar saves more when applied to a 22% debt than a 5% debt." }
+    ]
+  },
+  {
+    day: 35,
+    title: "When to Pay Off Debt vs Invest",
+    concept: [
+      "The debt-vs-invest decision comes down to comparing guaranteed returns (paying off debt) against expected returns (investing). Paying off a loan at 7% is a guaranteed 7% return. Investing in index funds has an expected return of roughly 10% historically — but it's not guaranteed. In any given year, stocks might return -20% or +30%.",
+      "The clear cases: Always pay off high-interest debt (above 8-10%) before investing beyond an employer match. Credit cards at 20%+? Pay those off immediately — no investment reliably beats 20%. On the other end, if your debt is below 4-5% (like many mortgages or subsidised student loans), investing the extra money will likely produce better results over a long time horizon.",
+      "The grey zone is 5-8%. A 6% student loan versus investing in index funds is genuinely debatable. Mathematically, investing probably wins over 20+ years. But paying off the loan gives you guaranteed returns, reduced monthly obligations, and psychological freedom. There's real value in being debt-free that doesn't show up in spreadsheets.",
+      "One rule never changes: always capture your employer's retirement match before paying extra on any debt. If your employer matches 50% of contributions up to 6% of salary, that's a guaranteed 50% instant return. No debt payoff beats that. The priority order: employer match → high-interest debt → build emergency fund → lower-interest debt vs investing (your call) → additional investing."
+    ],
+    scenario: {
+      prompt: "You have $30K in student loans at 5.5% interest, your employer offers a 4% 401(k) match, and you have $500/month extra after expenses. You've already built a 3-month emergency fund. What's the optimal allocation of that $500?",
+      options: [
+        { id: "a", label: "Put it all toward student loans — being debt-free is the priority" },
+        { id: "b", label: "Invest enough to get the full employer match, then put the rest toward student loans" },
+        { id: "c", label: "Invest enough to get the full employer match, then split the rest between extra loan payments and index fund investing" },
+        { id: "d", label: "Invest all of it — 5.5% is low enough to ignore" },
+      ],
+      correct: "c",
+      feedback: "First priority: capture the full employer match — that's free money (effectively a 100% instant return on the matched portion). After that, the 5.5% rate is in the grey zone. A reasonable approach is splitting the remainder: some extra toward loans (guaranteed 5.5% return, reduces obligations), some into index funds (expected ~10% return, builds long-term wealth). This balances mathematical optimisation with risk management and psychological comfort. Pure optimisation says invest it all, but a balanced approach accounts for real human psychology."
+    },
+    quiz: [
+      { q: "You should always pay off all debt before investing anything.", answer: false, explanation: "This ignores the employer match (free money) and the fact that low-interest debt may cost less than investment returns over time. The priority depends on the interest rate and available investment opportunities." },
+      { q: "Paying off a 20% credit card balance is a guaranteed 20% return.", answer: true, explanation: "Every dollar of 20% debt you eliminate saves you 20 cents per year in interest with absolute certainty. No investment offers a guaranteed 20% return." },
+      { q: "An employer 401(k) match should be captured before paying extra on any debt, regardless of interest rate.", answer: true, explanation: "An employer match is typically a 50-100% instant return on your contribution. Even 25% credit card debt doesn't beat a 100% employer match. Always capture free money first." }
+    ]
+  },
+  {
+    day: 36,
+    title: "Credit Scores & How They Work",
+    concept: [
+      "A credit score is a three-digit number (typically 300-850) that represents how risky you are as a borrower. Lenders use it to decide whether to lend to you and at what interest rate. A higher score means lower interest rates on mortgages, car loans, credit cards, and even insurance premiums in some jurisdictions. The difference between a 'good' and 'excellent' score can save tens of thousands over a lifetime of borrowing.",
+      "The five main factors: Payment history (35%) — have you paid on time? This is the single biggest factor. Credit utilisation (30%) — how much of your available credit are you using? Below 30% is good, below 10% is excellent. Length of credit history (15%) — older accounts help. Credit mix (10%) — having different types of credit (cards, loans). New credit inquiries (10%) — too many applications in a short period can ding your score.",
+      "Common myths debunked: Checking your own credit score does NOT hurt it (that's a soft inquiry). Closing old credit cards can HURT your score by reducing your total available credit and shortening your average account age. Carrying a balance does NOT help your score — pay in full every month. You don't need to pay interest to build credit.",
+      "Building credit from scratch: Get a credit card (secured if necessary), use it for small regular purchases, pay the full balance every month, and wait. Time is the main ingredient. Don't open multiple accounts at once, don't carry balances, and don't close your oldest accounts. It's boring, but boring works."
+    ],
+    scenario: {
+      prompt: "Taylor has a 680 credit score and wants to improve it before applying for a mortgage in 12 months. Current situation: 2 credit cards (one maxed at $5K limit, one with $200 on a $10K limit), one closed card from college, all payments on time for 3 years, and a recent car loan application. What's the single most impactful action?",
+      options: [
+        { id: "a", label: "Open 3 new credit cards to increase available credit" },
+        { id: "b", label: "Pay down the maxed-out card to below 30% utilisation ($1,500)" },
+        { id: "c", label: "Reopen the closed college credit card" },
+        { id: "d", label: "Stop using credit cards entirely for 12 months" },
+      ],
+      correct: "b",
+      feedback: "The maxed-out card is killing Taylor's score. Credit utilisation is 30% of the score, and one card at 100% utilisation is a red flag even if overall utilisation is moderate. Paying it down to $1,500 (30% of the $5K limit) — or ideally below $500 (10%) — would likely produce the biggest single score jump. Opening new cards (a) would generate hard inquiries and lower average account age. The closed card (c) generally can't be reopened. Stopping card use entirely (d) wouldn't help utilisation since the balance would remain."
+    },
+    quiz: [
+      { q: "Checking your own credit score lowers it.", answer: false, explanation: "Checking your own score is a 'soft inquiry' and has zero impact. Only 'hard inquiries' from lender applications affect your score, and even those are minor and temporary." },
+      { q: "Carrying a small balance on your credit card helps build credit faster than paying in full.", answer: false, explanation: "This is one of the most persistent credit myths. Carrying a balance just costs you interest — it doesn't help your score. Pay in full every month. Your score benefits from on-time payments and low utilisation, not from paying interest." },
+      { q: "Closing an old credit card you no longer use can actually hurt your credit score.", answer: true, explanation: "Closing an old card reduces your total available credit (increasing utilisation ratio) and can lower your average account age. Both hurt your score. Keep old cards open even if you rarely use them — just make a small purchase occasionally to keep them active." }
+    ]
+  },
+  {
+    day: 37,
+    title: "Strategic Use of Leverage",
+    concept: [
+      "Leverage means using borrowed money to amplify returns. When it works, it accelerates wealth building dramatically. When it fails, it can wipe you out. Understanding leverage is what separates sophisticated financial thinking from basic budgeting.",
+      "The principle is simple: if you can borrow at 4% and invest in something returning 8%, the 4% spread is pure profit on money that isn't yours. A property bought with a 20% deposit and an 80% mortgage at 4% that appreciates 5% per year generates a 25% return on your cash invested (5% of the full property value, but you only put in 20%). That's leverage working for you.",
+      "The risk is equally simple: leverage amplifies losses too. If that property drops 10% in value, you haven't lost 10% — you've lost 50% of your deposit. If your investment returns less than your borrowing cost, leverage actively destroys wealth. And unlike unleveraged losses, leveraged losses can exceed your original investment.",
+      "Smart leverage principles: never borrow at variable rates to invest in volatile assets. Always be able to service the debt from income, not from the investment itself. Have a margin of safety — don't leverage to the maximum the bank allows. And understand that leverage adds a time dimension to risk: even if your investment eventually recovers, you need to survive the drawdown without being forced to sell."
+    ],
+    scenario: {
+      prompt: "You have $100K in savings. Three options: (A) Buy a $100K property outright with cash, earning 6% rental yield. (B) Put $100K as a 20% deposit on a $500K property with a 4.5% mortgage, earning 5% rental yield. (C) Invest $100K in index funds at an expected 10% return with no leverage. Which produces the best return on your $100K over 10 years?",
+      options: [
+        { id: "a", label: "Option A — no debt risk, steady 6% return" },
+        { id: "b", label: "Option B — leverage amplifies returns despite higher costs" },
+        { id: "c", label: "Option C — stock market returns beat property" },
+        { id: "d", label: "They all return roughly the same" },
+      ],
+      correct: "b",
+      feedback: "Option A returns 6% on $100K = $6K/year. Option C has an expected return of 10% on $100K = $10K/year. Option B is where leverage gets interesting: 5% yield on a $500K property = $25K gross rent. Minus mortgage interest (~$18K in year 1 on $400K at 4.5%) = ~$7K cash flow. But you're also building equity through principal paydown (~$5K/year initially), and if the property appreciates 3%/year, that's $15K/year on a $500K asset. Total return on your $100K: potentially 20%+ in a good year. The catch: leverage works both ways, and property carries maintenance, vacancy, and illiquidity risks that index funds don't."
+    },
+    quiz: [
+      { q: "Leverage only makes sense when borrowing costs are lower than investment returns.", answer: true, explanation: "If you borrow at 6% to invest in something returning 4%, leverage is actively destroying wealth. The spread between borrowing cost and return is what makes leverage profitable — or destructive." },
+      { q: "The maximum leverage a bank offers is usually the amount you should use.", answer: false, explanation: "Banks assess their risk, not yours. Maximum leverage leaves zero margin of safety. A downturn that reduces your asset value or income could force a sale at the worst time. Conservative leverage (below maximum) provides crucial breathing room." },
+      { q: "Leveraged losses can exceed your original investment.", answer: true, explanation: "If you put $100K down on a $500K property and it drops 25% to $375K, you've lost $125K — more than your entire deposit. You still owe the bank $400K on an asset worth $375K. This is negative equity, and it's the dark side of leverage." }
+    ]
+  }
+];
+
+// ─── REVIEW QUESTION POOL ───
+const REVIEW_POOL = [
+  { fromDay: 1, q: "Net worth equals total income minus total expenses.", answer: false, explanation: "Net worth is assets minus liabilities, not income minus expenses. Income and expenses determine cash flow, which affects net worth over time." },
+  { fromDay: 1, q: "Tracking net worth monthly is more useful than tracking income.", answer: true, explanation: "Net worth captures your complete financial picture. Income is just one input — what matters is how much you keep and grow, not just how much you earn." },
+  { fromDay: 2, q: "Everyone should have exactly 6 months of expenses saved as an emergency fund.", answer: false, explanation: "Emergency fund size should vary based on income stability, dependents, and fixed obligations. A freelancer with a family might need 9-12 months, while a dual-income household with stable jobs might be fine with 3-4." },
+  { fromDay: 2, q: "Emergency funds should be kept in a high-yield savings account, not invested.", answer: true, explanation: "Emergency funds need to be liquid and stable. Investing them means they could lose value right when you need them most." },
+  { fromDay: 3, q: "Disability insurance is generally unnecessary for high earners.", answer: false, explanation: "High earners have the most to lose. Disability insurance protects your biggest asset — your future earning capacity." },
+  { fromDay: 3, q: "Extended warranties are usually a bad deal for consumers.", answer: true, explanation: "Extended warranties are high-margin products for sellers, which means they're priced unfavorably for buyers. For most consumer electronics, the expected cost of repair is less than the warranty price." },
+  { fromDay: 4, q: "Lifestyle inflation only affects people with low financial discipline.", answer: false, explanation: "Lifestyle inflation is a nearly universal psychological tendency. Even financially savvy people are susceptible unless they build systematic guardrails like auto-investing raises." },
+  { fromDay: 4, q: "Directing 50% of every raise to savings still allows your lifestyle to improve.", answer: true, explanation: "You keep half the raise for spending increases — your life still gets better. You just don't absorb 100% into lifestyle, which preserves the wealth-building gap." },
+  { fromDay: 5, q: "Starting to invest 10 years earlier is more impactful than doubling your monthly contribution later.", answer: true, explanation: "Due to compounding, money invested at 25 has roughly 4x the growth potential of money invested at 45. Time is more powerful than contribution size." },
+  { fromDay: 5, q: "The Rule of 72 says money doubles every 7.2 years at any return rate.", answer: false, explanation: "The Rule of 72 says you divide 72 by the annual return rate to estimate doubling time. At 7% returns, money doubles in about 10.3 years (72 ÷ 7). At 10%, it doubles in 7.2 years." },
+  { fromDay: 6, q: "Index funds aim to beat the market through smart stock selection.", answer: false, explanation: "Index funds aim to match the market by holding all stocks in an index proportionally. The insight is that matching the market cheaply beats most attempts to outperform it." },
+  { fromDay: 6, q: "A 1% difference in fund fees can cost tens of thousands of dollars over 20+ years.", answer: true, explanation: "On a $10K investment over 20 years, a 1.1% fee difference costs roughly $11,500+ compared to a low-cost index fund. Fees compound against you just like returns compound for you." },
+  { fromDay: 32, q: "A mortgage is always considered good debt.", answer: false, explanation: "A mortgage on an overpriced property or one that stretches you beyond your means can be bad debt. 'Good' debt depends on whether the asset builds wealth, not on the loan type." },
+  { fromDay: 32, q: "The key test for good vs bad debt is whether the borrowed money generates returns exceeding the interest cost.", answer: true, explanation: "Good debt funds assets or opportunities that return more than the cost of borrowing. Bad debt finances consumption that depreciates." },
+  { fromDay: 33, q: "Paying only minimum payments on a credit card can result in paying more interest than the original balance.", answer: true, explanation: "On high-interest cards, minimum payments are mostly interest. A $5K balance at 22% with minimums can cost $6K+ in interest — more than doubling the cost." },
+  { fromDay: 34, q: "The snowball method saves more money in total interest than the avalanche method.", answer: false, explanation: "The avalanche method (highest interest first) always saves the most in interest. The snowball method (smallest balance first) is psychologically motivating but costs more overall." },
+  { fromDay: 34, q: "The best debt payoff method is the one you'll actually stick with.", answer: true, explanation: "A mathematically perfect plan you abandon is worse than a slightly suboptimal plan you complete. Both avalanche and snowball work — consistency matters more than optimality." },
+  { fromDay: 35, q: "You should always capture an employer retirement match before paying extra on any debt.", answer: true, explanation: "An employer match is an instant 50-100% return. No debt interest rate beats that guaranteed return." },
+  { fromDay: 36, q: "Carrying a small credit card balance helps build credit faster.", answer: false, explanation: "This is a persistent myth. Paying in full every month builds credit just as well without costing you interest. Credit scores reward on-time payments and low utilisation, not interest payments." },
+  { fromDay: 37, q: "Leverage only amplifies gains, not losses.", answer: false, explanation: "Leverage amplifies both gains and losses equally. A 20% deposit on a property means a 10% property decline wipes out 50% of your equity. Leverage is a neutral multiplier — it magnifies whatever happens." },
+];
+
+const getReviewQuestion = (currentDay, completedDays) => {
+  const eligible = REVIEW_POOL.filter(r => r.fromDay < currentDay && completedDays.includes(r.fromDay));
+  if (eligible.length === 0) return null;
+  const weights = eligible.map(r => currentDay - r.fromDay);
+  const totalWeight = weights.reduce((a, b) => a + b, 0);
+  let rand = Math.random() * totalWeight;
+  for (let i = 0; i < eligible.length; i++) {
+    rand -= weights[i];
+    if (rand <= 0) return eligible[i];
+  }
+  return eligible[eligible.length - 1];
+};
+
+// ─── STORAGE (localStorage) ───
+const STORAGE_KEY = "finlit-progress";
+const defaultProgress = { completedDays: [], scores: {}, currentDay: 1, streak: 0, lastCompletedDate: null };
+
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      return { ...defaultProgress, ...parsed, completedDays: parsed.completedDays || [], scores: parsed.scores || {} };
+    }
+  } catch (e) { console.error("Load failed:", e); }
+  return { ...defaultProgress };
+}
+
+function saveProgress(progress) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); } catch (e) { console.error("Save failed:", e); }
+}
+
+// ─── STYLES ───
+const colors = { bg:"#FAFAF7", card:"#FFFFFF", border:"#E8E8E4", text:"#1A1A1A", textMid:"#555", textLight:"#999", accent:"#C4A45A", black:"#1A1A1A", green:"#66BB6A", greenBg:"#E8F5E9", red:"#E57373", redBg:"#FFEAEA", muted:"#F5F5F0" };
+const sans = "'DM Sans', sans-serif";
+const serif = "'Instrument Serif', Georgia, serif";
+
+// ─── COMPONENTS ───
+function ProgressBar({ value, max }) {
+  return React.createElement("div", { style: { background: colors.border, borderRadius: 6, height: 6 } },
+    React.createElement("div", { style: { background: colors.black, borderRadius: 6, height: 6, width: `${Math.min((value/max)*100,100)}%`, transition: "width 0.6s ease" } })
+  );
+}
+
+function StepIndicator({ current, total }) {
+  return React.createElement("div", { style: { display:"flex", gap:6, marginBottom:28 } },
+    Array.from({ length: total }, (_, i) =>
+      React.createElement("div", { key: i, style: { flex:1, height:3, borderRadius:2, background: i<=current ? colors.black : colors.border, transition:"background 0.3s ease" } })
+    )
+  );
+}
+
+function Button({ children, onClick, variant, style: extraStyle }) {
+  const v = variant || "primary";
+  const base = { width:"100%", padding: v==="secondary"?"16px":"18px", border: v==="secondary"?`1px solid ${colors.border}`:"none", borderRadius:12, fontSize: v==="secondary"?14:16, fontFamily:sans, fontWeight:600, cursor:"pointer", background: v==="secondary"?"transparent":colors.black, color: v==="secondary"?colors.textLight:colors.bg, marginTop:8, ...extraStyle };
+  return React.createElement("button", { onClick, style: base }, children);
+}
+
+function OptionButton({ label, selected, correct, showResult, onClick }) {
+  let bg = colors.card, borderColor = colors.border;
+  if (selected && showResult) { bg = correct ? colors.greenBg : colors.redBg; borderColor = correct ? colors.green : colors.red; }
+  else if (selected) { borderColor = colors.black; }
+  return React.createElement("button", { onClick, style: { padding:"16px 20px", background:bg, border:`1.5px solid ${borderColor}`, borderRadius:10, textAlign:"left", fontSize:15, fontFamily:sans, cursor:"pointer", color:colors.text, width:"100%", lineHeight:1.4 } }, label);
+}
+
+function TFButtons({ answer, userAnswer, setUserAnswer }) {
+  return React.createElement("div", { style: { display:"flex", gap:10 } },
+    [true, false].map(val => {
+      const selected = userAnswer === val;
+      const showResult = userAnswer !== null;
+      let bg = colors.card, border = colors.border;
+      if (selected && showResult) { bg = val===answer ? colors.greenBg : colors.redBg; border = val===answer ? colors.green : colors.red; }
+      if (showResult && !selected && val===answer) { bg = colors.greenBg; border = colors.green; }
+      return React.createElement("button", { key: String(val), onClick: () => { if (userAnswer===null) setUserAnswer(val); }, style: { flex:1, padding:"12px", borderRadius:8, border:`1.5px solid ${border}`, background:bg, fontFamily:sans, fontSize:14, cursor: userAnswer===null?"pointer":"default", fontWeight:500, color:colors.text } }, val ? "True" : "False");
+    })
+  );
+}
+
+function FeedbackBox({ text }) {
+  return React.createElement("div", { style: { marginTop:14, padding:"16px", background:colors.muted, borderRadius:10, fontFamily:sans, fontSize:14, lineHeight:1.65, color:colors.textMid } }, text);
+}
+
+function Label({ children, color }) {
+  return React.createElement("div", { style: { fontFamily:sans, fontSize:11, letterSpacing:2, textTransform:"uppercase", color: color||colors.accent, marginBottom:12 } }, children);
+}
+
+function BackHeader({ onBack, label }) {
+  return React.createElement("div", { style: { display:"flex", alignItems:"center", marginBottom:24 } },
+    React.createElement("button", { onClick: onBack, style: { background:"none", border:"none", fontSize:18, cursor:"pointer", padding:0, marginRight:12, color:colors.textLight } }, "←"),
+    React.createElement("div", { style: { fontFamily:sans, fontSize:12, letterSpacing:2, textTransform:"uppercase", color:colors.textLight } }, label)
+  );
+}
+
+// ─── SCREENS ───
+function HomeScreen({ progress, onStartLesson, onViewMap, onResetProgress }) {
+  const lesson = LESSONS.find(l => l.day === progress.currentDay);
+  const moduleIdx = getModuleForDay(progress.currentDay);
+  const completedCount = progress.completedDays.length;
+  const pct = Math.round((completedCount / 51) * 100);
+
+  if (!lesson) {
+    return React.createElement("div", { style: { padding:"48px 24px 24px" } },
+      React.createElement(Label, null, "Curriculum Complete"),
+      React.createElement("h1", { style: { fontFamily:serif, fontSize:32, fontWeight:400, lineHeight:1.15, margin:"0 0 12px" } }, "You've finished all available lessons!"),
+      React.createElement("p", { style: { fontFamily:sans, fontSize:15, color:colors.textMid, lineHeight:1.6 } }, `${completedCount} of 51 lessons completed. More lessons coming soon.`),
+      React.createElement("div", { style: { marginTop:16, marginBottom:24 } }, React.createElement(ProgressBar, { value:completedCount, max:51 })),
+      React.createElement(Button, { variant:"secondary", onClick:onViewMap }, "View All Lessons")
+    );
+  }
+
+  return React.createElement("div", { style: { padding:"48px 24px 24px" } },
+    React.createElement(Label, { color:colors.textLight }, `Day ${progress.currentDay} of 51`),
+    React.createElement("h1", { style: { fontFamily:serif, fontSize:34, fontWeight:400, lineHeight:1.15, margin:"0 0 6px" } }, lesson.title),
+    React.createElement("div", { style: { fontFamily:sans, fontSize:14, color:colors.textLight, marginBottom:32 } }, `Module ${moduleIdx+1} · ${MODULES[moduleIdx].name}`),
+    // Streak card
+    React.createElement("div", { style: { background:colors.card, border:`1px solid ${colors.border}`, borderRadius:12, padding:"16px 20px", display:"flex", alignItems:"center", gap:14, marginBottom:16 } },
+      React.createElement("div", { style: { fontSize:28 } }, "🔥"),
+      React.createElement("div", null,
+        React.createElement("div", { style: { fontFamily:sans, fontWeight:600, fontSize:15 } }, `${progress.streak} day streak`),
+        React.createElement("div", { style: { fontFamily:sans, fontSize:13, color:colors.textLight } }, `${completedCount} lessons completed`)
+      ),
+      React.createElement("div", { style: { marginLeft:"auto", fontFamily:sans, fontSize:14, color:colors.textLight, fontWeight:600 } }, `${pct}%`)
+    ),
+    React.createElement("div", { style: { marginBottom:32 } }, React.createElement(ProgressBar, { value:completedCount, max:51 })),
+    React.createElement(Button, { onClick:onStartLesson }, "Start Today's Lesson"),
+    React.createElement(Button, { variant:"secondary", onClick:onViewMap, style:{ marginTop:12 } }, "View All Lessons"),
+    React.createElement("div", { style: { marginTop:40, textAlign:"center" } },
+      React.createElement("button", { onClick:onResetProgress, style: { background:"none", border:"none", fontFamily:sans, fontSize:12, color:"#ccc", cursor:"pointer" } }, "Reset Progress")
+    )
+  );
+}
+
+function LessonScreen({ lesson, progress, onComplete, onBack }) {
+  const [step, setStep] = useState(0);
+  const [scenarioAnswer, setScenarioAnswer] = useState(null);
+  const [quizAnswers, setQuizAnswers] = useState({});
+  const [reviewAnswer, setReviewAnswer] = useState(null);
+
+  const reviewQ = getReviewQuestion(lesson.day, progress.completedDays);
+  const totalSteps = reviewQ ? 4 : 3;
+
+  const handleFinish = () => {
+    const quizScore = Object.entries(quizAnswers).reduce((acc, [idx, ans]) => acc + (ans === lesson.quiz[parseInt(idx)].answer ? 1 : 0), 0);
+    const scenarioCorrect = scenarioAnswer === lesson.scenario.correct ? 1 : 0;
+    onComplete({ quizScore, quizTotal: lesson.quiz.length, scenarioCorrect });
+  };
+
+  return React.createElement("div", { style: { padding:"32px 24px 40px" } },
+    React.createElement(BackHeader, { onBack, label: `Day ${lesson.day}` }),
+    React.createElement(StepIndicator, { current: step, total: totalSteps }),
+
+    // CONCEPT
+    step === 0 && React.createElement("div", null,
+      React.createElement(Label, null, "Concept"),
+      React.createElement("h2", { style: { fontFamily:serif, fontSize:28, fontWeight:400, lineHeight:1.2, margin:"0 0 20px" } }, lesson.title),
+      ...lesson.concept.map((para, i) => React.createElement("p", { key:i, style: { fontFamily:sans, fontSize:15, lineHeight:1.75, color:colors.textMid, marginBottom:16 } }, para)),
+      React.createElement(Button, { onClick: () => setStep(1), style:{ marginTop:16 } }, "Continue →")
+    ),
+
+    // SCENARIO
+    step === 1 && React.createElement("div", null,
+      React.createElement(Label, null, "Scenario Challenge"),
+      React.createElement("h2", { style: { fontFamily:serif, fontSize:24, fontWeight:400, lineHeight:1.25, margin:"0 0 20px" } }, lesson.scenario.prompt),
+      React.createElement("div", { style: { display:"flex", flexDirection:"column", gap:10 } },
+        ...lesson.scenario.options.map(opt => React.createElement(OptionButton, { key:opt.id, label:opt.label, selected:scenarioAnswer===opt.id, correct:opt.id===lesson.scenario.correct, showResult:scenarioAnswer!==null, onClick:() => { if(!scenarioAnswer) setScenarioAnswer(opt.id); } }))
+      ),
+      scenarioAnswer && React.createElement(FeedbackBox, { text: lesson.scenario.feedback }),
+      scenarioAnswer && React.createElement(Button, { onClick: () => setStep(2), style:{ marginTop:20 } }, "Continue →")
+    ),
+
+    // QUIZ
+    step === 2 && React.createElement("div", null,
+      React.createElement(Label, null, "Quick Quiz"),
+      React.createElement("div", { style: { display:"flex", flexDirection:"column", gap:24 } },
+        ...lesson.quiz.map((q, i) => React.createElement("div", { key:i },
+          React.createElement("p", { style: { fontFamily:sans, fontSize:15, lineHeight:1.5, marginBottom:10 } }, q.q),
+          React.createElement(TFButtons, { answer:q.answer, userAnswer: quizAnswers[i]!==undefined?quizAnswers[i]:null, setUserAnswer: val => setQuizAnswers(prev => ({...prev, [i]:val})) }),
+          quizAnswers[i] !== undefined && React.createElement(FeedbackBox, { text: q.explanation })
+        ))
+      ),
+      Object.keys(quizAnswers).length === lesson.quiz.length && React.createElement(Button, { onClick: () => reviewQ ? setStep(3) : handleFinish(), style:{ marginTop:24 } }, reviewQ ? "Continue →" : "Finish Lesson ✓")
+    ),
+
+    // REVIEW
+    step === 3 && reviewQ && React.createElement("div", null,
+      React.createElement(Label, null, `Review · Day ${reviewQ.fromDay}`),
+      React.createElement("p", { style: { fontFamily:sans, fontSize:15, lineHeight:1.5, marginBottom:14 } }, reviewQ.q),
+      React.createElement(TFButtons, { answer:reviewQ.answer, userAnswer:reviewAnswer, setUserAnswer: val => { if(reviewAnswer===null) setReviewAnswer(val); } }),
+      reviewAnswer !== null && React.createElement(React.Fragment, null,
+        React.createElement(FeedbackBox, { text: reviewQ.explanation }),
+        React.createElement(Button, { onClick: handleFinish, style:{ marginTop:24 } }, "Finish Lesson ✓")
+      )
+    )
+  );
+}
+
+function CompletionScreen({ lesson, score, onContinue }) {
+  const total = score.quizTotal + 1;
+  const correct = score.quizScore + score.scenarioCorrect;
+  const pct = Math.round((correct / total) * 100);
+
+  return React.createElement("div", { style: { padding:"60px 24px 24px", textAlign:"center" } },
+    React.createElement("div", { style: { fontSize:48, marginBottom:16 } }, pct >= 80 ? "🎯" : pct >= 50 ? "👍" : "📚"),
+    React.createElement("h2", { style: { fontFamily:serif, fontSize:28, fontWeight:400, margin:"0 0 8px" } }, `Day ${lesson.day} Complete`),
+    React.createElement("p", { style: { fontFamily:sans, fontSize:15, color:colors.textMid, marginBottom:24 } }, lesson.title),
+    React.createElement("div", { style: { background:colors.card, border:`1px solid ${colors.border}`, borderRadius:12, padding:"20px", marginBottom:24 } },
+      React.createElement("div", { style: { fontFamily:sans, fontSize:36, fontWeight:700, color:colors.text } }, `${correct}/${total}`),
+      React.createElement("div", { style: { fontFamily:sans, fontSize:13, color:colors.textLight, marginTop:4 } }, "questions correct")
+    ),
+    React.createElement(Button, { onClick:onContinue }, "Continue")
+  );
+}
+
+function MapScreen({ progress, onBack, onSelectLesson }) {
+  const daysByModule = [
+    [1,2,3,4,5],
+    [6,7,8,9,10,11,12,13,14],
+    [15,16,17,18,19,20,21,22],
+    [23,24,25,26,27,28,29,30,31],
+    [32,33,34,35,36,37],
+    [38,39,40,41,42,43,44,45],
+    [46,47,48,49,50,51],
+  ];
+
+  return React.createElement("div", { style: { padding:"32px 24px 40px" } },
+    React.createElement(BackHeader, { onBack, label:"Curriculum" }),
+    React.createElement("h2", { style: { fontFamily:serif, fontSize:26, fontWeight:400, margin:"0 0 24px" } }, "All Lessons"),
+    ...MODULES.map((mod, mi) => {
+      const days = daysByModule[mi];
+      const completedInModule = days.filter(d => progress.completedDays.includes(d)).length;
+      return React.createElement("div", { key:mi, style:{ marginBottom:28 } },
+        React.createElement("div", { style: { display:"flex", justifyContent:"space-between", alignItems:"baseline", marginBottom:4 } },
+          React.createElement(Label, { color:colors.textLight }, `Days ${mod.range}`),
+          React.createElement("span", { style: { fontFamily:sans, fontSize:12, color:colors.textLight } }, `${completedInModule}/${days.length}`)
+        ),
+        React.createElement("div", { style: { fontFamily:sans, fontWeight:600, fontSize:16, marginBottom:12 } }, mod.name),
+        React.createElement("div", { style: { display:"flex", gap:8, flexWrap:"wrap" } },
+          ...days.map(d => {
+            const completed = progress.completedDays.includes(d);
+            const current = d === progress.currentDay;
+            const available = LESSONS.some(l => l.day === d);
+            const locked = !completed && !current && !available;
+            return React.createElement("button", {
+              key:d,
+              onClick: () => { if(completed||current) onSelectLesson(d); },
+              style: { width:38, height:38, borderRadius:8, display:"flex", alignItems:"center", justifyContent:"center", fontSize:13, fontFamily:sans, fontWeight:500, background: completed?colors.black:current?colors.card:colors.muted, color: completed?colors.bg:current?colors.black:locked?"#ddd":"#bbb", border: current?`2px solid ${colors.black}`:`1px solid ${colors.border}`, cursor:(completed||current)?"pointer":"default", padding:0, opacity:locked?0.5:1 }
+            }, completed ? "✓" : d);
+          })
+        )
+      );
+    })
+  );
+}
+
+// ─── APP ───
+function App() {
+  const [progress, setProgress] = useState(() => loadProgress());
+  const [screen, setScreen] = useState("home");
+  const [activeLessonDay, setActiveLessonDay] = useState(null);
+  const [lastScore, setLastScore] = useState(null);
+
+  const handleStartLesson = useCallback(() => {
+    setActiveLessonDay(progress.currentDay);
+    setScreen("lesson");
+  }, [progress]);
+
+  const handleSelectLesson = useCallback((day) => {
+    setActiveLessonDay(day);
+    setScreen("lesson");
+  }, []);
+
+  const handleCompleteLesson = useCallback((score) => {
+    const today = new Date().toDateString();
+    const newCompleted = progress.completedDays.includes(activeLessonDay) ? progress.completedDays : [...progress.completedDays, activeLessonDay];
+    let newStreak = progress.streak;
+    if (progress.lastCompletedDate !== today) {
+      const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
+      newStreak = (progress.lastCompletedDate === yesterday.toDateString()) ? progress.streak + 1 : 1;
+    }
+    const nextDay = Math.max(...newCompleted) + 1;
+    const newProgress = { ...progress, completedDays: newCompleted, scores: { ...progress.scores, [activeLessonDay]: score }, currentDay: Math.min(nextDay, 52), streak: newStreak, lastCompletedDate: today };
+    saveProgress(newProgress);
+    setProgress(newProgress);
+    setLastScore(score);
+    setScreen("complete");
+  }, [progress, activeLessonDay]);
+
+  const handleResetProgress = useCallback(() => {
+    const fresh = { ...defaultProgress };
+    saveProgress(fresh);
+    setProgress(fresh);
+  }, []);
+
+  const activeLesson = LESSONS.find(l => l.day === activeLessonDay);
+
+  return React.createElement("div", { style: { fontFamily:serif, background:colors.bg, minHeight:"100vh", color:colors.text, maxWidth:430, margin:"0 auto" } },
+    screen === "home" && React.createElement(HomeScreen, { progress, onStartLesson:handleStartLesson, onViewMap:()=>setScreen("map"), onResetProgress:handleResetProgress }),
+    screen === "lesson" && activeLesson && React.createElement(LessonScreen, { lesson:activeLesson, progress, onComplete:handleCompleteLesson, onBack:()=>setScreen("home") }),
+    screen === "complete" && activeLesson && React.createElement(CompletionScreen, { lesson:activeLesson, score:lastScore, onContinue:()=>setScreen("home") }),
+    screen === "map" && React.createElement(MapScreen, { progress, onBack:()=>setScreen("home"), onSelectLesson:handleSelectLesson }),
+    React.createElement("div", { style: { padding:"16px 24px 24px", textAlign:"center", fontFamily:sans, fontSize:11, color:"#ccc" } }, "Educational content only — not financial advice")
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("app")).render(React.createElement(App));
+</script>
+</body>
+</html>
