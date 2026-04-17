@@ -704,7 +704,7 @@ function App() {
 
   return React.createElement("div", { style: { fontFamily:serif, background:colors.bg, minHeight:"100vh", color:colors.text, maxWidth:430, margin:"0 auto" } },
     screen === "home" && React.createElement(HomeScreen, { progress, onStartLesson:handleStartLesson, onViewMap:()=>setScreen("map"), onResetProgress:handleResetProgress }),
-    screen === "lesson" && activeLesson && React.createElement(LessonScreen, { lesson:activeLesson, progress, onComplete:handleCompleteLesson, onBack:()=>setScreen("home") }),
+    screen === "lesson" && activeLesson && React.createElement(LessonScreen, { key:activeLesson.day, lesson:activeLesson, progress, onComplete:handleCompleteLesson, onBack:()=>setScreen("home") }),
     screen === "complete" && activeLesson && React.createElement(CompletionScreen, { lesson:activeLesson, score:lastScore, onContinue:()=>setScreen("home") }),
     screen === "map" && React.createElement(MapScreen, { progress, onBack:()=>setScreen("home"), onSelectLesson:handleSelectLesson }),
     React.createElement("div", { style: { padding:"16px 24px 24px", textAlign:"center", fontFamily:sans, fontSize:11, color:"#ccc" } }, "Educational content only — not financial advice")
