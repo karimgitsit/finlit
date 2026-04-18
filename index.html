@@ -227,6 +227,630 @@ const LESSONS = [
     ]
   },
   {
+    day: 8,
+    title: "Bonds & Fixed Income",
+    concept: [
+      "Bonds are loans you make to governments or corporations. In exchange for your money, they pay you regular interest and return the principal on a set maturity date. A 10-year US Treasury bond at 4% yield means you lend the government money, receive 4% per year in interest, and get your principal back in 10 years.",
+      "Bonds behave differently from stocks, which is their main purpose in a portfolio. When stocks crash, high-quality government bonds often hold their value or even rise — investors flee to safety. This negative correlation is why a mix of stocks and bonds historically produces smoother returns than either alone. The cost is lower long-term returns: stocks have averaged ~10% annually, bonds closer to 4-5%.",
+      "The two main risks: interest rate risk (when rates rise, existing bonds fall in value because new bonds pay more) and credit risk (the issuer might default). Treasuries have essentially no credit risk. Corporate bonds pay more but can default. 'Junk bonds' pay the most and default the most — they behave more like stocks than bonds in a crisis.",
+      "For most investors, a total bond market index fund is all you need. It holds thousands of government and high-grade corporate bonds, providing broad diversification at low cost. The classic age-based rule of thumb is 'bond percentage = your age,' but that's a starting point. A 30-year-old saving for retirement might reasonably hold 10-20% bonds; someone approaching retirement typically wants 40-60%."
+    ],
+    scenario: {
+      prompt: "You're 28 and building a long-term portfolio. A friend says 'bonds are dead — they returned basically nothing in 2022 when rates rose, and stocks beat them over every long period anyway. Go 100% stocks.' What's the best response?",
+      options: [
+        { id: "a", label: "Agree — at 28, 100% stocks is optimal for long-term growth" },
+        { id: "b", label: "Disagree — always hold 50% bonds for safety regardless of age" },
+        { id: "c", label: "Partially agree — at 28 a high stock allocation makes sense, but a small bond allocation (10-20%) dampens volatility and provides rebalancing fuel during crashes" },
+        { id: "d", label: "Disagree — bonds always outperform stocks over long periods" },
+      ],
+      correct: "c",
+      feedback: "Your friend is right that stocks have beaten bonds over long periods and that 2022 was brutal for bonds. But 100% stocks means surviving a 50% drawdown without panicking or losing your job — most people overestimate their tolerance. A modest bond allocation gives you something to sell and rebuild stock positions when the market crashes, which is where real wealth is built. At 28, something like 80-90% stocks / 10-20% bonds balances growth with psychological durability. The 'right' answer varies, but 100% stocks and 50% bonds are both extremes for a 28-year-old."
+    },
+    quiz: [
+      { q: "When interest rates rise, existing bond prices typically fall.", answer: true, explanation: "New bonds issued at higher rates make older, lower-yielding bonds less attractive. To sell an old bond, you have to discount its price until its effective yield matches new bonds. Longer-duration bonds fall the most." },
+      { q: "US Treasury bonds have essentially no credit risk.", answer: true, explanation: "The US government has never defaulted on Treasury debt and can create dollars to repay it. Treasuries are considered the global 'risk-free' benchmark, though they still carry interest rate risk and inflation risk." },
+      { q: "Junk bonds are a safer alternative to stocks during market crashes.", answer: false, explanation: "Junk (high-yield) bonds behave more like stocks than bonds in a crisis. They're issued by financially weaker companies, which are the first to struggle in downturns. For downside protection, Treasuries and investment-grade bonds work far better." }
+    ]
+  },
+  {
+    day: 9,
+    title: "Asset Allocation & Target-Date Funds",
+    concept: [
+      "Asset allocation is the mix of stocks, bonds, and other assets in your portfolio. It's the single biggest driver of your long-term returns and volatility — far more important than which specific funds you pick. A 90/10 stock/bond portfolio and a 60/40 portfolio will produce very different outcomes over decades, even with identical underlying funds.",
+      "The right allocation depends on your time horizon and risk tolerance. Time horizon is the crucial variable: money you need in 2 years shouldn't be in stocks, and money you won't touch for 30 years shouldn't be in cash. Longer horizons let you ride out stock market volatility in exchange for higher expected returns.",
+      "Target-date funds solve the allocation problem automatically. You pick one based on your retirement year — 'Target 2060' for someone retiring around then — and the fund holds a diversified mix of stocks and bonds that automatically shifts toward more bonds as the date approaches. It's a one-fund portfolio managed by the fund company.",
+      "The tradeoff: target-date funds are convenient but not customised. Their 'glide path' (how allocation changes over time) is one-size-fits-all. Some are too conservative, some too aggressive, and fees vary. For someone starting out, a low-cost target-date fund is often the best possible default — it beats analysis paralysis and ensures you're actually invested with reasonable diversification."
+    ],
+    scenario: {
+      prompt: "You're 30 and starting a retirement account. You're deciding between three options: (A) Target-date 2060 fund at 0.08% expense ratio, currently 90% stocks / 10% bonds. (B) DIY mix: 60% US stocks + 20% international + 10% bonds + 10% REITs, all low-cost index funds. (C) Just buy the S&P 500 index — simpler than anything else. Which is the best starting point for someone new to investing?",
+      options: [
+        { id: "a", label: "A — one fund, professionally managed glide path, appropriate for the time horizon" },
+        { id: "b", label: "B — DIY gives more control and slightly lower fees" },
+        { id: "c", label: "C — simplicity beats diversification at this stage" },
+        { id: "d", label: "Any of them — consistency of contributions matters far more than allocation at this level" },
+      ],
+      correct: "d",
+      feedback: "All three are reasonable. (A) is the best default for most people new to investing — automatic diversification, automatic rebalancing, appropriate glide path. (B) offers slightly more control and can be marginally cheaper, but adds complexity. (C) is simpler but concentrates you in US large-caps with no bonds. The honest truth: at 30, the gap between these options over 30+ years is small compared to the gap between 'invested regularly' and 'waited until I figured out the perfect allocation.' Start with any reasonable option and increase contributions aggressively."
+    },
+    quiz: [
+      { q: "Asset allocation has a bigger impact on long-term returns than specific fund selection.", answer: true, explanation: "Research consistently shows allocation (stocks vs bonds vs cash) explains the vast majority of return and volatility variance. Whether you pick Vanguard's S&P 500 fund or Fidelity's matters far less than whether you're 60/40 or 90/10." },
+      { q: "Target-date funds automatically shift toward more bonds as you approach retirement.", answer: true, explanation: "This 'glide path' is the defining feature. A Target 2060 fund might be 90/10 stocks/bonds today and gradually shift to something like 50/50 or 40/60 by the target date." },
+      { q: "Because target-date funds are one-size-fits-all, they're always a worse choice than building your own portfolio.", answer: false, explanation: "For most investors, a low-cost target-date fund is better than a DIY portfolio because it eliminates behavioral mistakes — no forgotten rebalancing, no tinkering, no paralysis. Simplicity you'll actually execute beats sophistication you won't." }
+    ]
+  },
+  {
+    day: 10,
+    title: "Tax-Advantaged Accounts: 401(k), IRA, Roth",
+    concept: [
+      "Tax-advantaged accounts are the single biggest edge available to regular investors. They let you defer or eliminate taxes on investment growth, which compounds into enormous long-term differences. A dollar that grows tax-free for 30 years ends up worth roughly 30-40% more than the same dollar in a taxable account.",
+      "Traditional 401(k) and Traditional IRA: contributions reduce your taxable income today. The money grows tax-deferred. You pay income tax when you withdraw in retirement. Best when you expect to be in a lower tax bracket in retirement than you are now — typical for high earners mid-career.",
+      "Roth 401(k) and Roth IRA: contributions are made with after-tax money (no deduction today). But the money grows tax-free and withdrawals in retirement are completely tax-free. Best when you expect to be in a higher (or equal) tax bracket in retirement, or when you want tax diversification. Especially powerful for young people in lower brackets who have decades for tax-free compounding.",
+      "The priority stack for most people: (1) 401(k) up to employer match — free money. (2) Max out a Roth IRA if eligible. (3) Max out remaining 401(k) contributions. (4) HSA if you have a high-deductible health plan — triple tax advantage. (5) Taxable brokerage for anything beyond. Contribution limits change yearly; always check current IRS limits."
+    ],
+    scenario: {
+      prompt: "You're 25, earning $60K, starting your first real job with a 401(k) option. Your employer offers a 100% match up to 4% of salary. You can contribute up to $200/month to retirement accounts. How should you split it?",
+      options: [
+        { id: "a", label: "All $200 to Traditional 401(k) — maximum tax deduction" },
+        { id: "b", label: "$200 to Roth IRA — no 401(k) since fees might be high" },
+        { id: "c", label: "$200/month to 401(k) to capture the 4% match ($2,400/year), then shift any additional savings to a Roth IRA" },
+        { id: "d", label: "Skip retirement accounts — at 25 you need liquidity in a normal brokerage" },
+      ],
+      correct: "c",
+      feedback: "Step one is always the employer match — 4% of $60K is $2,400/year, doubled by the match to $4,800. Skipping it is leaving free money on the table. At $200/month ($2,400/year), you're hitting exactly the match threshold. If you had more to contribute later, the Roth IRA would be the next step since at a 25-year-old's lower tax bracket, paying tax now to get decades of tax-free growth is an incredible deal. (a) misses the Roth advantage; (b) skips free match money; (d) ignores that tax-free compounding is worth dramatically more than liquidity for long-term money."
+    },
+    quiz: [
+      { q: "Roth IRA contributions are tax-deductible today.", answer: false, explanation: "Roth contributions are made with after-tax money — no deduction today. The benefit comes later: withdrawals in retirement are completely tax-free. Traditional IRA contributions are deductible, but withdrawals are taxed." },
+      { q: "Capturing a full employer 401(k) match should usually come before contributing to an IRA.", answer: true, explanation: "An employer match is typically a 50-100% instant return — no investment beats that. Always capture the full match before diverting money elsewhere, even to Roth IRAs." },
+      { q: "Tax-advantaged accounts can save tens of thousands of dollars over a career.", answer: true, explanation: "The compounding benefit of tax-free or tax-deferred growth is enormous. Over 30+ years, the difference between taxable and tax-advantaged accounts is often 30%+ of final value — potentially hundreds of thousands of dollars." }
+    ]
+  },
+  {
+    day: 11,
+    title: "Dollar-Cost Averaging vs Lump Sum",
+    concept: [
+      "Dollar-cost averaging (DCA) means investing a fixed amount at regular intervals — $500 every month, for example — regardless of market conditions. You buy more shares when prices are low and fewer when they're high. Lump sum investing means putting all available money in at once.",
+      "Most people practice DCA naturally: they invest each paycheck as it comes in. That's not really DCA in the debate-worthy sense — that's just investing money as you earn it. The real question is what to do when you suddenly have a big chunk, like a bonus, inheritance, or tax refund. Should you invest it all at once or spread it over months?",
+      "The data is clear: lump sum wins roughly two-thirds of the time. Markets go up more often than they go down, so getting invested sooner usually beats waiting. Research from Vanguard shows lump sum beats 12-month DCA about 68% of the time, with an average outperformance of ~2% in year one.",
+      "But DCA has a psychological advantage that matters: it reduces the regret if you invest right before a crash. If markets drop 30% the week after your lump sum, you'll feel sick — even though statistically you made the right call. DCA is a form of insurance against bad luck and emotional reaction. For sums you can afford to lose, lump sum is mathematically better. For sums that would cause real distress to see temporarily halved, a 3-6 month DCA plan is defensible."
+    ],
+    scenario: {
+      prompt: "You receive a $60,000 inheritance and want to invest it for retirement (30-year horizon). You're a nervous investor who has never held more than $10K in the market. Which approach makes the most sense?",
+      options: [
+        { id: "a", label: "Lump sum — historically beats DCA ~68% of the time, maximise expected return" },
+        { id: "b", label: "Full DCA over 24 months to minimise regret" },
+        { id: "c", label: "Invest ~$10-20K immediately, DCA the rest over 6-12 months — captures most of the expected value of lump sum while limiting the regret from a bad entry" },
+        { id: "d", label: "Keep it all in cash until markets crash, then invest" },
+      ],
+      correct: "c",
+      feedback: "A hybrid approach fits someone who knows they might panic. Lump sum is mathematically better on average, but 'on average' doesn't help if you sell in a crash because you couldn't stomach the drawdown. Getting some in immediately (a) captures most of the lump-sum advantage, (b) 24-month DCA is too conservative — you're likely leaving 4-5% of expected returns on the table. (d) is market timing, which almost always underperforms because 'the crash' is visible only in hindsight. A 6-month DCA plan is a reasonable compromise between math and psychology."
+    },
+    quiz: [
+      { q: "Lump sum investing historically outperforms DCA more than half the time.", answer: true, explanation: "About 68% of the time, according to Vanguard research. Markets rise more often than they fall, so earlier exposure usually wins. DCA's value is emotional insurance, not expected return." },
+      { q: "Waiting in cash for a market crash is a reliable strategy for long-term investors.", answer: false, explanation: "Waiting in cash is market timing, which loses to staying invested over almost every long period studied. The 'crash' is only obvious after the fact; meanwhile the market drifts up and you miss the gains." },
+      { q: "Investing your paycheck each month is a form of dollar-cost averaging.", answer: true, explanation: "Regular contributions from income are technically DCA, though this is really just 'investing as you earn.' The interesting DCA debate is only about how to deploy a large lump sum you already have." }
+    ]
+  },
+  {
+    day: 12,
+    title: "Rebalancing Your Portfolio",
+    concept: [
+      "Rebalancing means resetting your portfolio back to its target allocation after market movements have pushed it off. If you set a 70% stocks / 30% bonds target, and after a strong year stocks now make up 80% of your portfolio, rebalancing means selling some stocks and buying bonds to return to 70/30.",
+      "Why bother? Two reasons. First, risk management: the whole point of setting an allocation was to limit your downside. If stocks drift from 70% to 85% during a bull market, your portfolio is now more exposed to a crash than you intended. Second, it mechanically enforces 'buy low, sell high' — you're selling whatever has appreciated and buying whatever has lagged.",
+      "There are two main approaches. Calendar rebalancing: do it on a schedule — once or twice a year works for most people. Threshold rebalancing: rebalance whenever any asset drifts more than 5% (or some chosen band) from its target. Both work. More frequent rebalancing doesn't meaningfully improve returns and creates more taxable events in taxable accounts.",
+      "Practical ways to rebalance without selling: direct new contributions toward underweight assets. If bonds are underweight, route your next several months of contributions entirely to bonds until the mix is back on target. This avoids capital gains taxes in taxable accounts and is all you need if you're still in accumulation mode with regular contributions."
+    ],
+    scenario: {
+      prompt: "Your target is 70% stocks / 30% bonds. After a strong market year, your $100K portfolio is now $82K stocks and $18K bonds — a 82/18 mix. You're still contributing $1K/month. What's the best rebalancing approach?",
+      options: [
+        { id: "a", label: "Sell $12K of stocks and buy $12K of bonds to restore 70/30 immediately" },
+        { id: "b", label: "Leave it — stocks are working, don't interrupt the winner" },
+        { id: "c", label: "Direct all new contributions to bonds for several months until the ratio drifts back to 70/30 naturally" },
+        { id: "d", label: "Rebalance to 50/50 to lock in gains" },
+      ],
+      correct: "c",
+      feedback: "If you're still in accumulation mode, directing new contributions to the underweight asset is the cleanest solution — no taxable events, no transaction costs. At $1K/month flowing to bonds, you'd restore 70/30 over 6-12 months. (a) works but creates a taxable event if it's in a taxable account. (b) ignores the point of setting a target in the first place — your risk exposure has grown. (d) is market timing dressed up as 'locking in gains.' The best investors have a target, stick to it, and let rebalancing do the work quietly."
+    },
+    quiz: [
+      { q: "Rebalancing mechanically enforces buying low and selling high.", answer: true, explanation: "Whatever has risen becomes overweight and gets trimmed; whatever has lagged becomes underweight and gets bought. It's a simple, unemotional discipline that forces you to do what feels hardest." },
+      { q: "You must sell assets to rebalance — there's no other way.", answer: false, explanation: "If you're still contributing regularly, you can rebalance by directing new money entirely to the underweight asset. This avoids taxes and transaction costs in taxable accounts and works well during accumulation years." },
+      { q: "Rebalancing more often (e.g., monthly) produces meaningfully higher returns than rebalancing annually.", answer: false, explanation: "Studies show little difference in returns across rebalancing frequencies. More frequent rebalancing just creates more taxable events and complexity. Annual or threshold-based rebalancing is enough for almost everyone." }
+    ]
+  },
+  {
+    day: 13,
+    title: "Behavioral Traps: Timing, Panic, and FOMO",
+    concept: [
+      "The biggest enemy of the average investor isn't inflation, fees, or a bad fund — it's themselves. Study after study shows that the gap between fund returns and actual investor returns is 1-3% per year, almost entirely due to poor timing. People buy in after a run-up (FOMO) and sell during crashes (panic). The funds do fine; the investors don't.",
+      "Panic selling is the most destructive pattern. Markets drop 20-30%, people sell to 'stop the bleeding,' and then miss the recovery. After 2008, many investors sold at the bottom and waited for 'clarity' — by the time things felt safe again, the market had already recovered most of the drop. Missing just the 10 best days of the market over 20 years roughly cuts your total return in half.",
+      "FOMO works the opposite way. An asset runs up 200% and suddenly everyone wants in — crypto in 2021, meme stocks, individual tech names. You buy near the top because you can't stand watching others make money. Then it drops 60% and you sell near the bottom. You experienced the full loss but only a sliver of the gain.",
+      "The defenses that actually work are structural, not willpower. Automate contributions so they happen regardless of mood. Write an investment plan when you're calm, and commit to not deviating during emotional periods. Reduce how often you check your portfolio — daily checking doesn't help long-term investors and increases the urge to act. And remember: the boring investor who does nothing almost always beats the active one who tries to time the market."
+    ],
+    scenario: {
+      prompt: "The market drops 25% over two months and is all over the news. Your retirement portfolio is down $40K. A friend says they 'moved to cash until things stabilize — you can always buy back in when it's clear.' Your portfolio is for retirement 25 years away. What's the rational move?",
+      options: [
+        { id: "a", label: "Follow your friend — preserve capital, re-enter when markets recover" },
+        { id: "b", label: "Do nothing — keep contributing on schedule, possibly even increase contributions to buy at lower prices" },
+        { id: "c", label: "Switch to bonds temporarily until volatility subsides" },
+        { id: "d", label: "Sell half, keep half — hedge your bets" },
+      ],
+      correct: "b",
+      feedback: "With a 25-year horizon, a 25% drop is a sale, not a disaster. History shows market crashes are the best time to buy, not sell — but it never feels that way in the moment. Your friend's plan has a fatal flaw: there's no signal for when to buy back in. 'When it's clear' is always after the recovery, meaning they'll sell low and buy high. The people who rebalanced or kept buying during 2008 and 2020 were dramatically better off than those who 'went to cash to be safe.' The boring answer — keep going — is almost always right for long-term investors."
+    },
+    quiz: [
+      { q: "Missing just the 10 best market days over 20 years can roughly cut your total return in half.", answer: true, explanation: "The best days often cluster near the worst days — right after crashes. Investors who sell to 'avoid the storm' tend to miss the recovery days, which do most of the work of long-term returns." },
+      { q: "Investors who check their portfolio less frequently tend to earn higher returns than those who check daily.", answer: true, explanation: "Frequent checking amplifies the emotional response to short-term volatility, which increases the likelihood of poorly-timed trades. 'Don't just do something, sit there' is genuinely good investing advice." },
+      { q: "Moving to cash during a crash and waiting for things to stabilize is a reliable way to protect retirement savings.", answer: false, explanation: "It's one of the most destructive things long-term investors do. There's no objective signal for when it's 'safe' — by the time markets feel calm, they've typically already recovered most of the loss. Staying invested and continuing to buy through crashes is the evidence-based approach." }
+    ]
+  },
+  {
+    day: 14,
+    title: "Withdrawal Strategies & the 4% Rule",
+    concept: [
+      "Building wealth is only half the problem. At some point you stop accumulating and start drawing down. The withdrawal phase has its own math, and the central question is: how much can you spend each year without running out of money?",
+      "The 4% rule comes from the Trinity Study, which analysed historical US returns and found that retirees withdrawing 4% of their initial portfolio (adjusted for inflation each year) had a very high probability of their money lasting 30 years. A $1M portfolio supports $40K/year in year one, adjusted up for inflation thereafter.",
+      "The rule has important limits. It was designed for 30-year retirements — if you're retiring at 40 for a 50-year retirement, 4% is probably too aggressive; 3.25-3.5% is safer. It also assumes a diversified stock/bond portfolio (roughly 60/40), reasonable fees, and the willingness to spend flexibly if markets have a terrible start. It's a starting point, not a guarantee.",
+      "The biggest risk is sequence of returns: retiring into a bad market early on is far worse than hitting one later. A 30% crash in year 2 of retirement can permanently impair a portfolio, while the same crash in year 20 is usually fine. Defenses include keeping 2-3 years of expenses in cash/bonds at retirement, being willing to cut spending in bad years, and not fully retiring overnight — part-time work for a few years dramatically reduces sequence risk."
+    ],
+    scenario: {
+      prompt: "You want to retire when investments can cover $60,000/year in today's dollars, with a 30-year horizon. Using the 4% rule as a starting point, what portfolio size do you need — and what's one major caveat?",
+      options: [
+        { id: "a", label: "$1.5M — but 4% assumes a 30-year retirement and diversified portfolio; longer retirements or poor early years may require a lower withdrawal rate" },
+        { id: "b", label: "$600K — 10% withdrawal is aggressive but achievable with stocks" },
+        { id: "c", label: "$6M — need 100x annual expenses for safety" },
+        { id: "d", label: "$1.5M — the 4% rule is a hard rule and never fails" },
+      ],
+      correct: "a",
+      feedback: "$60K / 0.04 = $1.5M — that's the standard 4% calculation. The important caveat: 4% isn't a law of physics. It's a historical result with important assumptions (30-year horizon, ~60/40 portfolio, US data). For very long retirements (50+ years), 3.25-3.5% is safer. Sequence of returns risk means a bad early retirement can hurt portfolio longevity even at 4%. The practical implication: build toward 25x expenses ($1.5M here) as a minimum, and keep some flexibility in spending and some work optionality for the first few years."
+    },
+    quiz: [
+      { q: "The 4% rule was designed to support any length of retirement.", answer: false, explanation: "The original study targeted 30-year retirements. For longer horizons (early retirement, FIRE), 3-3.5% is a safer starting point. For shorter horizons, you can often withdraw more." },
+      { q: "Sequence of returns risk means a bad market early in retirement is worse than the same bad market late in retirement.", answer: true, explanation: "Withdrawing from a crashed portfolio early permanently shrinks your base. The same market decline 20 years into retirement, after decades of growth, often has minimal impact on whether your money lasts." },
+      { q: "A $1M portfolio supports roughly $40,000/year in the first year of retirement under the 4% rule.", answer: true, explanation: "4% of $1M is $40K, adjusted upward for inflation in each subsequent year. This is the classic starting-point calculation, though it should be adjusted for your specific horizon, allocation, and flexibility." }
+    ]
+  },
+  {
+    day: 15,
+    title: "Rent vs Buy: The Real Math",
+    concept: [
+      "'Rent is throwing money away' is one of the most repeated and most misleading pieces of financial advice. When you own a home, a huge portion of your monthly payment is also 'thrown away' — interest, property taxes, insurance, maintenance, HOA fees, and opportunity cost on your down payment. Only the principal portion builds equity, and in the early years of a mortgage, that portion is small.",
+      "The honest comparison requires calculating the true cost of ownership: mortgage interest + property tax + insurance + maintenance (budget ~1% of home value per year) + HOA + closing costs amortised over your expected holding period. Then compare that to rent, and factor in what your down payment could have earned invested elsewhere.",
+      "The rent-vs-buy decision also depends heavily on how long you'll stay. Transaction costs of buying and selling (5-8% of home value combined) are brutal if you move within 3-5 years. You typically need to stay 5+ years for ownership to mathematically outperform renting, and longer in expensive markets.",
+      "Buying still makes sense for many people — it forces savings, protects against rent increases, lets you modify your home, and provides long-term stability. But the financial case isn't automatic. In many cities today, renting and investing the difference is genuinely competitive with or better than buying. Make the decision on your actual numbers, not on a cultural assumption that buying is always 'smarter.'"
+    ],
+    scenario: {
+      prompt: "You're deciding between buying a $500K home (20% down = $100K, 6.5% mortgage, $5K property tax, $1.5K insurance, $5K/year maintenance estimate) or renting a comparable place for $2,400/month. You plan to stay 4 years. Which is likely better financially?",
+      options: [
+        { id: "a", label: "Buy — building equity beats renting every time" },
+        { id: "b", label: "Rent — at a 4-year horizon, transaction costs alone (5-8% buying + selling) likely exceed any equity gains, and monthly ownership costs here are higher than rent" },
+        { id: "c", label: "Buy — you can always sell if plans change" },
+        { id: "d", label: "Doesn't matter — they're mathematically identical over any time period" },
+      ],
+      correct: "b",
+      feedback: "At 6.5% on a $400K mortgage, year-1 interest alone is ~$26K. Add $5K tax, $1.5K insurance, $5K maintenance — ownership costs ~$37K/year before any equity. Rent is $28.8K/year. Plus selling costs (~$30K on $500K) and buying costs (~$10K). You'd need significant appreciation just to break even over 4 years. At a 5-7+ year horizon the math shifts, but at 4 years in a high-rate environment, renting and investing the $100K down payment is likely the better financial move. The cultural belief that 'buying always wins' ignores how much of the monthly payment isn't really building equity."
+    },
+    quiz: [
+      { q: "When you own a home, your entire monthly mortgage payment goes toward building equity.", answer: false, explanation: "Especially in early years, most of a mortgage payment is interest, not principal. Add property tax, insurance, maintenance, and HOA, and a large share of ownership costs don't build equity at all." },
+      { q: "Transaction costs from buying and selling a home are typically 5-8% of the home's value combined.", answer: true, explanation: "Realtor commissions (often 5-6%), closing costs, title fees, transfer taxes, and moving costs add up fast. This is why a short holding period makes buying mathematically tough — you need appreciation just to cover the costs of transacting." },
+      { q: "The rent-vs-buy math strongly depends on how long you'll stay in the home.", answer: true, explanation: "Short horizons favor renting because transaction costs dominate. Longer horizons favor buying because principal paydown and appreciation compound. The crossover point is usually 5-7 years, but varies with local prices, rates, and rent levels." }
+    ]
+  },
+  {
+    day: 16,
+    title: "What Actually Determines Property Value",
+    concept: [
+      "Property value isn't set by what a seller wants or what a buyer hopes to pay — it's set by the market. The three classic valuation approaches, used by appraisers and serious investors, are: comparable sales, income approach, and replacement cost. Understanding them helps you avoid overpaying and spot opportunities.",
+      "Comparable sales ('comps') is the dominant method for residential property. You look at recent sales of similar properties in the same area — similar size, age, condition, lot. Adjust for differences and you get a value range. The key word is 'recent': comps older than 6 months are unreliable in a fast-moving market, and further-away properties are weak evidence.",
+      "The income approach applies to rental property. It asks: what income does this property produce, and what return would an investor demand? A property generating $20K/year in net operating income, in a market where investors expect a 6% return, is worth roughly $333K ($20K / 0.06). This is how commercial real estate is actually priced.",
+      "Replacement cost asks: what would it cost to rebuild this property from scratch today? Land value + construction cost = replacement cost. It's a ceiling — you shouldn't pay much more than it would cost to build the same thing. It's especially useful in areas where construction is common, or for unusual properties where comps are thin."
+    ],
+    scenario: {
+      prompt: "You're evaluating a single-family home listed at $450K. Three data points: (1) Three similar homes on the same street sold for $395K, $410K, and $425K in the last 4 months. (2) The house rents for ~$2,200/month with ~$8K in annual expenses — net operating income ~$18K/year. (3) Local investors target a 6% cap rate. What's your best estimate of fair value?",
+      options: [
+        { id: "a", label: "$450K — the seller knows the market" },
+        { id: "b", label: "~$300K — only the income approach matters for any property" },
+        { id: "c", label: "~$410-425K — recent comps are the strongest evidence for a residential home, and the income approach (~$300K) suggests it's overpriced as a pure rental but reasonable as an owner-occupied home" },
+        { id: "d", label: "$600K — list price is always below true value" },
+      ],
+      correct: "c",
+      feedback: "For owner-occupied single-family homes, comps are the gold standard — and three recent comps on the same street cluster around $395-425K, so $450K is above market. The income approach ($18K / 0.06 = $300K) doesn't mean the house is worth $300K — it means it doesn't work as a pure rental at $450K. Owner-occupiers pay for amenity value, not just income. The honest answer is somewhere around $415K. Use multiple approaches; be most skeptical when they disagree significantly."
+    },
+    quiz: [
+      { q: "Comparable sales from more than a year ago are usually strong evidence of current market value.", answer: false, explanation: "Real estate markets move. Comps older than ~6 months lose reliability, and in fast-moving markets even 3-month-old comps can be stale. Recent, nearby, similar sales are the gold standard." },
+      { q: "The income approach values a property based on the rental income it could generate and investors' required return.", answer: true, explanation: "Net operating income divided by cap rate gives you the value. A $30K NOI at a 6% cap rate implies a $500K valuation. This is how commercial property is priced, and it's a sanity check for residential rentals." },
+      { q: "A property's list price is a reliable indication of its fair market value.", answer: false, explanation: "List prices reflect what sellers hope to get, not what the market will pay. Good sellers price based on comps; aspirational sellers list high and wait. Always evaluate value independently before assuming the list price is meaningful." }
+    ]
+  },
+  {
+    day: 17,
+    title: "Down Payments & Closing Costs",
+    concept: [
+      "The down payment gets all the attention, but closing costs quietly add 2-5% of the purchase price on top. On a $400K home, that's $8K-$20K in fees beyond the down payment. Buyers who save diligently for 20% down and then get blindsided at closing are a common story.",
+      "Standard down payment options: 20% avoids private mortgage insurance (PMI) and generally gets the best rates. Conventional loans often accept 3-5% down. FHA loans allow as little as 3.5% down but require mortgage insurance for the loan's life. VA loans (military) and USDA loans (rural areas) can go 0% down. Each option trades up-front cash for higher monthly costs, higher rates, or mortgage insurance.",
+      "Closing costs include: lender fees (origination, underwriting), title insurance, appraisal, inspection, prepaid property tax and insurance escrow, recording fees, and transfer taxes. Some are negotiable (lender fees), some are fixed (government fees), and some can be rolled into the loan (increasing principal but preserving cash).",
+      "The hidden cost most buyers miss: reserves. Lenders typically want to see 2-6 months of mortgage payments still in your account after closing. And you'll need moving costs, initial repairs, furniture, and a reasonable emergency fund because homeownership surfaces surprise expenses. Budget closing + 6-month emergency fund + 1-2% of home value in 'new home' expenses, or you'll start ownership cash-poor."
+    ],
+    scenario: {
+      prompt: "You're planning to buy a $450K home and have $130K saved. You assumed a 20% down payment ($90K) would leave you with $40K to spare. What should you actually budget for total cash-to-close, and is $130K enough for this purchase?",
+      options: [
+        { id: "a", label: "Total cash needed ~$105-115K (down payment + closing costs + prepaids) — $130K is enough, but thin once you factor in moving, initial repairs, and remaining emergency fund" },
+        { id: "b", label: "Total cash needed ~$90K — $130K leaves a comfortable $40K buffer" },
+        { id: "c", label: "Total cash needed ~$200K — $130K is nowhere near enough" },
+        { id: "d", label: "Cash needed is irrelevant — the lender finances everything" },
+      ],
+      correct: "a",
+      feedback: "On a $450K purchase with 20% down: down payment $90K, closing costs ~2-3% ($9-14K), prepaid taxes and insurance escrow ($3-6K depending on jurisdiction). Total cash-to-close roughly $102-110K. Leaves you $20-28K. From that, subtract moving ($2-5K), immediate repairs/furniture ($5-10K), and you're down to maybe $10-20K. That's barely an emergency fund for someone who now owns a home. The practical implication: people regularly underestimate cash needs by $15-25K. If you're borderline, a smaller home or larger savings cushion protects you from going into homeownership one furnace failure away from disaster."
+    },
+    quiz: [
+      { q: "Closing costs typically add 2-5% of the purchase price on top of the down payment.", answer: true, explanation: "Lender fees, title insurance, appraisal, escrow prepayments, and taxes add up quickly. On a $400K home, closing costs of $10-15K are common. Always budget for this on top of the down payment." },
+      { q: "FHA loans let you buy with as little as 3.5% down but typically require mortgage insurance for the life of the loan.", answer: true, explanation: "FHA's low down payment comes with mandatory mortgage insurance premiums that don't drop off automatically, unlike conventional PMI which ends at 20% equity. The trade is lower up-front cash for higher long-term cost." },
+      { q: "After closing, you don't need any cash reserves — the home is fully paid for in monthly installments.", answer: false, explanation: "Lenders usually require 2-6 months of payments in reserves, and homeownership surfaces unexpected expenses (repairs, appliance failures, property tax surprises). Going into ownership with no emergency fund is how people end up in high-interest debt fast." }
+    ]
+  },
+  {
+    day: 18,
+    title: "Property Taxes & Insurance",
+    concept: [
+      "Property taxes and homeowner's insurance are the 'hidden' monthly costs of ownership. People focus on the mortgage payment and forget that in many areas, taxes and insurance together add $500-$2,000+ per month on top of principal and interest. Two identical houses can have wildly different true costs depending on location.",
+      "Property tax rates vary enormously — from under 0.5% of home value annually in low-tax states to over 2.5% in high-tax areas. A $500K home might cost $2,500/year in one state and $12,500/year in another. Property taxes also rise over time, often faster than inflation, because they're tied to assessed value (which drifts up) and local budget needs.",
+      "Homeowner's insurance covers the structure, contents, and liability. Cost depends on location, construction, age, coverage limits, and natural disaster risk. In hurricane, wildfire, or flood zones, insurance can be shockingly expensive — some areas now have premiums of $5-10K/year, and in extreme cases insurance is hard to obtain at any price.",
+      "Two critical tips: check actual property tax bills before buying (not estimates), and get an insurance quote before committing. Don't assume 'average' costs. Also know that many mortgages escrow both — your lender collects 1/12 of the annual bill each month and pays it on your behalf. This spreads the cost but can cause monthly payment jumps when tax assessments rise."
+    ],
+    scenario: {
+      prompt: "You're comparing two similar $400K homes. House A is in a state with 0.6% property tax and moderate insurance ($1,200/year). House B is in a state with 2.1% property tax and higher insurance risk ($3,000/year). How much more does House B cost per year — and how should this affect your buying decision?",
+      options: [
+        { id: "a", label: "House B costs about $7,800/year more ($6,000 tax + $1,800 insurance) — this changes the effective 'price' of the home by ~$130-150K over a decade" },
+        { id: "b", label: "House B costs about $500/year more — taxes are a minor factor" },
+        { id: "c", label: "House B costs the same — property taxes are deductible so they're free" },
+        { id: "d", label: "House B is actually cheaper because higher taxes fund better services" },
+      ],
+      correct: "a",
+      feedback: "House A: 0.6% × $400K = $2,400 tax + $1,200 insurance = $3,600/year. House B: 2.1% × $400K = $8,400 + $3,000 = $11,400/year. Difference: $7,800/year — that's $650/month in perpetuity. Over 10 years, you'd pay $78K+ more on the identical home, with property taxes typically growing faster than inflation. The deductibility argument has limits too (SALT caps, standard deduction changes). The practical lesson: when comparing homes, always compare total monthly cost (PITI — principal, interest, tax, insurance), not just list price or mortgage payment."
+    },
+    quiz: [
+      { q: "Property tax rates are essentially the same across the country.", answer: false, explanation: "Rates vary dramatically — under 0.5% in some states to over 2.5% in others. On a $500K home, that's a $10K/year difference. Always check the actual rate when comparing homes in different areas." },
+      { q: "Homeowner's insurance costs can be extremely high in hurricane, wildfire, or flood zones.", answer: true, explanation: "Premiums of $5,000-$10,000+/year have become common in high-risk areas, and in some regions insurers have pulled out entirely. Always get an actual insurance quote before buying in any area with natural disaster exposure." },
+      { q: "When lenders 'escrow' taxes and insurance, they collect money monthly and pay the bills on your behalf.", answer: true, explanation: "The lender adds 1/12 of your annual tax and insurance bill to your monthly payment, holds it in an escrow account, and pays the bills when due. This protects the lender (they need the property insured and taxes paid) and spreads the cost for you." }
+    ]
+  },
+  {
+    day: 19,
+    title: "HOAs, Condos & Shared Ownership",
+    concept: [
+      "A Homeowners Association (HOA) is a governing body for a community — usually for condos, townhouses, or planned developments. Owners pay monthly or quarterly fees, and the HOA handles shared amenities, exterior maintenance, insurance on common areas, and enforcement of community rules. Fees range from under $100/month to over $1,500/month depending on what's included.",
+      "The financial risk most buyers miss: special assessments. If the HOA has a major unexpected expense — a new roof on the building, a lawsuit, deferred maintenance catching up — owners can be billed thousands or tens of thousands on short notice. A condo with a seemingly reasonable $400/month HOA fee can hit you with a $25K special assessment when the building's elevator system fails.",
+      "Before buying in an HOA, read the documents carefully. Key questions: What are the reserves? (A well-funded HOA has enough saved to handle major repairs without special assessments.) What's the recent history of fee increases? What's pending? Are there ongoing lawsuits? How many units are owner-occupied vs rented? High rental percentages can make units harder to finance later.",
+      "The upside: a good HOA can save you time and provide services you'd pay for anyway — landscaping, trash, exterior maintenance, amenities. The downside: you lose control over aesthetic decisions, you're bound by rules others vote on, and you're financially exposed to the decisions of a board and the maintenance of a shared property. The quality of HOA governance varies enormously — research it like you research the property itself."
+    ],
+    scenario: {
+      prompt: "You're evaluating a $400K condo with $450/month HOA fees. The HOA reserve fund is $80K. The building is 25 years old with original roof, HVAC, and elevator. Recent board minutes mention 'upcoming capital planning.' 40 units in the building. What's the primary risk here?",
+      options: [
+        { id: "a", label: "No significant risk — the HOA fee is moderate and the building is established" },
+        { id: "b", label: "Special assessment risk is high — $80K across 40 units is only $2K per unit in reserves, while roof/HVAC/elevator replacements on a 25-year-old building can easily run $300K-$1M, meaning $7,500-$25K per unit in special assessments likely" },
+        { id: "c", label: "Main risk is that HOA fees will double in 10 years" },
+        { id: "d", label: "Main risk is future rent controls lowering values" },
+      ],
+      correct: "b",
+      feedback: "This is the classic underfunded HOA setup: aging building, major systems at end-of-life, minimal reserves. $80K in reserves for a 40-unit building facing roof + HVAC + elevator work within 5-10 years is a near-certainty of special assessments in the $10-25K range per unit. The 'upcoming capital planning' language in minutes is often a soft warning. The HOA fee itself isn't outrageous, but the financial position of the HOA is what matters. Before buying, request the reserve study, recent special assessments history, and 3-year board minutes. An underfunded HOA is a ticking clock."
+    },
+    quiz: [
+      { q: "HOA special assessments are rare and predictable.", answer: false, explanation: "Special assessments can hit with little notice when HOAs face unexpected costs or deferred maintenance. A well-funded HOA (strong reserves, recent reserve study) minimizes this risk, but underfunded HOAs make them nearly inevitable over long horizons." },
+      { q: "A high percentage of rental units in a condo building can make individual units harder to finance.", answer: true, explanation: "Many conventional lenders limit financing when owner-occupancy falls below 50% (sometimes higher). This can limit your pool of buyers when you sell and affect your own ability to get a mortgage. Always ask the owner-occupancy percentage." },
+      { q: "HOA fees and reserves are the only important financial factors in a condo purchase.", answer: false, explanation: "You also need to look at the age and condition of major systems, pending legal issues, recent and planned special assessments, and the owner-occupancy rate. The HOA fee tells you current cost; these other factors tell you the risk of surprise costs." }
+    ]
+  },
+  {
+    day: 20,
+    title: "Location & Market Dynamics",
+    concept: [
+      "'Location, location, location' is a cliché because it's true. The same physical house can be worth twice as much three miles away. Location captures school district quality, walkability, safety, commute times, amenities, and — most importantly — the economic trajectory of the surrounding area. When location changes, property values follow.",
+      "The three most powerful location factors for long-term appreciation: job market health (is the area gaining high-paying employment?), population trends (growing or shrinking?), and supply constraints (is new housing being built easily?). Cities with strong job growth and limited ability to expand housing supply — think San Francisco, Boston, parts of NYC — see long-run price growth. Areas losing population or easily building new supply see stagnant or declining prices.",
+      "Micro-location matters as much as macro. Within a single city, property value varies block by block. Being near a good school adds 10-20% to value. Being on a busy street subtracts. Being in a 'path of gentrification' (adjacent to rising neighborhoods) can be very profitable over 5-10 years. A mediocre house in a great location beats a great house in a mediocre location almost every time — because you can renovate the house, but you can't move it.",
+      "School districts are the single biggest micro-location factor for family-oriented markets, even for buyers without kids. Houses zoned for top-rated schools command premiums and sell faster. This makes school districts both an opportunity (buying just inside a good district is a known winner) and a trap (school quality can change, and overpaying for a district you don't need is wasted money)."
+    ],
+    scenario: {
+      prompt: "You're choosing between two similar homes at the same price ($450K). House A: newer construction, larger lot, in a rural exurb 45 minutes from major employment centers, stagnant local population. House B: 1960s house needing cosmetic work, smaller lot, but walkable to transit, in a growing metro with strong job growth and limited buildable land. Which is likely the better long-term financial decision?",
+      options: [
+        { id: "a", label: "House A — newer and bigger is objectively worth more" },
+        { id: "b", label: "House B — location fundamentals (job growth, transit, supply constraints) drive long-term appreciation far more than the condition of a specific house" },
+        { id: "c", label: "House A — rural areas always grow faster than cities" },
+        { id: "d", label: "They'll appreciate identically because location doesn't matter" },
+      ],
+      correct: "b",
+      feedback: "House B has the structural ingredients for long-term appreciation: job growth creates demand, transit access adds value, and supply constraints mean new housing can't easily drive prices down. You can renovate the dated kitchen; you can't move the house closer to jobs or make the metro grow faster. House A has a nicer structure but in a location with weak demand drivers — rural exurbs far from jobs have historically seen flat or declining real prices. The counterintuitive truth: paying for a well-located fixer-upper often beats paying the same money for a better-looking house in a weaker location."
+    },
+    quiz: [
+      { q: "Long-term property appreciation is primarily driven by the condition of the specific house.", answer: false, explanation: "Location drives long-term appreciation; house condition drives short-term price at sale. You can always renovate a house, but you can never relocate it to a better job market or school district. Location fundamentals matter most." },
+      { q: "A city with strong job growth and limited ability to build new housing tends to have rising real estate prices over time.", answer: true, explanation: "Demand (jobs) meets constrained supply (geography, zoning) and prices rise. This is why coastal US cities have outpaced inland areas for decades — job growth plus natural or regulatory limits on supply push prices up." },
+      { q: "School district quality typically affects home values even for buyers without children.", answer: true, explanation: "School quality is priced into every home in a district because the next buyer may have children. Homes in top-rated districts command 10-20% premiums and tend to appreciate faster. It's one of the most consistent micro-location effects in residential real estate." }
+    ]
+  },
+  {
+    day: 21,
+    title: "Inspection & Due Diligence",
+    concept: [
+      "A home inspection is the buyer's chance to find problems before closing. You hire a licensed inspector (typical cost $400-$800) who examines the home's structure, roof, plumbing, electrical, HVAC, and visible systems. They produce a detailed report — often 40-80 pages — listing defects, safety issues, and items nearing end of life.",
+      "Inspectors don't catch everything. They look at what's visible and accessible. Hidden problems — asbestos, foundation issues behind finished walls, mold in crawl spaces, sewer line condition — may require specialised inspections. For older homes (pre-1980s), a sewer scope ($200-400), radon test, and — depending on construction era — asbestos or lead paint testing are cheap insurance against expensive surprises.",
+      "How to actually use the inspection: don't treat it as a pass/fail test. Every home has issues. The question is: which issues are deal-breakers, which are negotiable, and which are acceptable? Deal-breakers: structural problems, major foundation issues, failed septic, extensive mold, active roof leaks. Negotiable: aging systems, moderate repairs, safety issues. Cosmetic items are rarely worth fighting over — you'll just make the seller dig in.",
+      "After inspection, buyers typically have three options: accept the property as-is, request repairs before closing, or request a credit (cash reduction) to handle repairs themselves. Credits are usually better than repairs — sellers doing rushed repairs on your behalf often do the cheapest possible fix. Take the cash and handle it yourself once you own the place."
+    ],
+    scenario: {
+      prompt: "Your inspection on a $500K house reveals: (1) A 22-year-old roof nearing end of life (est. $15K to replace in 2-3 years). (2) Mixed electrical (some original knob-and-tube, needs updating — $8K). (3) A hairline foundation crack that the inspector calls 'likely settling, recommend further evaluation by structural engineer.' (4) A leaky bathroom faucet. How should you handle this?",
+      options: [
+        { id: "a", label: "Walk away — too many problems" },
+        { id: "b", label: "Accept everything as-is — it's a buyer's duty to handle repairs" },
+        { id: "c", label: "Get a structural engineer to evaluate the foundation (deal-breaker if serious), negotiate a credit for the roof and electrical (~$15-20K), ignore the faucet" },
+        { id: "d", label: "Demand the seller fix every item before closing" },
+      ],
+      correct: "c",
+      feedback: "(c) is the professional response. The foundation crack is the unknown — never close without resolving ambiguity on structural issues. Roof and electrical are quantifiable costs, perfect for a credit. The faucet is a $20 fix; fighting over it loses goodwill without gain. Negotiating for a credit rather than repairs is usually better: you control quality and timing. (a) overreacts — these are normal issues for an older home and cleanly negotiable. (d) creates an adversarial close and gets you rushed, low-quality seller-managed repairs."
+    },
+    quiz: [
+      { q: "A home inspection catches all problems with a property.", answer: false, explanation: "Inspectors examine visible and accessible systems. Hidden problems — sewer lines, areas behind finished walls, mold in sealed crawl spaces — require specialised inspections. For older homes especially, add sewer scope, radon, and potentially asbestos/lead testing." },
+      { q: "Cash credits are often preferable to asking the seller to complete repairs before closing.", answer: true, explanation: "Seller-managed repairs are often rushed and use the cheapest possible contractors since the seller doesn't live with the result. A credit lets you handle repairs on your timeline, with contractors you choose, to the quality you want." },
+      { q: "Every home inspection finding requires negotiation — if you don't push back on each item, you're losing money.", answer: false, explanation: "Focus on deal-breakers (structural, systems near failure, safety issues) and significant quantifiable costs. Fighting over cosmetic items or tiny repairs poisons negotiations and rarely produces meaningful savings." }
+    ]
+  },
+  {
+    day: 22,
+    title: "Appreciation vs Cash Flow",
+    concept: [
+      "Real estate makes money two ways: appreciation (the property gains value over time) and cash flow (rent exceeds all expenses, leaving money in your pocket each month). Different markets and strategies emphasize different sides of this tradeoff, and understanding the distinction is critical to setting expectations.",
+      "Appreciation-driven markets: coastal cities with strong job growth and constrained supply. Property values grow faster than inflation for decades, but rental yields are low — often 3-4% of property value, barely enough to cover costs. You bet on long-term price gains; short-term cash flow is thin or negative. Los Angeles, San Francisco, New York are classic examples.",
+      "Cash-flow markets: smaller Midwestern and Southern cities, often with slower population growth. Rental yields can be 8-12%, generating real monthly profit on day one, but property values grow slowly — maybe matching inflation, sometimes less. You earn income steadily but don't see dramatic price gains over time. Cleveland, Memphis, parts of Indianapolis are typical.",
+      "Neither strategy is objectively better. Appreciation builds wealth long-term but requires cash reserves to cover shortfalls. Cash flow pays you now but requires more work to scale wealth. The worst strategy is accidentally owning a property that delivers neither — weak appreciation and thin rents. Always evaluate both, and pick intentionally based on your goals: income today (cash flow) or wealth in 20 years (appreciation)."
+    ],
+    scenario: {
+      prompt: "You have $100K to invest in one of two rental properties. Property A: $500K condo in a major coastal city, rents for $2,500/month, total expenses $2,300/month — $200 monthly cash flow, but the area has averaged 5% annual appreciation. Property B: $200K single-family in a Midwest city, rents for $1,800/month, total expenses $1,100/month — $700 monthly cash flow, but the area typically appreciates 1-2%/year. Which is better?",
+      options: [
+        { id: "a", label: "Property A — 5% appreciation on $500K = $25K/year beats cash flow" },
+        { id: "b", label: "Property B — cash flow of $8,400/year is real money; don't speculate on appreciation" },
+        { id: "c", label: "Both are valid — A bets on capital gains with thin cash flow, B provides immediate income but slower wealth accumulation; the right answer depends on your goals and ability to cover A's cash flow gaps if rent stagnates" },
+        { id: "d", label: "Neither — real estate always loses to index funds" },
+      ],
+      correct: "c",
+      feedback: "Property A's math is more compelling on paper — 5% of $500K is $25K/year in appreciation, dwarfing B's $8.4K cash flow. But appreciation is expected, not guaranteed. If rents stall or expenses rise, thin cash flow becomes negative cash flow, which you fund out of pocket. Property B gives you money every month regardless of what prices do. Property A suits investors with high income and long horizons who can weather downturns. Property B suits investors who need their real estate to pay for itself or provide supplemental income. The sophisticated move is knowing which strategy fits your situation — not assuming one is universally better."
+    },
+    quiz: [
+      { q: "Appreciation-heavy markets typically offer strong rental yields that easily cover costs.", answer: false, explanation: "It's usually the opposite. High-appreciation markets tend to have low rental yields because buyers bid up prices for future gains. Rental yields of 3-4% are common in major coastal cities — barely enough to cover costs, if that." },
+      { q: "Cash-flow-focused real estate investing generates consistent monthly income but typically slower long-term price growth.", answer: true, explanation: "Cash-flow markets (smaller cities, industrial areas, non-coastal metros) usually have slower appreciation. You're trading steady income today for less dramatic wealth accumulation — both are valid strategies for different goals." },
+      { q: "A property that has neither strong cash flow nor strong appreciation potential is still worth buying as a long-term hedge.", answer: false, explanation: "A property with weak cash flow and weak appreciation is the worst of both worlds. Real estate investing only works when you're intentionally capturing at least one of the two — monthly income or long-term gains. Buying by default is how investors lose money quietly for years." }
+    ]
+  },
+  {
+    day: 23,
+    title: "Fixed-Rate vs Adjustable-Rate Mortgages",
+    concept: [
+      "A fixed-rate mortgage locks your interest rate for the entire loan term — 15 or 30 years typically. Your principal and interest payment never changes. An adjustable-rate mortgage (ARM) has a lower initial rate that adjusts periodically based on market rates. A '5/1 ARM' means the rate is fixed for 5 years, then adjusts annually.",
+      "The appeal of ARMs: they usually offer lower initial rates — sometimes 0.5-1.5% below a 30-year fixed. On a $400K loan, that's $200-600/month in savings during the fixed period. For buyers who know they'll sell or refinance within the initial fixed period, an ARM can be the smarter choice.",
+      "The risk: when the ARM adjusts, your rate can jump significantly. Most ARMs have caps — maximum rate change per adjustment (often 2%) and over the life of the loan (often 5-6%). A 5/1 ARM starting at 5% could legally adjust to 10-11% over time. That turns a $2,150/month payment on a $400K loan into $3,700+.",
+      "The decision comes down to three questions: How long will you stay in the house or hold the loan? What's the rate gap between fixed and ARM right now? Can your budget survive the maximum possible payment? Fixed rates are the safe default — you trade some rate for certainty. ARMs make sense only when you have a realistic exit strategy before the adjustment period, and a real plan if you end up holding longer than expected."
+    ],
+    scenario: {
+      prompt: "You're buying a $450K home with a $360K mortgage and two offers on the table. Option A: 30-year fixed at 6.75%, monthly P&I $2,335. Option B: 7/1 ARM at 5.5%, monthly P&I $2,044 for 7 years, then rate can adjust up to 10.5% (caps built in). You think you'll probably move in 5-7 years but aren't certain. Which loan?",
+      options: [
+        { id: "a", label: "Option A — fixed rate certainty is worth the extra $291/month" },
+        { id: "b", label: "Option B — save $291/month and exit before the adjustment" },
+        { id: "c", label: "Option B, but only if you're confident you'll move within 7 years AND could afford the worst-case payment (~$2,900/month at 8%, $3,200+ at 10%) if you don't" },
+        { id: "d", label: "Neither — wait for rates to drop" },
+      ],
+      correct: "c",
+      feedback: "ARMs can be smart, but only with eyes open. Saving $291/month × 7 years = $24K in savings if you actually exit on schedule. But 'probably move in 5-7 years' has a way of becoming 'still here in year 9.' The responsible ARM user knows their plan AND can survive the worst case. If a jump to 8-10% would break your budget, the savings aren't worth it. (a) is the safe default. (b) is too casual about the risk. (d) is market timing. The honest framework is: take the ARM if exit is a real plan AND you have the income cushion to survive if the plan fails."
+    },
+    quiz: [
+      { q: "An adjustable-rate mortgage's interest rate can change after the initial fixed period.", answer: true, explanation: "That's the defining feature of an ARM. After the initial fixed period (usually 3, 5, 7, or 10 years), the rate adjusts periodically based on a benchmark index plus a margin. Rate caps limit how much it can move per adjustment and over the life of the loan." },
+      { q: "A fixed-rate mortgage is always a worse deal than an ARM because fixed rates are higher.", answer: false, explanation: "Fixed rates trade a higher rate for certainty. If you'll hold the loan long-term or rates rise significantly, the fixed rate wins. ARMs are smart for short-term holders with exit plans, not automatically better for everyone." },
+      { q: "Most ARMs have rate caps limiting how much the rate can increase at each adjustment and over the life of the loan.", answer: true, explanation: "Typical caps might be 2% per adjustment and 5-6% total over the life of the loan. Always check the specific caps before signing — they determine your worst-case payment, which you need to be able to afford." }
+    ]
+  },
+  {
+    day: 24,
+    title: "Amortization: Where Your Money Actually Goes",
+    concept: [
+      "Every mortgage payment splits between two things: interest (the bank's fee for lending you the money) and principal (paying down what you owe). Amortization is the schedule that determines the split each month. The surprising fact for most first-time buyers: in the early years of a mortgage, almost all of your payment goes to interest, not principal.",
+      "On a $400K 30-year mortgage at 7%, your monthly P&I is about $2,661. Of that, the first payment is roughly $2,333 interest and $328 principal. Year 1 total: about $28K in interest, $4K in principal. You've paid $32K but only reduced your loan balance by $4K. The equity you think you're building is barely moving.",
+      "The balance shifts over time. By year 15, the split is closer to 50/50. By year 25, most of your payment is going to principal. But the early years are brutal — this is why selling a house after 3-5 years, with all the transaction costs, often results in very little equity gained beyond what the market appreciation provides.",
+      "Two ways to beat amortization: shorter loan terms and extra principal payments. A 15-year mortgage has a higher monthly payment but dramatically less total interest. Making just one extra principal payment per year on a 30-year loan can cut 5-7 years off the term and save tens of thousands in interest. Every extra dollar of principal today saves you that dollar's worth of compounding interest over the remaining years."
+    ],
+    scenario: {
+      prompt: "You have a $400K 30-year fixed mortgage at 7% ($2,661/month P&I). You could afford to pay an extra $300/month. A financial writer claims 'that extra payment will cut about 7 years off your loan and save you over $100K in interest.' Is this accurate?",
+      options: [
+        { id: "a", label: "Yes — extra principal payments compound dramatically over time" },
+        { id: "b", label: "No — $300/month extra only saves about $10K over the full loan" },
+        { id: "c", label: "The claim is directionally right — extra $300/month on this loan saves roughly $100K+ in interest and shortens the term by about 7 years, because every early principal dollar eliminates years of future interest on that amount" },
+        { id: "d", label: "It depends on your tax bracket, which changes everything" },
+      ],
+      correct: "c",
+      feedback: "The math works out. $300/month extra on a $400K/7%/30-year mortgage saves approximately $102K in total interest and shortens the loan to about 23 years. The reason it's so dramatic: principal paid today stops accruing interest for the entire remaining life of the loan. Paying $300 in year 1 means that $300 isn't generating interest for 29 more years. The 'compounding' of debt reduction works in reverse of investment compounding — eliminating future interest obligations. That's why extra principal payments are remarkably powerful, especially early in the loan."
+    },
+    quiz: [
+      { q: "In the early years of a 30-year mortgage, most of your monthly payment goes to interest, not principal.", answer: true, explanation: "On a typical 30-year loan at current rates, year 1 can be 85-90% interest. This gradually shifts — by year 15, the split is closer to 50/50; by year 25, most of the payment goes to principal." },
+      { q: "An extra principal payment in year 1 saves more interest than the same extra payment in year 20.", answer: true, explanation: "Principal paid early eliminates interest over more remaining years. An extra $1,000 in year 1 stops earning interest for 29 years; the same $1,000 in year 20 only saves 10 years of interest. Earlier is always better." },
+      { q: "A 15-year mortgage has the same total interest cost as a 30-year mortgage.", answer: false, explanation: "A 15-year mortgage pays off much faster and typically has a lower rate, dramatically reducing total interest — often by 50-60% or more compared to a 30-year loan. The tradeoff is a higher monthly payment." }
+    ]
+  },
+  {
+    day: 25,
+    title: "Private Mortgage Insurance (PMI)",
+    concept: [
+      "PMI is insurance that protects the lender (not you) if you default on a mortgage with less than 20% down. It's required on conventional loans when your down payment is below 20% and typically costs 0.3-1.5% of the loan amount per year. On a $400K loan, that's $1,200-$6,000/year in extra cost for the privilege of borrowing with a smaller down payment.",
+      "PMI is added to your monthly payment. On a conventional loan, it automatically falls off once you reach 22% equity based on the original loan schedule, and you can typically request removal at 20% equity. This means PMI is often temporary — 3-7 years of payments depending on your down payment and rate of principal paydown.",
+      "The honest math of skipping the 20% down payment: putting 10% down instead of 20% means PMI for several years. But it also means you buy 1-2 years sooner and keep $40-80K of cash for emergencies, investments, or home improvements. In appreciating markets, buying sooner often outweighs the PMI cost. In flat or declining markets, waiting to avoid PMI may be smarter.",
+      "FHA loans have a different structure: Mortgage Insurance Premium (MIP). Unlike conventional PMI, FHA's MIP lasts the life of the loan if you put less than 10% down, or 11 years if you put more. This is a critical distinction — an FHA loan can mean paying mortgage insurance for 30 years, which is why many buyers who use FHA refinance into conventional loans once they have 20% equity."
+    ],
+    scenario: {
+      prompt: "You're buying a $400K home and can put down either 10% ($40K, PMI ~$200/month for 4 years) or wait 2 years to save for 20% down ($80K, no PMI). Home prices in your area have been rising ~4%/year. Which is likely better?",
+      options: [
+        { id: "a", label: "Wait for 20% down — PMI is wasted money and should always be avoided" },
+        { id: "b", label: "Buy now with 10% down — the home will likely cost $34K more in 2 years (4% × $400K × 2) and you'll pay ~$9.6K in total PMI, so buying now saves roughly $24K net" },
+        { id: "c", label: "Rent forever — housing is overpriced" },
+        { id: "d", label: "Wait 2 years no matter what; PMI is never worth it" },
+      ],
+      correct: "b",
+      feedback: "The math on this scenario favors buying now. At 4% appreciation, the same house costs ~$434K in 2 years — $34K more. Meanwhile, PMI for 4 years at $200/month totals $9,600 (and likely drops off sooner if you pay extra principal). Net benefit of buying now: roughly $24K. Plus you've locked in current rates (if favorable) and started building equity. The 'avoid PMI at all costs' mindset makes sense in a flat market, but in a rising market, waiting often costs far more than PMI. The general principle: calculate the actual PMI cost against the actual cost of waiting — don't follow a rule of thumb blindly."
+    },
+    quiz: [
+      { q: "Private Mortgage Insurance protects the borrower in case they can't make payments.", answer: false, explanation: "PMI protects the lender, not the borrower. If you default, the insurance pays the lender — you still lose the house. It's an extra cost on you for the lender's protection, required when you put down less than 20%." },
+      { q: "Conventional PMI automatically falls off once you reach 22% equity based on the original loan schedule.", answer: true, explanation: "Federal law requires lenders to automatically cancel PMI at 78% LTV (22% equity) based on original amortization. You can usually request manual removal at 80% LTV (20% equity), and faster with home appreciation or extra principal payments." },
+      { q: "FHA mortgage insurance works exactly like conventional PMI and drops off at 20% equity.", answer: false, explanation: "FHA's MIP is different. With less than 10% down, MIP lasts the life of the loan. With 10%+ down, it lasts 11 years. This is why many FHA borrowers refinance into conventional loans once they have enough equity." }
+    ]
+  },
+  {
+    day: 26,
+    title: "Points, Rate Buydowns & Credits",
+    concept: [
+      "'Discount points' let you pay cash up front at closing to reduce your mortgage rate. One point costs 1% of the loan amount and typically reduces the rate by 0.25%. On a $400K loan, 1 point costs $4,000 and might drop your rate from 7% to 6.75%. The key question is always: when do you break even, and will you hold the loan past that point?",
+      "Break-even math is simple. If buying a point saves you $65/month, and the point costs $4,000, your break-even is about 62 months — just over 5 years. If you keep the loan for more than 5 years, you save money. If you refinance or sell sooner, you lose on the trade. Refinancing is the hidden risk — rates can drop and make your expensive rate buydown obsolete.",
+      "The opposite trade also exists: lender credits. You accept a slightly higher rate in exchange for the lender paying some or all of your closing costs. On a $400K loan, a 0.25% higher rate might generate $4,000 in lender credits. This is the mirror image of points — good when you'll hold the loan only a few years, less good for long-term holders.",
+      "Temporary rate buydowns ('2-1 buydowns') are a newer trend, often offered by sellers. The seller pays to reduce your rate by 2% in year 1 and 1% in year 2, returning to the full rate in year 3. It lowers your early payments and can help with affordability, but the permanent rate is unchanged. They're marketing-heavy; do the math on whether a simple price reduction of equivalent value would be better."
+    ],
+    scenario: {
+      prompt: "On your $400K mortgage, the lender offers 7.0% with no points, or 6.5% if you pay 2 points ($8,000 upfront). The monthly P&I difference is about $133 ($2,661 vs $2,528). You plan to stay in the house 6-8 years. Should you buy the points?",
+      options: [
+        { id: "a", label: "Yes — 2 points always saves money long-term" },
+        { id: "b", label: "No — never pay for a lower rate" },
+        { id: "c", label: "Break-even is $8,000 / $133 ≈ 60 months (5 years). At 6-8 years, you'd recoup the cost and save $2-5K net — but only if you don't refinance sooner, which is the key risk" },
+        { id: "d", label: "Only relevant if you're a first-time buyer" },
+      ],
+      correct: "c",
+      feedback: "The break-even calculation is the right framework. $8,000 / $133/month = 60 months. Beyond that, you're in the black. At 6-8 years you'd save $1,600-$3,200 beyond the cost. But watch the refinance risk: if rates drop to 5.5% in 3 years and you refinance, you've essentially wasted the $8K you spent buying the rate down. Points make most sense when you're highly confident you'll hold the loan past break-even AND rates don't meaningfully drop. In high-rate environments, some buyers prefer to take a higher rate and wait for refinance opportunities rather than lock in an expensive rate buydown."
+    },
+    quiz: [
+      { q: "One discount point typically costs 1% of the loan amount and reduces the rate by about 0.25%.", answer: true, explanation: "This is the industry standard, though exact terms vary by lender. On a $300K loan, a point costs $3,000 and drops the rate by roughly 0.25% (e.g., 7% to 6.75%). Always confirm the specific rate reduction with your lender." },
+      { q: "The break-even period for buying points is the number of months it takes for monthly savings to equal the upfront cost.", answer: true, explanation: "Upfront cost divided by monthly payment savings = break-even months. If you hold the loan longer than that, you come out ahead. Shorter, and you lose money on the trade." },
+      { q: "Lender credits (accepting a higher rate for closing cost assistance) are always a bad deal.", answer: false, explanation: "Lender credits are the opposite side of the points trade. They're excellent for buyers who'll hold the loan only a few years or who need to preserve cash at closing. The math mirrors points: higher rate costs more over time, but saves cash now." }
+    ]
+  },
+  {
+    day: 27,
+    title: "15-Year vs 30-Year Mortgages",
+    concept: [
+      "The 30-year mortgage is the American default, but the 15-year mortgage is a radically different product. On a $400K loan at 7%, a 30-year has a monthly P&I around $2,661 and total interest paid over the life of the loan of roughly $558K. A 15-year at 6.25% (15-year rates are usually 0.5-0.75% lower) has a monthly P&I around $3,428 and total interest of roughly $217K. Same home, $341K difference in lifetime interest.",
+      "The 15-year wins on pure math. You pay off the home faster, build equity much faster, and pay dramatically less interest. The cost is the higher monthly payment — in our example, about $767/month more. For buyers who can comfortably afford it, a 15-year builds wealth faster than almost any alternative use of that extra money, especially when compared to spending it.",
+      "The 30-year wins on flexibility. The lower required payment gives you breathing room if income drops. You can always make extra principal payments to simulate a 15-year schedule, but if you commit to the 15-year and then lose your job, the higher payment becomes a hard obligation. The 30-year with voluntary extra payments is the best-of-both-worlds option for buyers who value optionality.",
+      "There's also an important secondary consideration: what would you do with the $767/month difference? If you'd invest it diligently at 8-10% returns, the math can tilt toward the 30-year — since you're paying 7% debt to invest at 10%. If you'd spend it, the 15-year's forced savings is likely better. Be honest about which person you actually are — not which one you wish you were."
+    ],
+    scenario: {
+      prompt: "You can afford either a 15-year mortgage at $3,400/month or a 30-year at $2,650/month. You're a disciplined saver who currently contributes heavily to index funds. Which is likely better for your long-term wealth?",
+      options: [
+        { id: "a", label: "15-year always wins due to interest savings" },
+        { id: "b", label: "30-year — invest the $750/month difference at expected 10% returns and you'll likely end up wealthier than the 15-year holder while keeping flexibility" },
+        { id: "c", label: "It's close. For a disciplined saver, the 30-year + invest can slightly outperform — but only if you actually invest the difference every month without fail, and can handle equity markets' volatility" },
+        { id: "d", label: "30-year only if you intend to never pay extra principal" },
+      ],
+      correct: "c",
+      feedback: "Both (b) and (c) capture truth, but (c) is more honest. The math favors '30-year + invest the difference' when interest rates are moderate and expected stock returns are higher. At 7% mortgage vs 10% expected return, the spread is real. But 'disciplined saver' is doing a lot of work in that sentence. Studies show most people don't actually invest the difference consistently — the money gets absorbed by lifestyle. For disciplined investors who genuinely will deploy the $750/month, 30-year + invest often wins. For everyone else, the 15-year's forced savings produces better real-world outcomes. Know which one you are."
+    },
+    quiz: [
+      { q: "A 15-year mortgage typically has a lower interest rate than a 30-year mortgage.", answer: true, explanation: "15-year rates are usually 0.5-0.75% lower because the loan is paid back faster, reducing the lender's risk and capital cost. Combined with the shorter term, this makes total interest on a 15-year dramatically lower." },
+      { q: "The 30-year mortgage is always the better choice because it has lower monthly payments.", answer: false, explanation: "Lower payments mean more total interest and slower equity building. The 30-year offers flexibility, but it's not universally 'better' — 15-year loans are mathematically superior for buyers who can afford the payments and would otherwise spend the difference." },
+      { q: "Making extra principal payments on a 30-year loan can approximate a 15-year payoff schedule while preserving flexibility.", answer: true, explanation: "Adding enough extra principal each month to match a 15-year amortization gets you the same payoff timeline — but if you lose your job, you can stop the extra payments and revert to the lower required payment. This is the 'best of both worlds' for many buyers." }
+    ]
+  },
+  {
+    day: 28,
+    title: "Refinancing: When It's Worth It",
+    concept: [
+      "Refinancing replaces your existing mortgage with a new one, typically to get a lower rate, change the loan term, or take cash out of equity. It's a powerful tool when used well and a money-loser when used poorly. The most common motivation is rate reduction — when market rates drop significantly below your current rate, refinancing can save you hundreds per month.",
+      "Refinancing isn't free. Closing costs run 2-5% of the loan amount — $6K-$15K on a $300K loan. The break-even calculation is critical: monthly savings divided by closing costs equals break-even months. If refinancing costs $8K and saves you $200/month, break-even is 40 months. Stay in the loan longer than that, and you come out ahead.",
+      "The traditional rule of thumb was 'refinance when rates drop 1%.' Modern math is more nuanced: consider your closing costs, expected holding period, and any changes in mortgage insurance status. Sometimes a 0.5% rate drop is worth it (large loan, low closing costs, long holding period). Sometimes a 1.5% drop isn't worth it (small remaining balance, high costs, planning to move soon).",
+      "Cash-out refinancing is its own category. You refinance for more than you owe and take the difference in cash. It can fund renovations, debt consolidation, or investments — but you're converting short-term debt into 30-year debt and increasing your mortgage balance. Use it carefully: funding home improvements that add value can be smart; funding a lifestyle upgrade or consolidating credit card debt you'll just run back up is a fast track to lifelong debt servitude."
+    ],
+    scenario: {
+      prompt: "You have a 30-year mortgage at 7% with $350K remaining and 28 years left. Current rates are 5.5%. You plan to stay in the home 5+ more years. Refinancing costs would be $8K (rolled into the new loan). Monthly P&I drops from ~$2,350 to ~$2,010 — $340/month savings. Should you refinance?",
+      options: [
+        { id: "a", label: "No — any refinance with closing costs is a trap" },
+        { id: "b", label: "Yes — break-even is about $8,000 / $340 ≈ 24 months. At 5+ years remaining, you'd save roughly $12K+ net after break-even, plus build equity faster" },
+        { id: "c", label: "Refinance only if rates drop another 1%" },
+        { id: "d", label: "It's a wash — closing costs always equal total savings" },
+      ],
+      correct: "b",
+      feedback: "This is a textbook refinance opportunity. Break-even in 2 years, a 5+ year holding period, and $340/month savings produces meaningful net benefit — around $12K+ after break-even. The rate drop from 7% to 5.5% is exactly the size where refinancing becomes clearly worthwhile. A few nuances: rolling closing costs into the loan increases your principal, so the real long-term savings are slightly less than the naive $340 × 60 months. But the math still strongly favors refinancing. (a) applies an overly conservative rule; (c) requires more than necessary; (d) is simply wrong in this scenario."
+    },
+    quiz: [
+      { q: "Refinancing is free — there are no meaningful costs involved.", answer: false, explanation: "Refinancing typically costs 2-5% of the loan amount in closing costs. On a $300K refinance, that's $6K-$15K in fees. You must recoup these costs through monthly savings before you're actually ahead." },
+      { q: "Cash-out refinancing to pay off credit card debt is always a smart trade.", answer: false, explanation: "It converts short-term debt into 30-year debt and puts your house at risk for consumer spending. Worse, many borrowers pay off the cards and then run them back up — ending up with both the mortgage AND new credit card debt. The behavioral pattern often matters more than the math." },
+      { q: "The break-even period for refinancing is your closing costs divided by your monthly savings.", answer: true, explanation: "This is the standard calculation. If you stay in the loan longer than the break-even period, you come out ahead. The shorter the break-even and the longer your holding period, the more attractive the refinance." }
+    ]
+  },
+  {
+    day: 29,
+    title: "Escrow, Taxes & Insurance in Your Payment",
+    concept: [
+      "When people talk about their 'mortgage payment,' they usually mean PITI — Principal, Interest, Taxes, Insurance. The lender typically collects one-twelfth of your annual property tax and insurance bills each month and holds it in an 'escrow account,' then pays the bills when they come due. This protects the lender (unpaid taxes and insurance threaten their collateral) and simplifies budgeting for you.",
+      "Your monthly payment can change even with a fixed-rate mortgage. Property taxes typically rise each year. Insurance premiums can jump significantly, especially in areas facing climate risk. When the escrow analysis runs (usually annually), if taxes or insurance went up, your monthly payment adjusts upward. Fixed P&I, variable T&I.",
+      "Escrow shortages are a surprise many homeowners face. If tax or insurance increased and your escrow account didn't collect enough, the lender either spreads the shortfall over 12 months (raising your payment) or gives you the option to pay it in a lump sum. A big tax reassessment can add $100-400/month to your payment overnight — always be prepared for this possibility.",
+      "You can sometimes 'waive escrow' — pay taxes and insurance directly rather than through the lender. Lenders usually require you to have 20% equity and may charge a fee. The benefit: you control the cash until bills are due and might earn modest interest on it. The risk: you have to remember to pay large annual bills and have the cash on hand. For most people, escrow is a feature, not a bug — it forces a useful discipline."
+    ],
+    scenario: {
+      prompt: "Your 'fixed-rate' mortgage payment was $2,400/month when you bought the house two years ago. This year, you received a notice that your new monthly payment will be $2,750 — a $350 jump. What likely happened?",
+      options: [
+        { id: "a", label: "Your mortgage rate changed even though it was fixed" },
+        { id: "b", label: "Your property taxes and/or homeowner's insurance increased significantly, causing your escrow to recalculate and adjust monthly collection" },
+        { id: "c", label: "The bank made a mistake" },
+        { id: "d", label: "Principal paydown caused the payment to grow" },
+      ],
+      correct: "b",
+      feedback: "The P&I portion of a fixed-rate mortgage doesn't change. What changed is the T&I portion — taxes, insurance, or both. A reassessment that raised your property taxes 20% and an insurance renewal that jumped premiums 30% can easily combine to add $350/month. If the previous year's escrow was short, you may also be making up the shortfall on top of the new higher monthly collection. This is especially common after a big local tax reassessment or in regions where insurance costs are rising due to climate risk. Fixed-rate means fixed principal and interest — not fixed total payment."
+    },
+    quiz: [
+      { q: "A fixed-rate mortgage's total monthly payment (PITI) can rise over time even if the interest rate never changes.", answer: true, explanation: "The principal and interest portion is fixed, but taxes and insurance (the T and I) can rise, pushing total PITI up. Property tax reassessments and insurance renewals are the most common causes." },
+      { q: "Lenders typically require escrow accounts for taxes and insurance on most mortgages.", answer: true, explanation: "Escrow protects the lender — unpaid taxes or insurance would put their collateral at risk. On most loans, especially with less than 20% down, escrow is required. With 20%+ equity, some lenders allow waiving escrow." },
+      { q: "If your escrow account has a shortfall, you can ignore the notice — the bank absorbs the cost.", answer: false, explanation: "Escrow shortfalls are your obligation. The lender either adds the shortfall to your monthly payment (spread over 12 months) or requires a lump-sum payment. Always review annual escrow statements and plan for possible increases, especially after tax reassessments." }
+    ]
+  },
+  {
+    day: 30,
+    title: "Qualifying for a Mortgage: DTI, Credit & Income",
+    concept: [
+      "Lenders evaluate three core things before approving you: Debt-to-Income ratio (DTI), credit score, and verified income stability. DTI is your total monthly debt payments divided by gross monthly income. Most lenders cap total DTI at 43-45% for conventional loans, though this varies by loan type and borrower profile. A $100K salary means $8,333/month gross and a typical ceiling of ~$3,500/month in total debt payments including the new mortgage.",
+      "Credit score determines both whether you qualify and at what rate. A 760+ score gets the best rates. Each 20-point drop below that tier typically costs 0.125-0.25% in rate. The difference between a 620 score and a 760 score on a $400K mortgage can be more than $200/month — over $70K across a 30-year term.",
+      "Income verification is stricter than most buyers expect. Lenders typically want to see two years of stable income from the same field. Freelancers and self-employed borrowers are held to tougher standards — often two years of tax returns, not just recent income. A job change during the mortgage process, even for a raise, can complicate approval. If you're planning to buy, avoid job changes and major purchases (new car, opening credit lines) during the 3-6 months before applying.",
+      "'Getting approved' has two levels. Pre-qualification is a casual estimate based on stated income — worth little. Pre-approval is a verified review with documentation — lenders check credit, income, and assets, and issue a commitment to lend up to a specific amount at approximate terms. Real sellers only take pre-approval seriously, and in competitive markets it's often required just to tour homes."
+    ],
+    scenario: {
+      prompt: "You earn $90K/year gross ($7,500/month). You have: car loan at $400/month, student loans at $300/month, credit card minimums totaling $150/month. You want to buy a home with estimated monthly PITI of $2,800. What's your DTI, and does this qualify under typical limits?",
+      options: [
+        { id: "a", label: "DTI 25% — well within any lender's limit" },
+        { id: "b", label: "Total debt = $3,650/month ÷ $7,500 gross = 48.7% DTI — above the typical 43-45% cap, likely requires reducing debt, increasing income, or lowering target home price" },
+        { id: "c", label: "DTI 37% — slightly high but will likely be approved" },
+        { id: "d", label: "DTI doesn't matter as long as you have a down payment" },
+      ],
+      correct: "b",
+      feedback: "($2,800 PITI + $400 car + $300 student loans + $150 credit cards) = $3,650 total monthly debt. Divided by $7,500 gross income = 48.7% DTI. That's above the typical 43% ceiling most lenders set. Options: pay off the credit cards (removes $150/month), pay off the car faster (removes $400), or target a cheaper home with a ~$2,250 PITI. This is why high-debt buyers often struggle to get approved even with decent income — DTI is a hard constraint. Paying down revolving debt before applying is one of the highest-leverage moves you can make in the approval process."
+    },
+    quiz: [
+      { q: "DTI (debt-to-income ratio) compares your total monthly debt payments to your gross monthly income.", answer: true, explanation: "Total monthly debt (including the new mortgage PITI) divided by gross monthly income. Most lenders cap this at 43-45% for conventional loans. It's one of the two or three biggest factors in qualification decisions." },
+      { q: "A 720 credit score and a 620 credit score get essentially the same mortgage rate.", answer: false, explanation: "The rate difference between these scores is typically 0.5-1% or more, which translates to hundreds per month on a typical mortgage. Credit score improvements are one of the highest-ROI moves you can make in the year before buying." },
+      { q: "Making a job change for higher pay in the middle of a mortgage application usually helps approval.", answer: false, explanation: "Job changes during the mortgage process — even for more money — complicate approval because lenders want to see stable, verified income from the same employer. If you must change jobs, try to do it either well before or after closing, not during." }
+    ]
+  },
+  {
+    day: 31,
+    title: "Prepayment Strategy: Pay Off or Invest?",
+    concept: [
+      "Once you have a mortgage, a recurring question is: should extra cash go toward paying down the mortgage faster, or toward investing? It's the same debt-vs-invest question from earlier, applied specifically to the biggest debt most people will ever have. The math says invest if your expected return exceeds the mortgage rate; the psychology says there's real value in being debt-free.",
+      "The pure math case for paying down mortgage: a 7% mortgage is a guaranteed 7% return on every dollar of principal paid down. To beat that in investments, you need after-tax returns above 7% — a reasonable expectation for stocks over 30 years, but not remotely guaranteed in any given decade. When rates are high (like 7%+), paying down the mortgage starts looking like a competitive investment.",
+      "The pure math case for investing instead: if your mortgage is at 3-4% (as many were before 2022), investing the extra money at expected 7-10% returns dramatically outperforms extra principal payments. Over 20+ years, the difference can be enormous. A $500/month extra over 20 years at 9% stock returns is roughly $335K; the same $500/month saving 4% mortgage interest is roughly $135K.",
+      "The hybrid reality: most people should do both proportionally, and the right mix depends on the rate. High mortgage rates (7%+) tilt toward prepayment. Low rates (under 5%) tilt toward investing. But also consider tax-advantaged account space, emergency fund status, and psychological factors. Being debt-free has genuine value that doesn't show up in spreadsheets — reduced monthly obligations, optionality in a recession, lower overall risk. Don't optimize the spreadsheet at the expense of the life."
+    ],
+    scenario: {
+      prompt: "You're 40 with a $300K mortgage at 6.5% and 27 years remaining. You've maxed tax-advantaged accounts. You have $1,000/month extra after all essentials. You're choosing between (A) throwing it all at extra principal — pays off the mortgage ~12 years early and saves ~$175K interest, or (B) investing in a taxable brokerage at expected 8% net return. What's the strongest argument for each?",
+      options: [
+        { id: "a", label: "A wins because guaranteed 6.5% return beats variable 8% expected return" },
+        { id: "b", label: "B wins because 8% > 6.5% in expected value" },
+        { id: "c", label: "Both are defensible: A gives a guaranteed, tax-free 6.5% equivalent return and reduces risk; B has higher expected return but with volatility and taxes. At today's rates, splitting the $1,000 — e.g., $500 each — is a reasonable compromise" },
+        { id: "d", label: "Neither — keep the cash as savings" },
+      ],
+      correct: "c",
+      feedback: "Both approaches are defensible at 6.5%. Pure math slightly favors investing (8% > 6.5%), but after taxes on investment gains and accounting for the risk of volatility, the gap narrows considerably. Prepayment has hidden benefits too: it's a tax-free 'return,' and it mechanically reduces your future monthly obligation, which provides real security. Many advisors recommend splitting the difference at moderate rates — some extra principal, some investing — which balances mathematical optimization with risk reduction and psychological comfort. At very high rates (8%+), prepay. At very low rates (under 4%), invest. In between, a blend often wins."
+    },
+    quiz: [
+      { q: "Extra principal payments on a 6% mortgage are effectively a guaranteed 6% return.", answer: true, explanation: "Every dollar of principal you eliminate stops accruing 6% interest for the rest of the loan. It's a guaranteed return equal to your mortgage rate, with no volatility or tax consequences (since you're not earning income). No investment offers a guaranteed 6% return." },
+      { q: "At very low mortgage rates (3-4%), extra principal payments are usually the best use of extra cash.", answer: false, explanation: "At low rates, you're paying down a cheap loan while forgoing the expected return of investments. Over long horizons, invested money at 7-10% dramatically outperforms saving 3-4% mortgage interest. Low-rate mortgage holders generally benefit from investing the extra money." },
+      { q: "Paying off a mortgage entirely has value beyond the pure interest savings.", answer: true, explanation: "Eliminating a large monthly obligation reduces your required income, creates optionality in job choices and retirement timing, and removes a source of financial stress. These benefits are real even if they're hard to quantify — and for some people, they outweigh the mathematical advantage of investing." }
+    ]
+  },
+  {
     day: 32,
     title: "Good Debt vs Bad Debt",
     concept: [
@@ -380,6 +1004,370 @@ const LESSONS = [
       { q: "The maximum leverage a bank offers is usually the amount you should use.", answer: false, explanation: "Banks assess their risk, not yours. Maximum leverage leaves zero margin of safety. A downturn that reduces your asset value or income could force a sale at the worst time. Conservative leverage (below maximum) provides crucial breathing room." },
       { q: "Leveraged losses can exceed your original investment.", answer: true, explanation: "If you put $100K down on a $500K property and it drops 25% to $375K, you've lost $125K — more than your entire deposit. You still owe the bank $400K on an asset worth $375K. This is negative equity, and it's the dark side of leverage." }
     ]
+  },
+  {
+    day: 38,
+    title: "House Hacking",
+    concept: [
+      "House hacking means buying a property you live in while generating rental income from part of it — a multi-unit building where you occupy one unit and rent the others, a single-family with a rented-out ADU or basement, or even renting rooms to housemates. It's one of the most powerful wealth-building strategies available to regular income earners because it combines owner-occupant financing terms with rental income.",
+      "The financing advantage is huge. Owner-occupants qualify for low-down-payment mortgages (3-5% conventional, 3.5% FHA, 0% VA) on properties up to 4 units. A pure investor buying the same duplex or fourplex would need 20-25% down at higher rates. A first-time buyer can control a $500K fourplex with $17,500 down via FHA, live in one unit, and rent the other three.",
+      "The math when it works: rental income from other units often covers most or all of your housing costs. You might live essentially free while building equity and letting tenants pay down your mortgage. Over 5-10 years this builds substantial wealth — and you can repeat the strategy by refinancing to conventional when you have 20% equity and using your owner-occupant benefit on another property.",
+      "The realities of being a live-in landlord: you'll deal with tenant complaints, maintenance calls, vacancies, and the complications of living next to your tenants. It's not passive. Boundaries are harder to maintain when the tenant is your neighbor. But for someone willing to put in the work, house hacking accelerates wealth dramatically versus renting or buying a traditional single-family home."
+    ],
+    scenario: {
+      prompt: "You're a first-time homebuyer with $30K saved. Option A: buy a $400K single-family home with 5% down ($20K), monthly PITI ~$2,950, all paid by you. Option B: buy a $500K fourplex as owner-occupant with 5% down ($25K), live in one unit, rent the others for $1,500 each. Monthly PITI on the fourplex ~$3,700, rental income $4,500/month. Which builds wealth faster?",
+      options: [
+        { id: "a", label: "Option A — simpler and less landlord work" },
+        { id: "b", label: "Option B — tenants cover PITI and then some, meaning you live essentially free while building equity on a $500K asset instead of a $400K one" },
+        { id: "c", label: "They're equivalent" },
+        { id: "d", label: "Option A — single-family homes always appreciate faster" },
+      ],
+      correct: "b",
+      feedback: "Option B's math is dramatically better for wealth building. You're paying $3,700/month PITI but receiving $4,500/month in rent — your housing is effectively free, plus $800/month cushion for vacancy and maintenance. You're building equity on a $500K property instead of paying your entire $2,950/month housing cost out of pocket. Over 10 years, this difference compounds into hundreds of thousands in additional net worth. The costs: you're a landlord (tenant management, maintenance, vacancies), and privacy is reduced. For someone willing to accept that tradeoff, house hacking is one of the highest-leverage wealth moves available to ordinary income earners."
+    },
+    quiz: [
+      { q: "Owner-occupied multi-family properties (up to 4 units) qualify for the same low-down-payment financing as single-family homes.", answer: true, explanation: "This is the key financing advantage of house hacking. 2-4 unit properties qualify for conventional, FHA, and VA loans at owner-occupant terms, meaning 3-5% down instead of the 20-25% required for pure investment properties." },
+      { q: "House hacking is effectively passive income.", answer: false, explanation: "Being a live-in landlord involves real work: tenant screening, maintenance, vacancies, and the challenges of living next to tenants. The financial rewards are high, but the time commitment and occasional stress are meaningful." },
+      { q: "You can repeat the house-hacking strategy by buying additional properties as owner-occupant.", answer: true, explanation: "You can generally only have one primary residence at a time, but after living in a property for about a year, you can typically refinance to a standard loan and use your owner-occupant benefit on a new property. Some investors scale a portfolio this way — buying a new owner-occupant property every 1-2 years." }
+    ]
+  },
+  {
+    day: 39,
+    title: "Analyzing Rentals: Cap Rate & Cash-on-Cash",
+    concept: [
+      "Real estate investors need standard metrics to compare properties quickly. Two of the most important: cap rate and cash-on-cash return. Cap rate measures the property's unlevered yield — how much it produces relative to its price, ignoring financing. Cash-on-cash measures your actual return on the actual cash you put in, factoring in the mortgage.",
+      "Cap rate = Net Operating Income (NOI) ÷ Property Price. NOI is annual rental income minus all operating expenses (taxes, insurance, maintenance, property management, vacancy allowance) — but NOT mortgage payments. A property generating $24K NOI on a $400K purchase price has a 6% cap rate. Cap rates are how investors compare markets: 4% in coastal cities, 7-9% in Midwest cash-flow markets.",
+      "Cash-on-cash return = Annual Pre-Tax Cash Flow ÷ Total Cash Invested. This includes the effect of your mortgage. If you bought the same $400K property with $100K down and $20K in closing costs/rehab, and cash flow after mortgage is $6K/year, cash-on-cash is $6K / $120K = 5%. Cash-on-cash is more useful for personal decision-making because it reflects your actual invested capital.",
+      "The two metrics together tell a story. Low cap rate + high cash-on-cash usually means heavy leverage — you've amplified returns but also risk. High cap rate + low cash-on-cash suggests expensive money or high up-front costs eating returns. Investors also look at total return (cash flow + principal paydown + appreciation) over time to capture the full picture, but cap rate and cash-on-cash are the quick screening tools."
+    ],
+    scenario: {
+      prompt: "You're evaluating a $300K rental property. Rental income: $2,500/month ($30K/year). Operating expenses: $12K/year. You'd buy with $75K down, $5K closing costs. Mortgage: $225K at 7% = ~$18K/year in interest + principal (about $13.5K interest in year 1). What are the cap rate and year-1 cash-on-cash return?",
+      options: [
+        { id: "a", label: "Cap rate 6%, cash-on-cash about 0% — NOI is $18K ($30K - $12K), cap = $18K/$300K = 6%. Cash flow after mortgage ≈ $0 in year 1, so cash-on-cash is near zero" },
+        { id: "b", label: "Cap rate 10%, cash-on-cash 20%" },
+        { id: "c", label: "Cap rate 4%, cash-on-cash 15%" },
+        { id: "d", label: "Cap rate equals cash-on-cash — they always do" },
+      ],
+      correct: "a",
+      feedback: "NOI = $30K rent - $12K expenses = $18K. Cap rate = $18K / $300K = 6%. Mortgage payment roughly $18K/year, meaning cash flow is approximately zero in year 1. Cash-on-cash ≈ 0% on $80K invested. But that's only year 1 cash flow — the property is also building equity (~$4.5K/year in principal paydown initially) and may appreciate. A total return calculation would include those, making the property more attractive. This example highlights a common pitfall: a 6% cap rate property at 7% mortgage rates often barely cash flows. You need cap rates meaningfully above mortgage rates for leveraged returns to work — which is increasingly rare in expensive markets."
+    },
+    quiz: [
+      { q: "Cap rate is calculated using the mortgage payment as an expense.", answer: false, explanation: "Cap rate uses Net Operating Income (NOI), which is rent minus operating expenses only — taxes, insurance, maintenance, management, vacancy. Mortgage payments are NOT included in NOI. This lets you compare properties on their fundamentals, independent of financing." },
+      { q: "Cash-on-cash return reflects your actual return on the cash you invested, including the effects of leverage.", answer: true, explanation: "Cash-on-cash = annual pre-tax cash flow (after all expenses including mortgage) ÷ total cash invested (down payment + closing costs + rehab). It's the 'what am I actually earning on my money' metric." },
+      { q: "A property with a cap rate below the current mortgage rate will typically produce positive cash flow when purchased with financing.", answer: false, explanation: "When cap rate is below mortgage rate, the property generates less income than the cost of borrowing against it — often resulting in negative or near-zero cash flow. This is the central problem with leveraged real estate when rates are high and cap rates are low." }
+    ]
+  },
+  {
+    day: 40,
+    title: "The 1% Rule & BRRRR",
+    concept: [
+      "The 1% rule is a fast screening heuristic for rental properties: monthly rent should be at least 1% of the purchase price. A $200K property should rent for at least $2,000/month to be worth deeper analysis. If it rents for $1,500, it likely won't cash flow after expenses and financing. This rule is rough, but it's useful for filtering out losing deals quickly in high-volume markets.",
+      "In modern expensive markets, the 1% rule is hard to find. A $500K property rarely rents for $5,000/month — more likely $2,500-3,500. This is part of why many coastal markets are tough for cash-flow investors: the math simply doesn't work under the 1% rule. Cash-flow investors have migrated toward Midwest and Southern markets where the rule is still achievable, or toward the 0.7-0.8% variant more common today.",
+      "BRRRR stands for Buy, Rehab, Rent, Refinance, Repeat. It's a strategy where investors buy a distressed property under market value, renovate it, rent it out, then refinance based on the new higher value — pulling most or all of their original cash back out. If done well, you end up owning a cash-flowing rental with little or no of your own money left in the deal, freeing that capital to repeat on the next property.",
+      "BRRRR's appeal is explosive portfolio growth. Its danger is equally real: each step has execution risk. Overpay for rehab, and your numbers break. Take longer than planned, and you burn through reserves. Get a low appraisal, and you can't refinance out your capital. Experienced investors make it work because they've tightened each step through repetition — beginners often lose money on their first BRRRR because they underestimate rehab costs and timeline."
+    ],
+    scenario: {
+      prompt: "You find a $150K property in a Midwest market that rents for $1,500/month. Operating expenses are $6K/year. You can buy with 25% down ($37,500), $3K closing costs, at 7.5% investor rate. Does this pass the 1% rule, and is the deal likely to cash flow?",
+      options: [
+        { id: "a", label: "Passes 1% rule ($1,500/$150K = 1%). NOI ≈ $12K, mortgage ≈ $9.4K/year, cash flow ≈ $2.6K/year on $40.5K invested = 6.4% cash-on-cash — a decent cash-flow deal in today's market" },
+        { id: "b", label: "Fails 1% rule — won't cash flow" },
+        { id: "c", label: "Barely worth analysis — cap rates matter more" },
+        { id: "d", label: "Good deal but needs 20% cap rate to work" },
+      ],
+      correct: "a",
+      feedback: "This deal passes the 1% rule exactly ($1,500/month on $150K = 1%). NOI = $18K rent - $6K expenses = $12K. Mortgage at 7.5% on $112,500 is about $9,400/year. Cash flow ≈ $2,600/year. On total invested capital of ~$40.5K, that's about 6.4% cash-on-cash in year 1 — plus principal paydown of ~$1,200/year and any appreciation. This is what a reasonable cash-flow deal looks like in today's market. Note how different this is from the $300K/$2,500 rent scenario earlier, which barely cash flowed. The 1% rule quickly identifies which properties have a chance of working with leverage."
+    },
+    quiz: [
+      { q: "The 1% rule suggests monthly rent should be at least 1% of the purchase price for a rental property to work as a cash-flow investment.", answer: true, explanation: "It's a rough screening heuristic. A $200K property should rent for at least $2,000/month to be worth deeper analysis. Properties well below 1% rarely produce positive cash flow after expenses and financing, especially at current mortgage rates." },
+      { q: "The BRRRR strategy (Buy, Rehab, Rent, Refinance, Repeat) allows investors to recycle their capital across multiple properties.", answer: true, explanation: "Done well, BRRRR lets you pull most of your original cash back out via refinancing after rehab raises the property value, so you can redeploy that capital on the next deal. Done poorly, you get stuck with capital trapped in under-performing rehabs." },
+      { q: "The 1% rule is easy to achieve in most major US coastal markets today.", answer: false, explanation: "Coastal markets typically have rent-to-price ratios of 0.4-0.6%, well below the 1% threshold. This is why cash-flow-focused investors increasingly buy in Midwest and Southern markets, while coastal investors focus on appreciation instead." }
+    ]
+  },
+  {
+    day: 41,
+    title: "REITs vs Direct Ownership",
+    concept: [
+      "A Real Estate Investment Trust (REIT) is a company that owns and operates income-producing real estate — apartments, offices, malls, warehouses, data centers. You can buy shares of publicly traded REITs like any other stock. It's the way to get real estate exposure without owning physical property, dealing with tenants, or committing hundreds of thousands of dollars.",
+      "REITs offer several advantages over direct ownership: instant diversification (a single REIT might own thousands of properties across many markets), liquidity (you can sell in seconds), no active management (no tenant calls), and accessibility (you can invest with $100 instead of $100,000). REITs are also legally required to distribute 90% of taxable income as dividends, making them a meaningful income-producing investment.",
+      "Direct ownership offers what REITs can't: leverage (mortgages amplify returns), direct control, tax advantages unique to individual property ownership (depreciation, 1031 exchanges, mortgage interest deduction), and the ability to force value through renovation or management improvements. For investors willing to do the work, direct ownership can produce higher returns than REITs over long periods.",
+      "The honest comparison: REITs historically deliver returns competitive with direct real estate ownership once you account for all the costs, time, and hassle of being a landlord. For someone who wants real estate exposure in their portfolio but doesn't want to be a landlord, a low-cost REIT index fund is a reasonable solution. For someone specifically pursuing real estate wealth building with leverage and control, direct ownership opens possibilities REITs can't match."
+    ],
+    scenario: {
+      prompt: "You want real estate exposure in your portfolio but have limited time, a full-time job, and no interest in being a landlord. You have $50K to allocate. Which makes more sense?",
+      options: [
+        { id: "a", label: "Buy a rental property — direct ownership always beats REITs long-term" },
+        { id: "b", label: "Invest in a low-cost REIT index fund — you get diversified real estate exposure, dividend income, and liquidity without becoming a landlord" },
+        { id: "c", label: "Skip real estate — stocks are always better" },
+        { id: "d", label: "Buy a vacation rental for passive income" },
+      ],
+      correct: "b",
+      feedback: "For someone without time or interest in property management, REITs are the right fit. A REIT index fund gives you diversified exposure to hundreds of properties across many sectors and geographies, for about 0.1% expense ratio, with instant liquidity. $50K isn't enough to buy a quality rental property in many markets, and becoming a landlord without the desire to manage tenants is a recipe for frustration. Direct ownership can outperform for committed investors who seek the leverage and control, but it's not 'always better' — especially for someone whose competitive advantage lies elsewhere (their career). Vacation rentals aren't passive either — they're arguably more work than long-term rentals."
+    },
+    quiz: [
+      { q: "REITs are legally required to distribute most of their income to shareholders as dividends.", answer: true, explanation: "US REITs must distribute at least 90% of taxable income to maintain their tax status. This makes them relatively high-yield investments — typical REIT dividend yields are 3-5%, higher than most stocks." },
+      { q: "Direct real estate ownership offers tax advantages that REITs cannot replicate individually.", answer: true, explanation: "Depreciation deductions, mortgage interest deductions, 1031 exchanges, and other tax benefits are available to direct property owners but not to REIT investors. These can be meaningful for high-income investors, though they come with the cost and complexity of active ownership." },
+      { q: "REITs have consistently underperformed direct real estate investment by a wide margin.", answer: false, explanation: "Over long periods, REITs have delivered returns broadly competitive with direct ownership once you account for leverage, time investment, and hassle. For passive investors, REITs offer a reasonable proxy for real estate exposure without the operational burden." }
+    ]
+  },
+  {
+    day: 42,
+    title: "Tax Benefits: Depreciation & 1031",
+    concept: [
+      "Real estate's tax treatment is one of its biggest structural advantages. The most underappreciated benefit is depreciation: the IRS lets you deduct a portion of the building's value each year as a 'loss' — even if the property is actually appreciating. Residential rental property is depreciated over 27.5 years. A $300K building (excluding land) generates roughly $11K/year in depreciation deductions.",
+      "The power of depreciation is that it shelters rental income from taxes. If your property generates $12K in cash flow but shows $11K in depreciation plus $8K in mortgage interest, you may show a tax loss of $7K — despite actually having $12K of cash in your pocket. That loss can offset other income (within limits) and means you pay little or no tax on rental cash flow for years.",
+      "The 1031 exchange lets you sell one investment property and buy another without paying capital gains taxes, as long as you follow strict rules (like-kind property, 45-day identification window, 180-day closing). This lets investors roll gains from one property into the next, deferring taxes indefinitely. Combined with the 'step-up in basis' at death, 1031-chained properties can eventually pass to heirs with the original capital gains never taxed.",
+      "These benefits come with complexity. Depreciation is 'recaptured' (taxed as income) when you sell, unless you 1031 exchange. The 1031 timeline is unforgiving — miss the 45-day window and you owe all the taxes. For serious investors these tools are wealth-multiplying; for casual investors the complexity can create mistakes. Working with a real estate CPA is usually worth the cost once you own 2+ properties."
+    ],
+    scenario: {
+      prompt: "You own a rental property generating $15K/year in cash flow after all expenses. The depreciable building value is $330K (depreciation = $12K/year), and mortgage interest is $8K/year. How much of your $15K cash flow is actually taxable this year?",
+      options: [
+        { id: "a", label: "All $15K — cash flow is always taxable" },
+        { id: "b", label: "About $0 — depreciation ($12K) + mortgage interest (already counted in expenses) can offset most or all of your taxable rental income, meaning you often pay little to no tax on positive cash flow" },
+        { id: "c", label: "Half the cash flow is taxed, half is tax-free" },
+        { id: "d", label: "Real estate income is never taxed" },
+      ],
+      correct: "b",
+      feedback: "This is the famous 'paper loss while cashing checks' scenario. Taxable income = gross rent - operating expenses - mortgage interest - depreciation. Your $15K cash flow is already net of operating expenses and mortgage payment (principal portion isn't deductible). But adding the $12K depreciation deduction on top can eliminate most taxable income — you might actually report a tax loss despite collecting positive cash flow. This tax advantage is why real estate investors often speak of 'tax-free' cash flow in the early years. Caveat: depreciation is recaptured when you sell (unless you 1031), so it's more accurately described as tax deferral than tax elimination."
+    },
+    quiz: [
+      { q: "Depreciation lets you deduct a portion of a rental property's building value each year, even if the property is appreciating in market value.", answer: true, explanation: "Depreciation is an accounting concept, not a reflection of actual market value changes. Residential rental property is depreciated straight-line over 27.5 years, generating meaningful annual deductions regardless of whether the property's market value is rising or falling." },
+      { q: "A 1031 exchange requires you to close on the replacement property within 45 days.", answer: false, explanation: "The rules are: identify replacement property within 45 days, and close within 180 days. Both deadlines are strict — missing either means the exchange fails and you owe all the deferred capital gains taxes." },
+      { q: "Depreciation deductions taken during ownership are eliminated when you sell the property.", answer: false, explanation: "Depreciation is 'recaptured' at sale — taxed as ordinary income up to the amount depreciated. You can defer this by doing a 1031 exchange into another property. Strictly speaking, depreciation is tax deferral, not tax elimination, though it effectively becomes elimination if you hold 1031-chained properties until death." }
+    ]
+  },
+  {
+    day: 43,
+    title: "Property Management: DIY or Hire?",
+    concept: [
+      "Every rental property owner faces a choice: manage tenants yourself or hire a property manager. Property managers typically charge 8-12% of collected rent, plus leasing fees (often half a month's rent to one full month when placing a new tenant), plus markups on maintenance. On a property renting for $2,000/month, management costs are roughly $200-240/month plus periodic leasing fees.",
+      "Self-management's appeal: you keep the fees, learn the business deeply, and maintain direct control over tenant selection and property standards. For a single local rental, self-managing is often reasonable — the work is sporadic (a few hours most months, more during transitions). It also helps build the expertise to recognize whether a property manager is doing a good job on your future properties.",
+      "Hiring a manager's appeal: time freedom, emotional distance from tenants, systems and contractor relationships built by the manager, and the ability to own properties far from where you live. Good property managers earn their fee by reducing vacancy (through proper pricing and faster turnovers), screening tenants rigorously, and handling the emotional labor of tenant management.",
+      "The real question isn't 'how much do property managers cost?' but 'what's my time worth and what's my expertise?'. A high-earning professional who could make $200/hour on additional work often shouldn't spend 10 hours managing a tenant dispute — hiring out at 10% of rent is cheap compared to the alternatives. A hands-on investor with fewer demands on their time and real skill at tenant management can legitimately save those fees. Be honest about which one you are."
+    ],
+    scenario: {
+      prompt: "You own two rental properties 500 miles apart. Your full-time job pays well and is demanding. You're considering hiring a property manager at 10% of rent + tenant placement fees (roughly $4,000/year total across both properties). Is this worth it?",
+      options: [
+        { id: "a", label: "No — managers always cost more than they save" },
+        { id: "b", label: "Yes — managing distant rentals while holding a demanding full-time job almost always argues for hiring a manager, since the value of your time and the cost of mistakes (poor tenant screening, slow vacancy fills) typically exceed the fees" },
+        { id: "c", label: "Only if you're wealthy — otherwise DIY" },
+        { id: "d", label: "Sell the properties — landlording isn't worth it" },
+      ],
+      correct: "b",
+      feedback: "Your situation has 'hire a manager' written all over it. Distance makes self-managing impractical. Your demanding job means time is scarce. Tenant problems on a property 500 miles away can spiral into real costs (lost rent, property damage) while you're unable to respond quickly. The 10% fee is a rounding error compared to one bad tenant, one extended vacancy, or one missed maintenance issue. The counterpoint: find a good manager — bad ones are worse than self-management. Ask for references, review their fee schedule carefully (watch for maintenance markups), and verify they have systems for the situations that matter."
+    },
+    quiz: [
+      { q: "Property managers typically charge 8-12% of collected rent, plus additional fees for tenant placement.", answer: true, explanation: "Management fees of 8-12% of gross rent are standard in most US markets. Tenant placement fees are separate — usually half a month to a full month of rent when finding a new tenant. Always clarify the full fee structure before signing." },
+      { q: "Self-managing distant out-of-state rental properties is usually a good strategy for working professionals.", answer: false, explanation: "Managing rentals far from where you live is very difficult without local contractors, local knowledge, and the ability to respond to emergencies quickly. For distant properties, a good local manager is almost always worth the fee." },
+      { q: "A property manager's true value comes primarily from lower vacancy rates, better tenant screening, and time savings — not just from handling maintenance calls.", answer: true, explanation: "Good property managers earn their fees by keeping units occupied, reducing turnover, and rigorously screening tenants. Poor managers create costs; good managers often produce returns that exceed their fees through better property performance." }
+    ]
+  },
+  {
+    day: 44,
+    title: "Scaling a Real Estate Portfolio",
+    concept: [
+      "Scaling from one rental to a real portfolio introduces new challenges: financing constraints, time management, geographic diversification, and systems. Each additional property isn't just 'one more' — it changes the math and the lifestyle demands. The first property teaches you the basics; properties two through five are where you learn whether you actually want to be in this business long-term.",
+      "Financing becomes harder as you scale. Conventional lenders typically cap investors at 10 financed properties. Each additional property makes you look 'riskier' to lenders even if each one cash flows well. Investors scaling past this limit use portfolio loans from smaller banks, commercial loans for multi-unit buildings, or 'DSCR loans' (Debt Service Coverage Ratio loans) that qualify based on property cash flow rather than personal income.",
+      "The reinvestment flywheel is how serious portfolios get built. Cash flow from existing properties covers expenses; appreciation + principal paydown builds equity; that equity gets pulled out via cash-out refinances to fund the next purchase. Done well, this creates an accelerating portfolio — each property generates the means to acquire the next. Done poorly, it creates over-leveraged fragility that collapses in the first downturn.",
+      "The honest truth about scaling: most people shouldn't. The first 1-3 properties can produce real wealth alongside a career. Scaling beyond requires either treating it as a serious business (time, systems, team) or accepting that you're now running a small company with all the stress, paperwork, and risk that implies. Many experienced investors conclude that 3-5 quality properties beats 20 mediocre ones."
+    ],
+    scenario: {
+      prompt: "You've owned a successful rental for 3 years. It's appreciated to $400K (originally bought for $300K) with a current mortgage balance of $210K. You're considering a cash-out refinance to pull $90K out for another property. Mortgage rate would go from 4% to 7%. What's the key tradeoff?",
+      options: [
+        { id: "a", label: "Always refinance to scale — more properties means more wealth" },
+        { id: "b", label: "Never refinance a low-rate mortgage — 4% is too good to give up" },
+        { id: "c", label: "The $90K funds another property, but your existing property's cash flow drops because of the higher rate and larger balance — calculate whether the new property's returns justify sacrificing the existing cash flow before committing" },
+        { id: "d", label: "Refinancing doesn't affect cash flow" },
+      ],
+      correct: "c",
+      feedback: "Cash-out refinances at much higher rates require careful math. Going from $210K at 4% to $300K at 7% increases your monthly interest cost meaningfully — possibly eliminating positive cash flow on the existing property. The new property needs to generate enough additional cash flow and appreciation to justify that sacrifice. If the new property produces $500/month cash flow but the refi costs you $800/month more, you're losing ground even as you scale. This is where scaling gets tricky — each new acquisition needs to be evaluated not just on its own merits but on the all-in impact to your portfolio. (a) and (b) are both too simplistic."
+    },
+    quiz: [
+      { q: "Conventional mortgage lenders typically cap investors at around 10 financed properties.", answer: true, explanation: "Fannie Mae and Freddie Mac conventional loans generally have a 10-property cap per borrower. Beyond that, investors use portfolio loans, commercial loans, or DSCR loans (qualified based on property cash flow). This financing constraint shapes how investors scale past the first few properties." },
+      { q: "A cash-out refinance always increases the cash flow of the refinanced property.", answer: false, explanation: "A cash-out refi increases your loan balance and typically your rate, both of which reduce cash flow on the refinanced property. You pull out capital to invest elsewhere, but the existing property becomes less profitable. Always calculate the all-in impact before executing." },
+      { q: "Most investors should pursue aggressive scaling past 10 properties as their primary wealth-building strategy.", answer: false, explanation: "Scaling past a few properties becomes increasingly operationally demanding and often turns into a small business rather than an investment. Many experienced investors conclude that 3-5 well-chosen properties produce better risk-adjusted outcomes than 20 mediocre ones." }
+    ]
+  },
+  {
+    day: 45,
+    title: "Exit Strategies for Real Estate",
+    concept: [
+      "Every real estate investment needs an exit strategy, even if the plan is 'never sell.' The main exit paths are: selling outright (and paying capital gains and depreciation recapture taxes), 1031 exchange into another property (defers taxes), refinance and hold (pulls out cash without selling), seller financing (sells over time for tax spread and ongoing income), and passing the property to heirs (step-up in basis eliminates unrealized gains).",
+      "The 'never sell' strategy is genuinely powerful for long-term wealth building. Each year you hold, the mortgage gets paid down, rents typically rise (but your mortgage is fixed), and appreciation compounds. Selling triggers taxes on accumulated gains plus depreciation recapture — often 25-35% of gains disappearing to taxes. Rolling via 1031 or holding until death avoids these.",
+      "Selling makes sense when: the property no longer fits your strategy (location, asset class, operational fit), better opportunities exist, you need liquidity, or the market is overheated relative to fundamentals. Don't sell based on short-term price movements. Do sell when the property has peaked and you have better places for the capital, or when holding it creates a lifestyle you don't want.",
+      "Seller financing is an underused exit. When you sell, instead of taking cash up front, you act as the bank — the buyer pays you monthly with interest. Benefits: spreads capital gains recognition over years (lower tax brackets), generates ongoing income at rates higher than bonds, and can sell to buyers who couldn't get traditional financing (at higher prices). Risk: the buyer defaults and you have to reclaim the property. For the right property and right buyer, it's an elegant exit."
+    ],
+    scenario: {
+      prompt: "You own a rental property purchased 15 years ago for $200K, now worth $500K, with $150K in accumulated depreciation. You're tired of being a landlord. What's the tax-smart way to exit?",
+      options: [
+        { id: "a", label: "Sell outright — simplest option, take the cash" },
+        { id: "b", label: "1031 exchange into a more passive property (a triple-net-leased commercial property or a Delaware Statutory Trust) — you exit active management without triggering taxes on $300K of gains plus $150K of depreciation recapture" },
+        { id: "c", label: "Just give up and abandon the property" },
+        { id: "d", label: "Refinance and take cash — but that doesn't solve the landlord problem" },
+      ],
+      correct: "b",
+      feedback: "A 1031 exchange into a more passive real estate structure lets you exit active management without a tax bill. Options include triple-net-leased commercial property (where the tenant handles most expenses and responsibilities), or Delaware Statutory Trusts (DSTs — fractional interests in large properties, entirely passive). You defer roughly $75K-$125K in taxes while eliminating the operational burden. If you sold outright (a), you'd owe capital gains tax on $300K plus depreciation recapture tax on $150K — potentially $75K-$125K in taxes. (d) doesn't solve the landlord problem. 1031 exchanges are one of the most powerful tax tools available to real estate investors."
+    },
+    quiz: [
+      { q: "Holding real estate until death can eliminate the capital gains tax that would otherwise be owed on accumulated appreciation.", answer: true, explanation: "Heirs receive a 'step-up in basis' — inherited property's cost basis resets to the current market value, eliminating any unrealized gains for tax purposes. This is part of why wealthy real estate investors often hold indefinitely and pass properties through estates." },
+      { q: "Selling a long-held rental triggers taxes only on the appreciation, not on the depreciation taken over the years.", answer: false, explanation: "You owe capital gains tax on appreciation AND depreciation recapture tax on the depreciation taken during ownership. Recapture is taxed at up to 25%, on top of capital gains taxes. On a long-held property, the combined tax bill can be substantial — often 25-35% of gains." },
+      { q: "Seller financing can spread a taxable gain across multiple years instead of realizing it all at once.", answer: true, explanation: "When you carry financing for a buyer, you receive payments over time. Tax on the gain is typically recognized proportionally as payments come in (the installment sale method), potentially keeping you in lower tax brackets each year compared to a lump-sum sale." }
+    ]
+  },
+  {
+    day: 46,
+    title: "Asset Allocation Across Life Stages",
+    concept: [
+      "Your ideal mix of stocks, bonds, cash, and real estate changes as you move through life. The asset allocation that's right for a 25-year-old with 40 years until retirement is reckless for a 65-year-old who'll start withdrawing next year. Allocation should evolve, but not based on arbitrary rules — it should reflect your actual time horizon, income stability, and net worth.",
+      "Early career (20s-30s): aggressive growth orientation. Time horizon is long enough to ride out any crash. Stock-heavy portfolios (80-90%) are defensible because even a brutal bear market has decades to recover. The bigger risk isn't market volatility — it's not saving enough. A small bond allocation (10-20%) provides rebalancing fuel and psychological ballast; 100% stocks is defensible but requires true composure through crashes.",
+      "Mid career (40s-early 50s): balancing growth with preservation. Your portfolio is now substantial enough that large drawdowns have meaningful consequences. A classic mix might be 70-80% stocks, 20-30% bonds, with increasing attention to tax-efficient asset location (bonds in tax-advantaged accounts, stocks in taxable). Real estate and alternative assets might enter the picture if they fit your goals.",
+      "Approaching and in retirement (late 50s+): sequence-of-returns risk rises sharply. The years just before and after retirement are most vulnerable to a bad market permanently impairing your portfolio. Typical allocations shift to 40-60% stocks, 40-60% bonds, with 2-3 years of expenses held in cash or short-term bonds as a 'ballast' you can spend from during market downturns without selling stocks at lows."
+    ],
+    scenario: {
+      prompt: "You're 55, planning to retire at 62, with a $900K portfolio currently invested 90% stocks / 10% bonds. You've never lost sleep over market volatility. A friend advises you to 'stay aggressive — you still have decades of life ahead.' What's the right critique?",
+      options: [
+        { id: "a", label: "Your friend is right — keep 90% stocks for higher returns" },
+        { id: "b", label: "Your friend is missing sequence-of-returns risk. A 40% crash in the next few years, right as you start withdrawals, can permanently impair a portfolio even if stocks eventually recover. Shifting toward 60-70% stocks and building 2-3 years of cash/bonds to spend from in downturns is standard pre-retirement positioning" },
+        { id: "c", label: "Go to 100% bonds immediately" },
+        { id: "d", label: "Sell everything and hold cash" },
+      ],
+      correct: "b",
+      feedback: "Your friend is giving advice appropriate for a 35-year-old, not a 55-year-old planning to retire in 7 years. Life expectancy is long, but withdrawals start soon — sequence risk dominates. A crash in years -2 through +5 of retirement is the single most dangerous event for portfolio longevity. Shifting to 60-70% stocks and building a cash/bond buffer for 2-3 years of spending doesn't mean abandoning growth — you still have 30+ years of investment horizon — but it means you can spend down the cash bucket during a crash while letting stocks recover. Glide paths aren't arbitrary; they reflect real mathematical risks."
+    },
+    quiz: [
+      { q: "Asset allocation should typically become more conservative as you approach retirement.", answer: true, explanation: "Sequence-of-returns risk peaks in the years just before and after retirement. Shifting toward bonds and cash provides a buffer that lets you avoid selling stocks at bad prices during early-retirement market drawdowns." },
+      { q: "A 100% stock portfolio is objectively optimal for anyone with more than 10 years until retirement.", answer: false, explanation: "It's defensible but not universally optimal. A small bond allocation provides rebalancing fuel during crashes and psychological ballast that helps investors stay invested through drawdowns. For investors who might panic-sell in a severe bear market, a more moderate allocation is almost always better in practice than a theoretically optimal one they abandon." },
+      { q: "Keeping 2-3 years of expenses in cash or short-term bonds is a common strategy for retirees.", answer: true, explanation: "This 'cash bucket' lets retirees fund spending from cash during market downturns without selling stocks at low prices. It's a practical defense against sequence-of-returns risk and one of the most important allocation principles for the early retirement years." }
+    ]
+  },
+  {
+    day: 47,
+    title: "Tax Optimization Across Your Finances",
+    concept: [
+      "Taxes are the single largest lifetime expense for most high earners — more than housing, more than food, more than anything else. Optimizing across your financial life can save tens of thousands per year. The three main levers: account location (which investments go in which accounts), tax-loss harvesting, and timing income and deductions across years.",
+      "Account location matters because different investments are taxed differently and different accounts have different tax characteristics. High-turnover funds, bonds, and REITs generate lots of taxable income and belong in tax-advantaged accounts (401k, IRA). Index funds that generate mostly long-term capital gains are tax-efficient and work fine in taxable accounts. Placing tax-inefficient investments in taxable accounts when you have tax-advantaged space is a common, avoidable mistake.",
+      "Tax-loss harvesting means intentionally selling investments at a loss to offset capital gains (or up to $3,000 of ordinary income per year). You immediately buy a similar but not 'substantially identical' fund to maintain market exposure. Done systematically, this can generate tax savings of 0.3-1% per year, which compounds meaningfully over decades. It works best in taxable accounts and during volatile markets.",
+      "Income and deduction timing: if you can control when income hits (bonuses, business distributions, Roth conversions), shifting it to lower-income years can save materially on taxes. Same for deductions — bunching multiple years of charitable giving into one year lets you itemize in that year and take the standard deduction in others. These strategies matter more at higher incomes and for self-employed or retired individuals with flexibility over when they recognize income."
+    ],
+    scenario: {
+      prompt: "You have: $200K in a taxable brokerage holding a high-turnover actively managed fund generating lots of dividends and short-term gains, and $100K in a 401(k) holding a total market index fund. Your marginal tax rate is 32%. What's the smartest structural change?",
+      options: [
+        { id: "a", label: "Swap them: put the tax-inefficient active fund in the 401(k) (tax-sheltered), and hold the tax-efficient index fund in taxable — this is called 'asset location' and can save thousands per year at 32% marginal rates" },
+        { id: "b", label: "Keep it as-is — account location doesn't matter" },
+        { id: "c", label: "Sell everything and buy bonds" },
+        { id: "d", label: "Move everything to crypto for 0% tax" },
+      ],
+      correct: "a",
+      feedback: "This is a classic asset location improvement. High-turnover funds generate short-term capital gains, dividends, and distributions that all get taxed annually at your marginal rate (32% in this case). In a taxable account, that's a major drag. Inside a 401(k), all that activity happens tax-free until withdrawal. A low-turnover total market index fund, by contrast, generates mostly unrealized long-term gains — very tax-efficient in a taxable account, even at high brackets. Swapping the location of these two investments can easily save $1,000-$3,000 per year at 32% marginal rates, without changing your overall allocation at all."
+    },
+    quiz: [
+      { q: "Placing tax-inefficient investments (like bonds and high-turnover funds) in tax-advantaged accounts can save significant taxes annually.", answer: true, explanation: "Bonds generate ordinary income, high-turnover funds generate short-term gains, and REITs generate non-qualified dividends — all taxed at ordinary rates. Shielding these in tax-advantaged accounts while keeping tax-efficient index funds in taxable can save 0.3-1% per year, compounding into meaningful sums over decades." },
+      { q: "Tax-loss harvesting lets you deduct up to $3,000 in capital losses against ordinary income each year.", answer: true, explanation: "Net capital losses offset capital gains first. Any excess can offset up to $3,000 of ordinary income per year, with remaining losses carried forward indefinitely. This is a real tax benefit — harvesting losses in volatile years builds up useful 'tax credits' for future use." },
+      { q: "Tax optimization strategies only matter for people in the highest tax brackets.", answer: false, explanation: "While high earners get more absolute benefit, even moderate earners can benefit from account location, tax-loss harvesting, and proper use of tax-advantaged accounts. The relative benefit in dollars rises with income, but the percentage benefit of smart tax planning can be meaningful at any income level." }
+    ]
+  },
+  {
+    day: 48,
+    title: "Insurance & Estate Basics",
+    concept: [
+      "Protection comes before optimization. It doesn't matter how well you invest if a single catastrophic event wipes it all out. The fundamental protection categories: health insurance (medical bills are the #1 cause of US bankruptcy), disability insurance (your earnings are your biggest asset while working), term life insurance (for those with dependents), liability coverage via umbrella policy (protects net worth from lawsuits), and proper estate documents.",
+      "Term life insurance is cheap for young, healthy people and covers the years when dependents rely on your income. A healthy 35-year-old can often buy $1M of 20-year term coverage for $30-50/month. Avoid 'whole life' and 'universal life' products in most cases — they blend insurance with investment in ways that benefit the seller more than the buyer. For most people, buy term and invest the difference separately.",
+      "Estate documents everyone needs, regardless of net worth: a will (directs assets and names guardians for minor children), powers of attorney (financial and healthcare — for if you're incapacitated), healthcare directive (your wishes for end-of-life care), and beneficiary designations on all retirement and life insurance accounts (these override the will). Not having these documents means the state makes decisions for you, often badly.",
+      "As net worth grows, additional planning becomes valuable: revocable living trusts can avoid probate, save time and legal fees for heirs, and provide privacy. For high-net-worth families, irrevocable trusts and strategic gifting can reduce estate taxes. These are worth professional help — a few hours with an estate attorney at $300-500/hour can save heirs many thousands and lots of stress."
+    ],
+    scenario: {
+      prompt: "You're 35, married, two young children, $120K income, $600K life insurance from work (1x salary + optional coverage), no will. Your spouse earns $80K. You've been 'meaning to get to' estate planning. What's the highest-priority gap?",
+      options: [
+        { id: "a", label: "Buy more expensive whole life insurance" },
+        { id: "b", label: "Create a basic will (with guardianship for children) and powers of attorney immediately — dying or becoming incapacitated without these documents puts enormous burden on your spouse and leaves guardianship decisions to a court" },
+        { id: "c", label: "Set up a complex trust structure" },
+        { id: "d", label: "None of this matters until you're older" },
+      ],
+      correct: "b",
+      feedback: "A basic will with named guardians for the children is the single most important missing piece. Without one, if both parents die, a court decides who raises your children — often a process involving family disputes and delays. Powers of attorney matter too: if you're incapacitated, your spouse can't automatically access accounts or make healthcare decisions for you without the documents in place. These can be done through online legal services for $200-500 or with an attorney for $500-1,500 — cheap insurance against the worst-case scenarios. The $600K life insurance might be light for dependents with a working spouse earning $80K, but documents come first."
+    },
+    quiz: [
+      { q: "Term life insurance is typically much cheaper than whole life insurance for the same amount of coverage.", answer: true, explanation: "Term insurance is pure insurance with no investment component, making it dramatically cheaper — often 5-15x less expensive than whole life for the same coverage. For most people with dependents, term is the right product; whole life's 'investment' component has high fees and often delivers poor returns." },
+      { q: "Beneficiary designations on retirement and life insurance accounts are overridden by what your will says.", answer: false, explanation: "Beneficiary designations override wills. If your will names your current spouse but your 401(k) still lists your ex-spouse as beneficiary, your ex inherits the 401(k). Always review and update beneficiary designations after major life events — marriage, divorce, births, deaths." },
+      { q: "Having a will is only important for wealthy people.", answer: false, explanation: "Wills aren't primarily about wealth — they're about directing what you own and, for parents, naming guardians for minor children. Anyone with dependents, anyone who cares who inherits their assets, and anyone who'd prefer to avoid leaving these decisions to a state-mandated process benefits from a will." }
+    ]
+  },
+  {
+    day: 49,
+    title: "Handling Windfalls",
+    concept: [
+      "A windfall — bonus, inheritance, stock vesting, legal settlement, lottery, business sale — is a pivotal financial moment. Statistics are harsh: roughly 70% of lottery winners lose all of it within a few years, and studies show similar patterns for smaller windfalls. Without a plan, windfalls tend to evaporate into lifestyle upgrades, risky investments, or 'helping' family members in ways that aren't actually help.",
+      "Step one: do nothing immediately. Park the money in a high-yield savings account for 30-90 days. Don't tell everyone. Don't quit your job. Don't buy anything significant. The emotional peak of sudden money is not when you want to be making irreversible decisions. Giving yourself a cooling-off period dramatically improves the quality of decisions that follow.",
+      "Step two: address the non-negotiables first. Pay off high-interest debt. Fill the emergency fund. Max out current-year tax-advantaged accounts. These aren't glamorous but they're the highest-return uses of windfall money. A windfall that pays off $30K of credit card debt at 22% is generating a guaranteed 22% return — nothing else matches it.",
+      "Step three: fit the remainder into your existing long-term plan. If you had a plan to invest $2K/month before the windfall, the windfall shouldn't change the plan — it just means you have more capital flowing into the same allocation. A $100K windfall after the above steps might simply be invested as a lump sum (or 3-6 months of DCA) into your existing portfolio. The biggest failure mode is treating windfall money as 'fun money' separate from your 'serious money' — all money is the same money, and the windfall is a rare chance to accelerate the plan you already have."
+    ],
+    scenario: {
+      prompt: "You receive a $75K inheritance. You have $6K in credit card debt at 22%, a $4K emergency fund (1 month of expenses), a 401(k) you're contributing to but not maxing, and no IRA. You already have a long-term investment plan and dollar-cost average into index funds monthly. What's the priority order?",
+      options: [
+        { id: "a", label: "Spend $25K on a dream trip, invest the rest" },
+        { id: "b", label: "Pay off $6K credit card (guaranteed 22% return), build emergency fund to $15-20K, max current-year Roth IRA ($7K), invest the remainder (~$42-47K) in your existing allocation as lump sum or short DCA" },
+        { id: "c", label: "Put it all in a single stock you like" },
+        { id: "d", label: "Quit your job" },
+      ],
+      correct: "b",
+      feedback: "(b) is the textbook windfall handling. Pay off 22% debt immediately — no investment beats that guaranteed return. Build emergency fund to a proper level (3-6 months) before investing more aggressively. Max tax-advantaged accounts while you have the cash to do so (the $7K Roth IRA opportunity disappears each year). Then invest the remainder into your existing plan — don't deviate from your allocation just because the money arrived as a lump. This approach preserves the windfall's full wealth-building power. (a) destroys roughly a third of the windfall for short-term experience. (c) gambles the entire windfall. (d) assumes $75K creates financial independence — it doesn't."
+    },
+    quiz: [
+      { q: "Waiting 30-90 days before making major decisions with a windfall typically improves the quality of those decisions.", answer: true, explanation: "The emotional intensity of receiving unexpected money impairs decision-making. A cooling-off period lets you think clearly, consult advisors if needed, and avoid impulse moves that feel right in the moment but look terrible 6 months later." },
+      { q: "Paying off high-interest debt with windfall money is one of the highest-return uses of the cash.", answer: true, explanation: "Eliminating debt at 15-25% interest is a guaranteed return at that rate — better than almost any investment can reliably deliver. It should be near the top of any windfall deployment priority list." },
+      { q: "The best use of a windfall is to treat it as 'fun money' separate from your regular savings and investments.", answer: false, explanation: "This mental accounting is one of the biggest reasons windfalls evaporate. All money is fungible — treating windfall dollars as special and spendable while treating paycheck dollars as serious and savable is arbitrary and expensive. Fit windfall money into your existing plan; don't invent a new one." }
+    ]
+  },
+  {
+    day: 50,
+    title: "FIRE Math & Financial Independence",
+    concept: [
+      "Financial independence means your investments generate enough income to cover your living expenses indefinitely — paid work becomes optional. The movement that popularized this idea is called FIRE (Financial Independence, Retire Early), though 'retiring' is optional and many FIRE-focused people continue working because they enjoy it.",
+      "The core math is simple: you need roughly 25 times your annual expenses invested. This comes from the 4% rule — if you can safely withdraw 4% per year, then your portfolio needs to be 25x annual expenses. Someone spending $60K/year needs $1.5M. Someone spending $40K/year needs $1M. The lower your expenses, the less you need — which is why FIRE communities obsess over expense optimization as much as income growth.",
+      "Savings rate is the master variable. At a 10% savings rate, traditional financial independence takes 40+ years. At 25%, around 30 years. At 50%, roughly 17 years. At 65%, about 10 years. The math works because high savings does two things at once: builds the portfolio faster AND reduces the target (because you're living on less, you need less saved). This is why someone earning $150K and spending $50K can reach financial independence dramatically faster than someone earning $300K and spending $250K.",
+      "Variations exist for different goals. 'Lean FIRE' targets minimal annual expenses (under $40K) for an earlier exit. 'Fat FIRE' targets comfortable retirement ($150K+ annual spend) with more cushion. 'Coast FIRE' means you've invested enough early that you no longer need to save — existing investments will grow into a retirement-sized portfolio without further contributions. 'Barista FIRE' means part-time work covers current expenses while investments grow untouched. Each is a valid shape of financial freedom."
+    ],
+    scenario: {
+      prompt: "You earn $120K and spend $60K/year. You're 30 and save $30K/year (25% savings rate), invested at expected 7% real returns. Roughly how many years until you hit a $1.5M financial independence target?",
+      options: [
+        { id: "a", label: "About 5 years" },
+        { id: "b", label: "About 25 years — saving $30K/year at 7% returns grows to approximately $1.5-1.6M over 24-25 years (the 25% savings rate is the key variable)" },
+        { id: "c", label: "Never — $30K/year isn't enough" },
+        { id: "d", label: "About 10 years with that income" },
+      ],
+      correct: "b",
+      feedback: "At a 25% savings rate ($30K of $120K), the math implies roughly 25 years to financial independence at 7% real returns. $30K/year compounding at 7% for 25 years grows to approximately $1.9M — comfortably above the $1.5M target. If you increased savings to $50K/year (41% savings rate), you'd hit FI in roughly 17 years. If you dropped to $15K/year (12.5% savings rate), it would take 35+ years. The non-linear relationship between savings rate and time-to-FI is why frugality and high income together produce the fastest path — raising income while holding expenses flat is where FIRE accelerates dramatically."
+    },
+    quiz: [
+      { q: "The '25x rule' for financial independence is derived from the 4% safe withdrawal rate.", answer: true, explanation: "If you can safely withdraw 4% of a portfolio per year, then the portfolio needs to be 25x your annual expenses to fund them (100% / 4% = 25). For longer retirements or more safety, some FIRE practitioners target 28-33x expenses." },
+      { q: "Your savings rate has a much bigger impact on time-to-financial-independence than your investment returns.", answer: true, explanation: "Doubling your savings rate can cut decades off your time-to-FI. Improving returns by 1-2% has much smaller impact. This is why FIRE communities focus more on savings rate than investment tactics — saving rate is the variable you actually control, and its leverage is enormous." },
+      { q: "Financial independence requires completely stopping work (traditional retirement).", answer: false, explanation: "FI just means paid work is optional. Many financially independent people continue working because they enjoy it, start businesses, do creative work, or pursue part-time roles that cover current expenses. The point isn't to stop working — it's to make work a choice rather than an obligation." }
+    ]
+  },
+  {
+    day: 51,
+    title: "Building Your Lifetime Financial Plan",
+    concept: [
+      "A financial plan isn't a document — it's a set of decisions about where your money goes and why. A good one answers: What are you trying to build? What's the timeline? What's the priority order when resources are limited? Without this clarity, every financial decision becomes ad-hoc, and the compound effect of good decisions is lost.",
+      "The universal priority stack that works for most people: (1) Cover current expenses. (2) Build a 1-month emergency buffer. (3) Pay off high-interest debt (>8%). (4) Capture employer 401(k) match. (5) Build emergency fund to 3-6 months of expenses. (6) Max tax-advantaged accounts (Roth IRA, HSA if eligible, remaining 401(k)). (7) Pay off moderate-rate debt or invest more. (8) Invest in taxable accounts once tax-advantaged is maxed. (9) Consider real estate or other diversification as meaningful capital accumulates.",
+      "Review and adjust annually. Set aside 2-3 hours once a year to update your net worth, review progress against goals, check allocations, update beneficiary designations, and renew the plan. This annual 'financial physical' catches problems early and prevents drift. More than annual review becomes tinkering; less than annual lets things rot.",
+      "The most important financial principle across everything you've learned: the gap between earning and spending, sustained over decades and invested sensibly, is the only real wealth-building formula. Every strategy — index funds, real estate, tax optimization, debt management — is just a variation on this theme. People who earn more but spend proportionally more don't build wealth. People who earn modestly but keep a widening gap do. Master the gap first; everything else is elaboration."
+    ],
+    scenario: {
+      prompt: "You're putting together a one-page personal financial plan. What's the single most important thing to get right, and why?",
+      options: [
+        { id: "a", label: "Which specific index funds to buy" },
+        { id: "b", label: "Your savings rate — the gap between what you earn and what you spend, sustained over decades, is the fundamental driver of every other wealth-building strategy working" },
+        { id: "c", label: "Whether to buy or rent" },
+        { id: "d", label: "Which cryptocurrency to hold" },
+      ],
+      correct: "b",
+      feedback: "Savings rate is the master variable. Everything else — fund selection, real estate, tax planning, insurance — is elaboration on the core formula. Two people earning the same income but saving 10% vs 40% will end up in dramatically different places regardless of what they invest in. The savings rate is what you control directly, and it has the biggest leverage on outcomes. Optimize that first, then layer on smarter investment choices, tax strategy, and other refinements. A 30% savings rate in a mediocre 60/40 portfolio beats a 5% savings rate in the theoretically optimal allocation. Start with the gap — everything else is support."
+    },
+    quiz: [
+      { q: "An annual review of your financial plan catches issues early and prevents drift.", answer: true, explanation: "A 2-3 hour annual 'financial physical' — reviewing net worth, goals, allocations, and beneficiary designations — catches problems before they compound. More frequent reviews tend to become tinkering; less frequent reviews let things rot." },
+      { q: "The gap between what you earn and what you spend is the fundamental driver of wealth building.", answer: true, explanation: "No investment strategy, tax optimization, or financial gimmick matters if you don't generate a sustained gap between income and expenses. Every wealth-building strategy assumes you have money left over to deploy. Master the gap first; everything else is elaboration on top of it." },
+      { q: "Personal finance decisions should always be optimized mathematically, regardless of psychological factors.", answer: false, explanation: "A mathematically optimal plan you can't stick with is worse than a slightly suboptimal plan you execute for decades. Real financial success requires plans that fit your actual psychology, life situation, and willingness to follow through — not just what a spreadsheet says is ideal." }
+    ]
   }
 ];
 
@@ -405,6 +1393,50 @@ const REVIEW_POOL = [
   { fromDay: 35, q: "You should always capture an employer retirement match before paying extra on any debt.", answer: true, explanation: "An employer match is an instant 50-100% return. No debt interest rate beats that guaranteed return." },
   { fromDay: 36, q: "Carrying a small credit card balance helps build credit faster.", answer: false, explanation: "This is a persistent myth. Paying in full every month builds credit just as well without costing you interest. Credit scores reward on-time payments and low utilisation, not interest payments." },
   { fromDay: 37, q: "Leverage only amplifies gains, not losses.", answer: false, explanation: "Leverage amplifies both gains and losses equally. A 20% deposit on a property means a 10% property decline wipes out 50% of your equity. Leverage is a neutral multiplier — it magnifies whatever happens." },
+  { fromDay: 7, q: "The S&P 500 includes small-cap stocks as well as large caps.", answer: false, explanation: "The S&P 500 tracks 500 large-cap US companies only. For mid-cap and small-cap exposure, you need a Total US Stock Market fund, which holds thousands of additional companies." },
+  { fromDay: 8, q: "When interest rates rise, existing bond prices typically fall.", answer: true, explanation: "Higher new-issue yields make older, lower-yielding bonds less attractive, so their prices drop until their effective yield matches new bonds. This is the core of interest rate risk for bonds." },
+  { fromDay: 8, q: "Holding some bonds in a long-term portfolio provides rebalancing fuel during stock market crashes.", answer: true, explanation: "When stocks crash, rebalancing means selling bonds (which held up) and buying stocks at lower prices. A small bond allocation gives you something to redeploy at exactly the moment it matters most." },
+  { fromDay: 9, q: "Target-date funds automatically shift toward bonds as you approach the target retirement year.", answer: true, explanation: "This 'glide path' is the defining feature. A fund targeted decades out holds mostly stocks; as the date approaches, it gradually shifts to a more bond-heavy allocation appropriate for withdrawal years." },
+  { fromDay: 10, q: "You should always capture your full employer 401(k) match before contributing to a Roth IRA.", answer: true, explanation: "An employer match is an instant 50-100% return. No other priority — not Roth IRAs, not high-interest debt, not emergency funds — beats capturing free money first." },
+  { fromDay: 10, q: "Roth IRA withdrawals in retirement are taxed as ordinary income.", answer: false, explanation: "Roth withdrawals in retirement are completely tax-free — that's the main advantage. You pay tax up front on contributions rather than at withdrawal. Traditional accounts work the opposite way." },
+  { fromDay: 11, q: "Lump sum investing historically outperforms DCA about two-thirds of the time.", answer: true, explanation: "Markets rise more often than they fall, so getting invested earlier usually wins. DCA's value is emotional insurance against bad luck, not expected return." },
+  { fromDay: 12, q: "If you're still making regular contributions, you can often rebalance without selling anything.", answer: true, explanation: "Direct new contributions toward the underweight asset until the ratio returns to target. This avoids capital gains taxes and transaction costs while still restoring your allocation." },
+  { fromDay: 13, q: "Investors who check their portfolio daily tend to earn higher returns than those who check annually.", answer: false, explanation: "Frequent checking amplifies emotional reactions to short-term volatility, often triggering poorly-timed trades. Long-term investors usually do better with less attention, not more." },
+  { fromDay: 13, q: "Going to cash during a market crash and waiting to 're-enter when it's clear' is a reliable strategy.", answer: false, explanation: "There's no objective signal for when it's 'safe.' By the time markets feel calm, they've typically already recovered most of the loss. This pattern — selling low and buying higher — is how average investors underperform their own funds." },
+  { fromDay: 14, q: "The 4% rule assumes a 30-year retirement and is often too aggressive for very long retirements.", answer: true, explanation: "For 40-50 year retirements (early retirees), 3-3.5% is a safer starting point. The 4% rule's underlying studies targeted traditional 30-year retirements with US historical data." },
+  { fromDay: 14, q: "Sequence-of-returns risk means a bad market early in retirement is worse than the same bad market late in retirement.", answer: true, explanation: "Withdrawing from a crashed portfolio early permanently shrinks your base before it can compound. The same crash 20 years into retirement has far less impact on portfolio longevity." },
+  { fromDay: 15, q: "'Rent is throwing money away' is always true because renters don't build equity.", answer: false, explanation: "A huge portion of early mortgage payments goes to interest, property tax, insurance, and maintenance — none of which builds equity. In many scenarios, renting and investing the difference is genuinely competitive with buying." },
+  { fromDay: 15, q: "Transaction costs of buying and selling a home are typically 5-8% of the home value combined.", answer: true, explanation: "Realtor fees, closing costs, transfer taxes, and moving expenses add up quickly. This is why short holding periods (under 5 years) often favor renting mathematically — transaction costs dominate." },
+  { fromDay: 16, q: "Comparable sales are the dominant valuation method for residential single-family homes.", answer: true, explanation: "Recent, nearby, similar sales are the strongest evidence of market value for residential property. The income approach applies more to rentals; replacement cost is a ceiling check." },
+  { fromDay: 17, q: "Closing costs typically add 2-5% of the purchase price on top of the down payment.", answer: true, explanation: "Lender fees, title insurance, appraisal, escrow prepayments, and taxes easily total $10-15K on a $400K home. Always budget for this on top of the down payment." },
+  { fromDay: 18, q: "Property tax rates are essentially the same across the country.", answer: false, explanation: "Rates range from under 0.5% to over 2.5% of home value annually. On a $500K home, that's a $10K+/year difference — enough to meaningfully change whether a home is affordable." },
+  { fromDay: 19, q: "Well-funded HOA reserves reduce the risk of surprise special assessments.", answer: true, explanation: "A strong reserve fund lets the HOA handle major repairs without billing owners unexpectedly. Underfunded HOAs facing aging buildings often produce $10-25K special assessments with little notice." },
+  { fromDay: 20, q: "A mediocre house in a great location generally beats a great house in a mediocre location over the long term.", answer: true, explanation: "You can renovate a house but not move it. Location fundamentals — job growth, school quality, supply constraints — drive long-term appreciation far more than the specific condition of the house at purchase." },
+  { fromDay: 21, q: "Asking the seller to make repairs before closing is usually better than taking a cash credit to handle them yourself.", answer: false, explanation: "Sellers rushing to close often use cheap contractors for seller-paid repairs. Taking a credit lets you control quality, timing, and contractor selection after you own the home." },
+  { fromDay: 22, q: "Coastal cities with strong job growth typically have low rental yields.", answer: true, explanation: "High-appreciation markets get bid up by buyers expecting future gains, pushing rental yields below the 1% monthly rule. These markets favor appreciation-focused strategies, not cash flow." },
+  { fromDay: 23, q: "An adjustable-rate mortgage is always riskier than a fixed-rate mortgage.", answer: false, explanation: "For buyers with a clear exit plan within the initial fixed period AND the income cushion to survive worst-case payments if the plan fails, ARMs can be smart. Risk depends on how you use the product." },
+  { fromDay: 24, q: "Making extra principal payments early in a mortgage saves dramatically more interest than the same extra payments late in the loan.", answer: true, explanation: "Early principal dollars stop accruing interest for the entire remaining loan term. A $1,000 extra payment in year 1 saves 29 years of interest on that amount; the same in year 25 only saves 5 years." },
+  { fromDay: 25, q: "FHA mortgage insurance works the same as conventional PMI and automatically drops off at 20% equity.", answer: false, explanation: "FHA's MIP lasts the life of the loan if you put less than 10% down, or 11 years otherwise. This is a major distinction from conventional PMI, and one reason many FHA borrowers later refinance into conventional loans." },
+  { fromDay: 26, q: "The break-even period for buying mortgage points is the upfront cost divided by the monthly savings.", answer: true, explanation: "If you stay in the loan longer than the break-even, you come out ahead. If you refinance or sell sooner, you lose on the trade. Refinance risk is the main danger of buying points." },
+  { fromDay: 27, q: "A 15-year mortgage typically carries a lower interest rate than a 30-year mortgage.", answer: true, explanation: "Lenders offer 0.5-0.75% lower rates on 15-year mortgages because the faster payoff reduces their risk. Combined with the shorter term, this makes total interest dramatically lower than a 30-year." },
+  { fromDay: 28, q: "Refinancing is essentially free and always worth doing when rates drop.", answer: false, explanation: "Refinancing costs 2-5% of the loan amount in closing costs. You need to calculate break-even and expected holding period before deciding. Small rate drops often don't justify refinancing, especially if you may sell soon." },
+  { fromDay: 29, q: "A fixed-rate mortgage means your total monthly payment (PITI) never changes.", answer: false, explanation: "Only the principal and interest are fixed. Property taxes and insurance can rise, increasing your escrow collection and total monthly payment even without any rate change." },
+  { fromDay: 30, q: "Debt-to-income ratio (DTI) is one of the most important factors in mortgage approval.", answer: true, explanation: "Most lenders cap DTI at 43-45% for conventional loans. High-debt buyers often struggle to qualify even with strong income — paying down revolving debt before applying is a high-leverage move." },
+  { fromDay: 31, q: "Extra principal payments on a mortgage provide a guaranteed return equal to the mortgage rate.", answer: true, explanation: "Every dollar of principal paid stops accruing interest at the mortgage rate for the rest of the loan. At 7%, prepayment is effectively a 7% guaranteed, tax-free return." },
+  { fromDay: 38, q: "House hacking (owner-occupying a multi-unit property) allows you to use low-down-payment financing on an investment property.", answer: true, explanation: "Multi-unit properties up to 4 units qualify for owner-occupant financing (3-5% down). A pure investor buying the same property would need 20-25% down at higher rates." },
+  { fromDay: 39, q: "Cap rate includes mortgage payments as an expense.", answer: false, explanation: "Cap rate uses Net Operating Income — rent minus operating expenses only. Mortgage payments are excluded so cap rate can be compared across properties regardless of financing structure." },
+  { fromDay: 40, q: "The 1% rule suggests monthly rent should be at least 1% of the purchase price.", answer: true, explanation: "A $200K property should rent for at least $2,000/month to be worth deeper analysis. It's a rough but useful screening heuristic that quickly filters out properties unlikely to cash flow with leverage." },
+  { fromDay: 41, q: "REITs offer meaningful real estate exposure with less time commitment than direct property ownership.", answer: true, explanation: "REITs provide diversified real estate exposure with instant liquidity and no landlord responsibilities. For passive investors, a low-cost REIT index fund is a reasonable way to include real estate in a portfolio." },
+  { fromDay: 42, q: "Depreciation on rental property can shelter rental income from taxes, even when the property is appreciating in market value.", answer: true, explanation: "Depreciation is an accounting deduction independent of market value changes. Combined with mortgage interest, it often creates a 'paper loss' on property that's actually appreciating and cash-flowing positively." },
+  { fromDay: 43, q: "Self-managing distant rental properties while holding a demanding full-time job is usually a good strategy.", answer: false, explanation: "Distance and time constraints make self-management difficult and risky. A good local property manager at 8-12% of rent typically costs less than the inefficiencies of trying to manage remotely." },
+  { fromDay: 44, q: "A cash-out refinance to fund another property purchase always improves overall returns.", answer: false, explanation: "A cash-out refi increases your loan balance and often your rate, reducing cash flow on the refinanced property. The new property must generate enough additional return to justify that sacrifice — it doesn't happen automatically." },
+  { fromDay: 45, q: "A 1031 exchange lets you defer capital gains taxes by rolling the proceeds into another investment property.", answer: true, explanation: "Following strict timeline rules (45-day identification, 180-day closing), you can exchange one investment property for another without triggering taxes. This is one of the most powerful wealth-preservation tools in real estate." },
+  { fromDay: 46, q: "Sequence-of-returns risk is highest in the years just before and after retirement.", answer: true, explanation: "A major crash at the start of retirement can permanently impair a portfolio. Building a cash/bond buffer for 2-3 years of expenses lets retirees avoid selling stocks at low prices during early-retirement downturns." },
+  { fromDay: 47, q: "Tax-inefficient investments like bonds and high-turnover funds are better held in tax-advantaged accounts.", answer: true, explanation: "These investments generate lots of annually-taxed income. Shielding them in 401(k)s or IRAs while holding tax-efficient index funds in taxable accounts can save meaningful taxes each year." },
+  { fromDay: 48, q: "Beneficiary designations on retirement accounts are overridden by the terms of your will.", answer: false, explanation: "Beneficiary designations override wills. An outdated beneficiary (e.g., an ex-spouse still listed on a 401(k)) will inherit regardless of what your will says. Review designations after any major life event." },
+  { fromDay: 49, q: "Waiting 30-90 days before making major decisions with a windfall tends to improve decision quality.", answer: true, explanation: "The emotional intensity of sudden money impairs judgment. A cooling-off period lets you think clearly, consult advisors, and avoid impulsive moves that look terrible 6 months later." },
+  { fromDay: 50, q: "Your savings rate has a much larger impact on time-to-financial-independence than your investment returns.", answer: true, explanation: "Doubling your savings rate can cut decades off your time-to-FI. Small improvements in returns have much smaller impact. Savings rate is the master variable of wealth building — and the one you directly control." },
+  { fromDay: 51, q: "The gap between earning and spending, sustained over decades and invested sensibly, is the fundamental driver of wealth building.", answer: true, explanation: "Every other strategy — index funds, real estate, tax optimization — is elaboration on top of this core formula. Master the gap first; everything else works only if there's money left over to deploy." },
 ];
 
 const getReviewQuestion = (currentDay, completedDays) => {
