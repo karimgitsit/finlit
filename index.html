@@ -1571,7 +1571,7 @@ function HomeScreen({ progress, onStartLesson, onViewMap, onResetProgress }) {
   );
 }
 
-function LessonScreen({ lesson, progress, onComplete, onBack }) {
+function LessonScreen({ lesson, progress, onComplete, onMarkComplete, onBack }) {
   const [step, setStep] = useState(0);
   const [scenarioAnswer, setScenarioAnswer] = useState(null);
   const [quizAnswers, setQuizAnswers] = useState({});
@@ -1579,6 +1579,7 @@ function LessonScreen({ lesson, progress, onComplete, onBack }) {
 
   const reviewQ = getReviewQuestion(lesson.day, progress.completedDays);
   const totalSteps = reviewQ ? 4 : 3;
+  const alreadyComplete = progress.completedDays.includes(lesson.day);
 
   const handleFinish = () => {
     const quizScore = Object.entries(quizAnswers).reduce((acc, [idx, ans]) => acc + (ans === lesson.quiz[parseInt(idx)].answer ? 1 : 0), 0);
@@ -1586,9 +1587,19 @@ function LessonScreen({ lesson, progress, onComplete, onBack }) {
     onComplete({ quizScore, quizTotal: lesson.quiz.length, scenarioCorrect });
   };
 
+  const handleSkip = () => {
+    if (window.confirm(`Mark Day ${lesson.day} as complete without doing the lesson?`)) onMarkComplete();
+  };
+
   return React.createElement("div", { style: { padding:"32px 24px 40px" } },
     React.createElement(BackHeader, { onBack, label: `Day ${lesson.day}` }),
     React.createElement(StepIndicator, { current: step, total: totalSteps }),
+    !alreadyComplete && React.createElement("div", { style: { textAlign:"right", marginTop:-8, marginBottom:12 } },
+      React.createElement("button", {
+        onClick: handleSkip,
+        style: { background:"none", border:"none", fontFamily:sans, fontSize:12, color:colors.textLight, cursor:"pointer", padding:"4px 0", textDecoration:"underline" }
+      }, "Mark as complete")
+    ),
 
     // CONCEPT
     step === 0 && React.createElement("div", null,
@@ -1710,20 +1721,30 @@ function App() {
     setScreen("lesson");
   }, []);
 
-  const handleCompleteLesson = useCallback((score) => {
+  const advanceProgress = (day, scoreEntry) => {
     const today = new Date().toDateString();
-    const newCompleted = progress.completedDays.includes(activeLessonDay) ? progress.completedDays : [...progress.completedDays, activeLessonDay];
+    const newCompleted = progress.completedDays.includes(day) ? progress.completedDays : [...progress.completedDays, day];
     let newStreak = progress.streak;
     if (progress.lastCompletedDate !== today) {
       const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
       newStreak = (progress.lastCompletedDate === yesterday.toDateString()) ? progress.streak + 1 : 1;
     }
     const nextDay = Math.max(...newCompleted) + 1;
-    const newProgress = { ...progress, completedDays: newCompleted, scores: { ...progress.scores, [activeLessonDay]: score }, currentDay: Math.min(nextDay, 52), streak: newStreak, lastCompletedDate: today };
+    const newScores = scoreEntry ? { ...progress.scores, [day]: scoreEntry } : progress.scores;
+    const newProgress = { ...progress, completedDays: newCompleted, scores: newScores, currentDay: Math.min(nextDay, 52), streak: newStreak, lastCompletedDate: today };
     saveProgress(newProgress);
     setProgress(newProgress);
+  };
+
+  const handleCompleteLesson = useCallback((score) => {
+    advanceProgress(activeLessonDay, score);
     setLastScore(score);
     setScreen("complete");
+  }, [progress, activeLessonDay]);
+
+  const handleMarkComplete = useCallback(() => {
+    advanceProgress(activeLessonDay, null);
+    setScreen("home");
   }, [progress, activeLessonDay]);
 
   const handleResetProgress = useCallback(() => {
@@ -1736,7 +1757,7 @@ function App() {
 
   return React.createElement("div", { style: { fontFamily:serif, background:colors.bg, minHeight:"100vh", color:colors.text, maxWidth:430, margin:"0 auto" } },
     screen === "home" && React.createElement(HomeScreen, { progress, onStartLesson:handleStartLesson, onViewMap:()=>setScreen("map"), onResetProgress:handleResetProgress }),
-    screen === "lesson" && activeLesson && React.createElement(LessonScreen, { key:activeLesson.day, lesson:activeLesson, progress, onComplete:handleCompleteLesson, onBack:()=>setScreen("home") }),
+    screen === "lesson" && activeLesson && React.createElement(LessonScreen, { key:activeLesson.day, lesson:activeLesson, progress, onComplete:handleCompleteLesson, onMarkComplete:handleMarkComplete, onBack:()=>setScreen("home") }),
     screen === "complete" && activeLesson && React.createElement(CompletionScreen, { lesson:activeLesson, score:lastScore, onContinue:()=>setScreen("home") }),
     screen === "map" && React.createElement(MapScreen, { progress, onBack:()=>setScreen("home"), onSelectLesson:handleSelectLesson }),
     React.createElement("div", { style: { padding:"16px 24px 24px", textAlign:"center", fontFamily:sans, fontSize:11, color:"#ccc" } }, "Educational content only — not financial advice")
